@@ -21,7 +21,7 @@ $week_scenes = array(
 	array( 'slug' => 'thursday', 'day' => __( 'Thursday', 'watch-collections' ), 'short' => __( 'THU', 'watch-collections' ), 'scene' => __( 'The evening shift', 'watch-collections' ), 'style' => __( 'Gold day-date style', 'watch-collections' ) ),
 	array( 'slug' => 'friday', 'day' => __( 'Friday', 'watch-collections' ), 'short' => __( 'FRI', 'watch-collections' ), 'scene' => __( 'Plans after dark', 'watch-collections' ), 'style' => __( 'Gold chronograph style', 'watch-collections' ), 'position' => '64% center' ),
 	array( 'slug' => 'saturday', 'day' => __( 'Saturday', 'watch-collections' ), 'short' => __( 'SAT', 'watch-collections' ), 'scene' => __( 'Out and about', 'watch-collections' ), 'style' => __( 'Sport diver style', 'watch-collections' ) ),
-	array( 'slug' => 'sunday', 'day' => __( 'Sunday', 'watch-collections' ), 'short' => __( 'SUN', 'watch-collections' ), 'scene' => __( 'Room to slow down', 'watch-collections' ), 'style' => __( 'Casual chronograph style', 'watch-collections' ) ),
+	array( 'slug' => 'sunday', 'day' => __( 'Sunday', 'watch-collections' ), 'short' => __( 'SUN', 'watch-collections' ), 'scene' => __( 'Room to slow down', 'watch-collections' ), 'style' => __( 'Casual chronograph style', 'watch-collections' ), 'position' => '78% center' ),
 );
 $week_images_are_previews = false;
 foreach ( $week_scenes as &$week_scene ) {
