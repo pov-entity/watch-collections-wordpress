@@ -126,3 +126,23 @@ The seven-day hero is already built into `front-page.php` and `assets/js/week-he
 The founder-approved campaign image pack has been prepared outside this repository for upload. Unzip `watch-collections-seven-day-hero-assets.zip` and upload the seven WebP files to `assets/hero-days/` using GitHub **Add file → Upload files**; commit them to `main`. WordPress Playground needs a **new import** after GitHub updates; a normal browser refresh does not sync the source code.
 
 The images are AI-generated lifestyle concepts, **not confirmed inventory or verified brand photography**. Product listings must use accurate, rights-cleared watch images and descriptions. 
+
+
+## Current website palette — v0.5.0
+
+The visual identity uses the founder-provided reference's colors only (not its law-firm emblem or typography).
+
+| Role | HEX | Use |
+| --- | --- | --- |
+| Deep navy | `#102A4F` | Site structure, primary actions |
+| Midnight navy | `#0B203D` | Dark sections and footer |
+| Steel blue | `#90B1C2` | Secondary accents, focus and progress |
+| Silver grey | `#CED3D9` | Dividers and understated surfaces |
+| Cool white | `#F5F7F9` | Main background and light cards |
+| Copper | `#B77B57` | Decorative highlights, never as fine print on light backgrounds |
+| Dark copper | `#99603E` | Accessible accent text on cool white |
+| Slate text | `#526577` | Supporting body text |
+
+Implemented in `assets/css/site.css`, `assets/css/editorial-home.css`, `assets/css/week-hero.css`, and WordPress `theme.json`; version `0.5.0` refreshes stylesheet cache. The seven-day lifestyle pictures, builder economics, and page copy are unchanged.
+
+**Preview:** Import the latest GitHub version into a *new* WordPress Playground installation or update the theme files in your saved one. A browser refresh does not import new commits. Verify mobile contrast and WooCommerce checkout styling before live launch.
