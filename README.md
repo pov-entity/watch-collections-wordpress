@@ -1,6 +1,6 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
-**Status:** Prototype v0.3.0. Not a live store. Brand name is a working title.
+**Status:** Prototype v0.4.0. Not a live store. Brand name is a working title.
 
 A custom responsive WordPress classic theme for a multi-brand everyday watch collection store. The repository root is the installable theme, for direct use with the **WordPress Playground → From GitHub** importer.
 
@@ -84,3 +84,28 @@ Commit these images alongside the theme. The PHP template automatically prefers 
 The text is live HTML for readability, accessibility and translation; don't bake it into photos. For mobile, test the portrait crop so the face, outfit and watch remain in view. Aim for compressed file sizes and consistent color grading. If product watches aren't based on approved real SKUs, avoid presenting them as exact purchasable product photos.
 
 No checkout, payments, production deploy, inventory purchase or external image licensing has been performed.
+
+
+## Editorial homepage redesign (v0.4.0)
+
+Adapted the founder-provided editorial website reference into an original watch-focused layout. The nautical imagery, copy, brands, and specific visual content were **not** reused.
+
+- Full-bleed seven-day cinematic hero with a translucent floating pill navigation and a curved ivory bottom edge.
+- Two-column photographic/illustrative montage explaining the everyday collection concept.
+- Deep-navy four-tile benefits panel about clarity, choice, order accuracy planning, and delivery information.
+- Three tall visual style cards for weekday, occasion, and weekend use.
+- Product-quality section explaining movements, materials, crystals, durability, fit, and functional complications.
+- Three-step Collection Studio explanation (content only; interactive builder still separate).
+- Four unmodified planned USD packages: 1/$160, 3/$299, 5/$499, 7/$639.
+- Four-stage intended fulfillment journey and purchase-assurance section.
+
+### Replace placeholder images
+Hero photography replacement remains:
+assets/hero-days/monday.webp ... sunday.webp.
+The three-image montage and three visual occasion cards reuse these exact campaign frames. When real WebP campaign frames are added, they automatically appear throughout the homepage as well.
+
+### Credibility constraints
+No unverifiable product specs, warehouse QC proof, shipment times, carrier promises, fake testimonials, or live checkout are asserted. Fulfillment is described as a plan, and illustrative placeholders are labeled.
+
+### Theme CSS scope
+assets/css/editorial-home.css is only enqueued on the front page after week-hero.css. Other WP pages and WooCommerce views keep their original templates.

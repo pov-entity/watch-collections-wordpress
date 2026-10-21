@@ -46,6 +46,12 @@ function watch_collections_assets() {
 			$version,
 			true
 		);
+		wp_enqueue_style(
+			'watch-collections-editorial-home',
+			get_template_directory_uri() . '/assets/css/editorial-home.css',
+			array( 'watch-collections-week-hero' ),
+			$version
+		);
 	}
 }
 add_action( 'wp_enqueue_scripts', 'watch_collections_assets' );
