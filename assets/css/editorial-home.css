@@ -78,7 +78,7 @@
 .editorial-quality__intro h2{font:400 clamp(2rem,2.6vw,2.65rem)/1.13 Georgia,serif;letter-spacing:-.055em;margin:0 0 24px}
 .editorial-quality__intro h2 em{color:#99603E}
 .editorial-quality__intro>p:not(.editorial-tag){font-size:.92rem;color:#526577;max-width:470px}
-.editorial-quality__visual{position:relative;display:block;width:100%;height:auto;margin:0;background:#f6f6f6}
+.editorial-quality__visual{position:relative;display:block;width:100%;height:auto;margin:0;background:transparent}
 .editorial-quality__visual img{display:block;width:100%;height:auto;object-fit:contain}
 .editorial-quality__visual figcaption{padding:10px 12px;font-size:.72rem;line-height:1.5;color:#526577;text-align:center;background:#E5EBF0}
 .editorial-quality__ring{width:205px;height:205px;border-radius:50%;display:grid;place-items:center;border:11px solid #698DA6;background:#CBD8E0;box-shadow:0 15px 26px #102A4F48,0 0 0 4px #8DAFC0, inset 0 0 0 3px #E5EDF2;transform:rotate(-12deg)}
