@@ -54,10 +54,11 @@ unset( $week_scene );
 		</div>
 		<div class="container week-hero__layout">
 			<div class="week-hero__copy">
-				<p class="week-hero__eyebrow"><?php esc_html_e( 'SEVEN DAYS. MANY SIDES OF YOU.', 'watch-collections' ); ?></p>
-				<h1 id="hero-title"><?php esc_html_e( 'Your week has', 'watch-collections' ); ?> <em><?php esc_html_e( 'seven sides.', 'watch-collections' ); ?></em></h1>
-				<p class="week-hero__statement"><?php esc_html_e( 'Your watch collection should too.', 'watch-collections' ); ?></p>
-				<p class="week-hero__description"><?php esc_html_e( 'From workdays to weekends, bring together watches that suit the way you dress, move and live. Choose the styles. Make the collection yours.', 'watch-collections' ); ?></p>
+				<p class="week-hero__eyebrow"><?php esc_html_e( 'A COLLECTION FOR REAL LIFE', 'watch-collections' ); ?></p>
+				<h1 id="hero-title"><?php esc_html_e( 'Seven days.', 'watch-collections' ); ?> <em><?php esc_html_e( 'Seven sides of you.', 'watch-collections' ); ?></em></h1>
+				<p class="week-hero__statement"><?php esc_html_e( 'A watch for every moment. A collection that’s yours.', 'watch-collections' ); ?></p>
+				<p class="week-hero__description"><?php esc_html_e( 'From the everyday routine to the moments worth dressing for, your style changes with the occasion. Your watches should feel just as natural.', 'watch-collections' ); ?></p>
+				<p class="week-hero__description week-hero__description--closing"><?php esc_html_e( 'Choose the pieces that speak to you. Bring them together in one collection, made to fit your life.', 'watch-collections' ); ?></p>
 				<div class="week-hero__actions">
 					<a href="#collection-options" class="week-hero__cta"><?php esc_html_e( 'Explore collection options', 'watch-collections' ); ?><span aria-hidden="true">↗</span></a>
 					<a href="#how-it-works" class="week-hero__secondary"><?php esc_html_e( 'How it works', 'watch-collections' ); ?><span aria-hidden="true">↘</span></a>
