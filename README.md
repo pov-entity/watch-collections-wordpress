@@ -1,6 +1,38 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
-**Status:** Prototype v0.6.0. Not a live store. Uses the founder's DialByDay Collections identity.
+**Status:** Prototype v0.7.0. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
+
+## Collection Studio — current version
+
+Use **Build your collection** in the header or homepage hero, or choose a package on the homepage. The portable `/?collection-studio=1` route works without a database page or permalink reset. `&box=1`, `&box=3` and `&box=6` request a box size. A native WordPress page can also use the **Collection Studio** page template.
+
+- Twelve original, clearly labeled vector concept watches, with style, strap and text search filters.
+- Watch details show visual design information separately from unverified movement, materials, dimensions, functions and water resistance.
+- Persistent desktop presentation-box preview and fixed mobile selection bar.
+- Add, replace, remove and reorder watches; confirm before a smaller box discards selections. Full boxes require choosing which watch to replace.
+- Browser-local persistence with corrupt-data validation and an in-memory fallback when storage is unavailable.
+- Native keyboard-accessible dialogs, reduced-motion support and a motion toggle.
+- Review the exact selection without creating orders, reserving stock or accepting payments.
+
+`inc/collection-studio.php` owns the shared package configuration and route. `assets/data/studio-catalog.json` contains public concept data; `watch_collections_studio_catalog` is the future catalog integration hook. `assets/js/collection-state.js` separates selection rules from the interface. This prototype must not be used to authorize commerce: real stock, package eligibility and prices need server-side validation in a separate commerce plugin.
+
+**Pricing decision:** The last approved numeric plans remain 1/$160 and 3/$299. The newly requested 6-watch box deliberately has a null price, shown as **Price to be confirmed**. The proposed 1/$179, 3/$399, 6/$699 ladder is a recommendation awaiting founder approval and has not been applied. Historic four-size plans below are superseded by the current 1/3/6 structure; the seven-day hero remains a lifestyle sequence.
+
+**Validation:** `node --test tests/collection-state.test.cjs` covers size eligibility, capacity, explicit replacement, downsizing confirmation, sparse selections, reordering, storage sanitization and null-price handling. PHP 7.4 parsing and rendered-template integration checks passed using WordPress function stubs. Browser QA verified desktop and a 390px mobile frame. A full WordPress/Playground integration test is still required after importing the theme.
+
+**Preview update:** Import the latest repository into a new WordPress Playground instance and confirm theme version **0.7.0**. Refreshing an older saved Playground does not fetch new commits.
+
+### Decision log — 2026-10-21
+
+- Founder selected box sizes 1, 3 and 6; replaced the former 1/3/5/7 options on the current homepage.
+- Kept price changes pending explicit approval. No order, payment, supplier outreach, spending or production deployment.
+- Built the selector with concept data, preserving the current approved logo, palette, typography and hero imagery.
+
+### Next three tasks
+
+1. Confirm the 1/3/6 price ladder and cost assumptions, including the six-slot box, freight, duties, fees and returns.
+2. Validate physical samples and replace concepts with approved SKU photography, measured fit, verified specifications and stock.
+3. Connect a server-validated commerce backend for package eligibility, inventory reservations and checkout; test in Playground and staging before launch.
 
 A custom responsive WordPress classic theme for a multi-brand everyday watch collection store. The repository root is the installable theme, for direct use with the **WordPress Playground → From GitHub** importer.
 
@@ -34,7 +66,7 @@ Original everyday-watch homepage, mobile responsive navigation, stylized concept
 
 ## Not built yet
 
-Interactive watch-box builder, configurable collection sizes, cart rules, packaging options, prices, supplier photography, product descriptions, legal pages, international shipping policies, operational payments, and real customer checkout. The homepage clearly labels conceptual product visuals.
+Production watch-box builder integration, cart rules, final packaging, approved pricing, supplier photography, verified product descriptions, legal pages, international shipping policies, operational payments, and real customer checkout. The homepage and Collection Studio clearly label conceptual visuals.
 
 **Do not accept real customer payments before full testing and legal/commercial details.**
 

@@ -35,14 +35,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'nav-list', 'depth' => 2 ) ); ?>
 				<?php else : ?>
 					<ul class="nav-list">
+						<li><a href="<?php echo esc_url( watch_collections_studio_url() ); ?>"><?php esc_html_e( 'Collection Studio', 'watch-collections' ); ?></a></li>
 						<li><a href="<?php echo esc_url( home_url( '/#collection-options' ) ); ?>"><?php esc_html_e( 'Collections', 'watch-collections' ); ?></a></li>
 						<li><a href="<?php echo esc_url( home_url( '/#quality' ) ); ?>"><?php esc_html_e( 'The details', 'watch-collections' ); ?></a></li>
 						<li><a href="<?php echo esc_url( home_url( '/#fulfillment' ) ); ?>"><?php esc_html_e( 'Delivery', 'watch-collections' ); ?></a></li>
 					</ul>
 				<?php endif; ?>
 			</nav>
-			<a class="header-action" href="<?php echo esc_url( watch_collections_shop_url() ); ?>">
-				<?php esc_html_e( 'Collection options', 'watch-collections' ); ?><span aria-hidden="true"> ↗</span>
+			<a class="header-action" href="<?php echo esc_url( watch_collections_studio_url() ); ?>">
+				<?php esc_html_e( 'Build your collection', 'watch-collections' ); ?><span aria-hidden="true"> ↗</span>
 			</a>
 		</div>
 	</header>

@@ -8,6 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once get_template_directory() . '/inc/collection-studio.php';
+
 function watch_collections_setup() {
 	load_theme_textdomain( 'watch-collections', get_template_directory() . '/languages' );
 	add_theme_support( 'title-tag' );
@@ -40,7 +42,7 @@ function watch_collections_assets() {
 	wp_enqueue_style( 'watch-collections-style', get_stylesheet_uri(), array(), $version );
 	wp_enqueue_style( 'watch-collections-site', get_template_directory_uri() . '/assets/css/site.css', array( 'watch-collections-style' ), $version );
 	wp_enqueue_script( 'watch-collections-site', get_template_directory_uri() . '/assets/js/site.js', array(), $version, true );
-	if ( is_front_page() ) {
+	if ( is_front_page() && ! watch_collections_is_studio() ) {
 		wp_enqueue_style(
 			'watch-collections-week-hero',
 			get_template_directory_uri() . '/assets/css/week-hero.css',
@@ -65,9 +67,14 @@ function watch_collections_assets() {
 	wp_enqueue_style(
 		'watch-collections-typography',
 		get_template_directory_uri() . '/assets/css/typography.css',
-		is_front_page() ? array( 'watch-collections-editorial-home', 'watch-collections-font-families' ) : array( 'watch-collections-site', 'watch-collections-font-families' ),
+		is_front_page() && ! watch_collections_is_studio() ? array( 'watch-collections-editorial-home', 'watch-collections-font-families' ) : array( 'watch-collections-site', 'watch-collections-font-families' ),
 		$version
 	);
+	if ( watch_collections_is_studio() ) {
+		wp_enqueue_style( 'watch-collections-studio', get_template_directory_uri() . '/assets/css/collection-studio.css', array( 'watch-collections-typography' ), $version );
+		wp_enqueue_script( 'watch-collections-state', get_template_directory_uri() . '/assets/js/collection-state.js', array(), $version, true );
+		wp_enqueue_script( 'watch-collections-studio', get_template_directory_uri() . '/assets/js/collection-studio.js', array( 'watch-collections-state' ), $version, true );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'watch_collections_assets' );
 
@@ -89,6 +96,10 @@ function watch_collections_shop_url() {
  */
 function watch_collections_body_classes( $classes ) {
 	$classes[] = 'watch-collections-theme';
+	if ( watch_collections_is_studio() ) {
+		$classes   = array_diff( $classes, array( 'home', 'blog' ) );
+		$classes[] = 'collection-studio-page';
+	}
 	return $classes;
 }
 add_filter( 'body_class', 'watch_collections_body_classes' );

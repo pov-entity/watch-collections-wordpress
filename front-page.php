@@ -7,12 +7,7 @@
  */
 get_header();
 
-$collection_options = array(
-	array( 'count' => 1, 'price' => 160, 'name' => __( 'Start with one', 'watch-collections' ), 'detail' => __( 'One watch you choose, in its presentation box.', 'watch-collections' ) ),
-	array( 'count' => 3, 'price' => 299, 'name' => __( 'Room for variety', 'watch-collections' ), 'detail' => __( 'Three watches you choose, together in one box.', 'watch-collections' ) ),
-	array( 'count' => 5, 'price' => 499, 'name' => __( 'Your wider rotation', 'watch-collections' ), 'detail' => __( 'Five watches you choose, together in one box.', 'watch-collections' ) ),
-	array( 'count' => 7, 'price' => 639, 'name' => __( 'The full collection', 'watch-collections' ), 'detail' => __( 'Seven watches you choose, together in one box.', 'watch-collections' ) ),
-);
+$collection_options = watch_collections_packages();
 
 $week_scenes = array(
 	array( 'slug' => 'monday', 'day' => __( 'Monday', 'watch-collections' ), 'short' => __( 'MON', 'watch-collections' ), 'scene' => __( 'Ready for the day', 'watch-collections' ), 'style' => __( 'Blue-dial moonphase style', 'watch-collections' ) ),
@@ -60,7 +55,7 @@ unset( $week_scene );
 				<p class="week-hero__statement"><?php esc_html_e( 'A watch for every moment. A collection that’s yours.', 'watch-collections' ); ?></p>
 				<p class="week-hero__description"><?php esc_html_e( 'Choose the styles that suit your days. Bring them together in one collection, built around you.', 'watch-collections' ); ?></p>
 				<div class="week-hero__actions">
-					<a href="#collection-options" class="week-hero__cta"><?php esc_html_e( 'Explore the collections', 'watch-collections' ); ?><span aria-hidden="true">↗</span></a>
+					<a href="<?php echo esc_url( watch_collections_studio_url() ); ?>" class="week-hero__cta"><?php esc_html_e( 'Explore the collections', 'watch-collections' ); ?><span aria-hidden="true">↗</span></a>
 					<a href="#how-it-works" class="week-hero__secondary"><?php esc_html_e( 'How it works', 'watch-collections' ); ?><span aria-hidden="true">↘</span></a>
 				</div>
 			</div>
@@ -181,10 +176,10 @@ unset( $week_scene );
 		<div class="container">
 			<div class="editorial-section-top">
 				<div><p class="editorial-tag"><span></span><?php esc_html_e( '03 / THE EXPERIENCE', 'watch-collections' ); ?></p><h2 id="process-title"><?php esc_html_e( 'Choose the watches.', 'watch-collections' ); ?> <em><?php esc_html_e( 'We bring the box together.', 'watch-collections' ); ?></em></h2></div>
-				<p><?php esc_html_e( 'The Collection Studio is being developed separately. This is the intended ordering experience.', 'watch-collections' ); ?></p>
+				<p><?php esc_html_e( 'Try the Collection Studio with concept watches. Choose a box, explore styles and see your selection together.', 'watch-collections' ); ?></p>
 			</div>
 			<div class="editorial-process__steps">
-				<div><span>01</span><h3><?php esc_html_e( 'Choose your box', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Pick space for 1, 3, 5 or 7 watches and see the planned price upfront.', 'watch-collections' ); ?></p></div>
+				<div><span>01</span><h3><?php esc_html_e( 'Choose your box', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Pick space for 1, 3 or 6 watches and see the planned pricing status upfront.', 'watch-collections' ); ?></p></div>
 				<div><span>02</span><h3><?php esc_html_e( 'Find your watches', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Mix eligible styles, check their details and change your selection before confirming.', 'watch-collections' ); ?></p></div>
 				<div><span>03</span><h3><?php esc_html_e( 'Review every detail', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'See the exact watch models, quantities, box and order total before any payment.', 'watch-collections' ); ?></p></div>
 			</div>
@@ -197,14 +192,19 @@ unset( $week_scene );
 				<div><p class="editorial-tag"><span></span><?php esc_html_e( '04 / YOUR COLLECTION', 'watch-collections' ); ?></p><h2 id="collection-options-title"><?php esc_html_e( 'A place for every piece.', 'watch-collections' ); ?> <em><?php esc_html_e( 'Start with your number.', 'watch-collections' ); ?></em></h2></div>
 				<p><?php esc_html_e( 'Choose the size of your collection. Each package pairs the specified number of eligible watches with a presentation box.', 'watch-collections' ); ?></p>
 			</div>
-			<div class="editorial-packages__grid">
+			<div class="editorial-packages__grid editorial-packages__grid--three">
 				<?php foreach ( $collection_options as $option ) : ?>
 				<article class="editorial-package">
 					<div class="editorial-package__top"><span><?php echo esc_html( sprintf( _n( '%s WATCH', '%s WATCHES', $option['count'], 'watch-collections' ), number_format_i18n( $option['count'] ) ) ); ?></span><span aria-hidden="true">↗</span></div>
 					<div class="editorial-package__box" aria-hidden="true"><div class="editorial-package__wood"><?php for ( $n = 0; $n < $option['count']; $n++ ) : ?><span class="editorial-package__compartment"><i></i></span><?php endfor; ?></div></div>
 					<h3><?php echo esc_html( $option['name'] ); ?></h3>
 					<p><?php echo esc_html( $option['detail'] ); ?></p>
+					<?php if ( null !== $option['price'] ) : ?>
 					<p class="editorial-package__price">$<?php echo esc_html( number_format_i18n( $option['price'] ) ); ?> <span><?php esc_html_e( 'USD / collection', 'watch-collections' ); ?></span></p>
+					<?php else : ?>
+					<p class="editorial-package__price editorial-package__price--pending"><?php esc_html_e( 'Price to be confirmed', 'watch-collections' ); ?></p>
+					<?php endif; ?>
+					<a class="editorial-package__choose" href="<?php echo esc_url( watch_collections_studio_url( $option['count'] ) ); ?>"><?php echo esc_html( sprintf( _n( 'Choose my %d watch', 'Choose my %d watches', $option['count'], 'watch-collections' ), $option['count'] ) ); ?><span aria-hidden="true">↗</span></a>
 				</article>
 				<?php endforeach; ?>
 			</div>
@@ -249,8 +249,8 @@ unset( $week_scene );
 		<div class="container">
 			<p class="editorial-tag editorial-tag--light"><?php esc_html_e( 'A WEEK FULL OF POSSIBILITIES', 'watch-collections' ); ?></p>
 			<h2 id="closing-title"><?php esc_html_e( 'Different days. Different watches.', 'watch-collections' ); ?><br><em><?php esc_html_e( 'One collection. Yours.', 'watch-collections' ); ?></em></h2>
-			<a class="editorial-button editorial-button--light" href="#collection-options"><?php esc_html_e( 'Explore the collection options', 'watch-collections' ); ?> <span aria-hidden="true">↗</span></a>
-			<p><?php esc_html_e( 'Collection Studio preview in development. No live checkout yet.', 'watch-collections' ); ?></p>
+			<a class="editorial-button editorial-button--light" href="<?php echo esc_url( watch_collections_studio_url() ); ?>"><?php esc_html_e( 'Build your collection', 'watch-collections' ); ?> <span aria-hidden="true">↗</span></a>
+			<p><?php esc_html_e( 'Try the Collection Studio preview. No live checkout yet.', 'watch-collections' ); ?></p>
 		</div>
 	</section>
 </main>
