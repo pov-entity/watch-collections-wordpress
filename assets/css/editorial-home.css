@@ -282,3 +282,8 @@
 .home .editorial-fulfillment,.home .editorial-closing{background:var(--editorial-deep)}
 .home .editorial-assurance__copy li{border-color:#C3D0DA}
 .home .editorial-button:focus-visible,.home .week-hero__cta:focus-visible{outline:3px solid #F5F7F9;outline-offset:4px}
+
+/* Exploded watch component diagram */
+.editorial-quality__visual{display:block;height:auto;margin:33px 0 0;background:#f6f6f6;overflow:visible}
+.editorial-quality__visual img{display:block;width:100%;height:auto;object-fit:contain}
+.editorial-quality__visual figcaption{padding:10px 12px;font-size:.72rem;line-height:1.5;color:#526577;text-align:center;background:#E5EBF0}
