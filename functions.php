@@ -29,6 +29,14 @@ add_action( 'after_setup_theme', 'watch_collections_setup' );
 
 function watch_collections_assets() {
 	$version = wp_get_theme()->get( 'Version' );
+	// Handpicked families from the founder's typography reference.
+	// Load only fonts actually used by the storefront to limit network weight.
+	wp_enqueue_style(
+		'watch-collections-font-families',
+		'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Montserrat:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap',
+		array(),
+		null
+	);
 	wp_enqueue_style( 'watch-collections-style', get_stylesheet_uri(), array(), $version );
 	wp_enqueue_style( 'watch-collections-site', get_template_directory_uri() . '/assets/css/site.css', array( 'watch-collections-style' ), $version );
 	wp_enqueue_script( 'watch-collections-site', get_template_directory_uri() . '/assets/js/site.js', array(), $version, true );
@@ -53,6 +61,13 @@ function watch_collections_assets() {
 			$version
 		);
 	}
+	// Load last: these are deliberate typography overrides on the entire site.
+	wp_enqueue_style(
+		'watch-collections-typography',
+		get_template_directory_uri() . '/assets/css/typography.css',
+		is_front_page() ? array( 'watch-collections-editorial-home', 'watch-collections-font-families' ) : array( 'watch-collections-site', 'watch-collections-font-families' ),
+		$version
+	);
 }
 add_action( 'wp_enqueue_scripts', 'watch_collections_assets' );
 
