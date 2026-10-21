@@ -3,6 +3,7 @@
  * Single layout source; 6200ms autoplay, gentle image crossfades.
  * All content/controls are real HTML for accessibility.
  */
+.home{--home-hero-gutter:clamp(18px,3vw,64px)}
 .week-hero{
   --hero-period:6200ms;
   position:relative;isolation:isolate;overflow:hidden;
@@ -25,12 +26,12 @@
     linear-gradient(180deg,rgba(8,19,34,.19),transparent 28%);
 }
 .week-hero__layout{
-  width:min(1280px,calc(100% - 100px));margin-inline:auto;
+  width:100%;max-width:none;margin-inline:auto;
   position:relative;display:grid;
   grid-template-columns:minmax(0,510px) minmax(0,1fr);
   grid-template-rows:minmax(0,1fr) auto auto;
   column-gap:clamp(24px,5vw,110px);
-  min-height:inherit;padding:clamp(143px,18vh,188px) 0 24px;
+  min-height:inherit;padding:clamp(143px,18vh,188px) var(--home-hero-gutter,clamp(18px,3vw,64px)) 24px;
 }
 .week-hero__copy{
   grid-column:1;grid-row:1;align-self:center;
@@ -131,14 +132,14 @@
 }
 .week-hero__cta:focus-visible,.week-hero__secondary:focus-visible,.week-hero__motion:focus-visible,.week-hero__tab:focus-visible{outline:3px solid #fff;outline-offset:4px}
 @media(max-width:1050px){
-  .week-hero__layout{width:calc(100% - 72px);grid-template-columns:minmax(0,440px) minmax(0,1fr);column-gap:22px}
+  .week-hero__layout{grid-template-columns:minmax(0,440px) minmax(0,1fr);column-gap:22px}
   .week-hero__copy h1{font-size:clamp(3.15rem,5.3vw,4.5rem)}
   .week-hero__shade{background:linear-gradient(90deg,rgba(8,19,34,.93),rgba(8,19,34,.75) 30%,rgba(8,19,34,.17) 73%),linear-gradient(0deg,rgba(8,19,34,.87),transparent 32%)}
 }
 @media(max-width:850px){
   .week-hero{min-height:max(770px,100svh)}
   .week-hero__layout{
-    width:calc(100% - 44px);grid-template-columns:minmax(0,1fr);
+    grid-template-columns:minmax(0,1fr);
     grid-template-rows:auto minmax(155px,1fr) auto auto;
     padding-top:120px;padding-bottom:20px;column-gap:0;
   }
@@ -167,7 +168,7 @@
 }
 @media(max-width:480px){
   .week-hero{min-height:max(775px,100svh)}
-  .week-hero__layout{width:calc(100% - 36px);padding-top:112px;padding-bottom:16px}
+  .week-hero__layout{padding-top:112px;padding-bottom:16px}
   .week-hero__copy h1{font-size:clamp(2.65rem,10.6vw,3.45rem);line-height:1.04}
   .week-hero__copy h1 em{font-size:.76em}
   .week-hero__eyebrow{font-size:.53rem;letter-spacing:.06em;margin-bottom:17px}
