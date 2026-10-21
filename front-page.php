@@ -36,7 +36,7 @@ foreach ( $week_scenes as &$week_scene ) {
 unset( $week_scene );
 ?>
 <main id="main">
-	<section class="week-hero" aria-labelledby="hero-title" data-week-hero data-duration="3000">
+	<section class="week-hero" aria-labelledby="hero-title" data-week-hero data-duration="6200">
 		<div class="week-hero__visual" aria-hidden="true">
 			<?php foreach ( $week_scenes as $index => $scene ) : ?>
 				<div class="week-hero__scene<?php echo 0 === $index ? ' is-active' : ''; ?>" data-hero-scene="<?php echo esc_attr( $index ); ?>" style="--day-index:<?php echo esc_attr( $index ); ?>">
@@ -58,13 +58,11 @@ unset( $week_scene );
 				<p class="week-hero__eyebrow"><?php esc_html_e( 'A COLLECTION FOR REAL LIFE', 'watch-collections' ); ?></p>
 				<h1 id="hero-title"><?php esc_html_e( 'Seven days.', 'watch-collections' ); ?> <em><?php esc_html_e( 'Seven sides of you.', 'watch-collections' ); ?></em></h1>
 				<p class="week-hero__statement"><?php esc_html_e( 'A watch for every moment. A collection that’s yours.', 'watch-collections' ); ?></p>
-				<p class="week-hero__description"><?php esc_html_e( 'From the everyday routine to the moments worth dressing for, your style changes with the occasion. Your watches should feel just as natural.', 'watch-collections' ); ?></p>
-				<p class="week-hero__description week-hero__description--closing"><?php esc_html_e( 'Choose the pieces that speak to you. Bring them together in one collection, made to fit your life.', 'watch-collections' ); ?></p>
+				<p class="week-hero__description"><?php esc_html_e( 'Choose the styles that suit your days. Bring them together in one collection, built around you.', 'watch-collections' ); ?></p>
 				<div class="week-hero__actions">
-					<a href="#collection-options" class="week-hero__cta"><?php esc_html_e( 'Explore collection options', 'watch-collections' ); ?><span aria-hidden="true">↗</span></a>
+					<a href="#collection-options" class="week-hero__cta"><?php esc_html_e( 'Explore the collections', 'watch-collections' ); ?><span aria-hidden="true">↗</span></a>
 					<a href="#how-it-works" class="week-hero__secondary"><?php esc_html_e( 'How it works', 'watch-collections' ); ?><span aria-hidden="true">↘</span></a>
 				</div>
-				<p class="week-hero__promise"><?php esc_html_e( 'Your watches. One presentation box. The choice is yours.', 'watch-collections' ); ?></p>
 			</div>
 
 			<div class="week-hero__day-card" aria-hidden="true">
