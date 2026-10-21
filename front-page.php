@@ -99,7 +99,12 @@ unset( $week_scene );
 				<p><?php esc_html_e( 'There is more to a watch than the way it photographs. We are building product listings around the details that matter for real ownership.', 'watch-collections' ); ?></p>
 			</div>
 			<figure class="editorial-quality__visual">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/watch-exploded.webp' ); ?>" alt="<?php esc_attr_e( 'Illustrative exploded view of watch components including crystal, bezel, dial, movement, case and bracelet', 'watch-collections' ); ?>" loading="lazy" decoding="async" width="941" height="1672">
+				<?php
+				$exploded_png = '/assets/watch-exploded-transparent.png';
+				$exploded_fallback = '/assets/watch-exploded.webp';
+				$exploded_asset = file_exists( get_template_directory() . $exploded_png ) ? $exploded_png : $exploded_fallback;
+				?>
+				<img src="<?php echo esc_url( get_template_directory_uri() . $exploded_asset ); ?>" alt="<?php esc_attr_e( 'Illustrative exploded view of watch components including crystal, bezel, dial, movement, case and bracelet', 'watch-collections' ); ?>" loading="lazy" decoding="async" width="1024" height="1536">
 				<figcaption><?php esc_html_e( 'Illustrative component diagram — specifications vary by model.', 'watch-collections' ); ?></figcaption>
 			</figure>
 			<div class="editorial-quality__details">
