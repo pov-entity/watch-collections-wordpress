@@ -103,3 +103,43 @@ html{scroll-padding-top:65px}.container{width:calc(100% - 36px)}.announcement-ba
 .standard-main{padding:55px 0 85px}.journal-grid{grid-template-columns:1fr}.woocommerce ul.products[class*=columns-] li.product{width:100%;float:none}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+
+/* Homepage v0.2: narrative > product catalog. The Collection Studio stays separate. */
+.home-story-hero .hero-description{max-width:510px}
+.empathy-section .section-heading h2{max-width:760px}
+.empathy-section .section-heading h2 em,.collection-value h2 em,.trust-section h2 em{font-family:Georgia,"Times New Roman",serif;font-weight:400;color:#8b6b53}
+.empathy-section .collection-card{min-width:0}
+.concept-copy .concept-emphasis{color:var(--ink)!important;font-weight:650;font-size:1rem;line-height:1.7;margin-top:15px}
+.collection-value{background:#f9f8f5}
+.collection-price-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid #d3d4d1;border-left:1px solid #d3d4d1}
+.collection-price-card{min-width:0;display:flex;flex-direction:column;padding:31px 25px 27px;border-right:1px solid #d3d4d1;border-bottom:1px solid #d3d4d1;background:#fff;min-height:330px;transition:background .2s}
+.collection-price-card:hover{background:#f4f1ea}
+.price-card-top{display:flex;justify-content:space-between;gap:12px;color:#88694f;font-size:.69rem;letter-spacing:.14em;font-weight:700}
+.price-card-top span:last-child{color:var(--ink);font-size:1.1rem;line-height:1}
+.collection-price-card h3{font-size:1.48rem;margin:29px 0 9px;letter-spacing:-.04em}
+.price-card-desc{font-size:.89rem;color:#65707c;line-height:1.6;min-height:72px;margin:0}
+.collection-price{font-family:Georgia,"Times New Roman",serif;font-size:3rem;letter-spacing:-.06em;line-height:1.15;color:var(--ink);margin:auto 0 7px;padding-top:20px}
+.collection-price span{font-size:1.5rem;vertical-align:top;display:inline-block;margin-top:6px;margin-right:3px}
+.price-card-includes{border-top:1px solid #e6e3de;margin:14px 0 0;padding-top:16px;color:#596675;font-size:.73rem;line-height:1.55}
+.prototype-price-note{margin:20px 0 0;color:#66707a;font-size:.73rem;line-height:1.65;max-width:850px}
+.trust-section{background:#eae7df}
+.trust-layout{display:grid;grid-template-columns:.88fr 1.12fr;align-items:start;gap:12%}
+.trust-section h2{margin:17px 0 25px}
+.trust-intro{color:#56636d;max-width:440px;font-size:1.03rem}
+.trust-point{display:grid;grid-template-columns:38px 1fr;gap:20px;padding:26px 0;border-bottom:1px solid #c9cac7}
+.trust-point:first-child{border-top:1px solid #c9cac7}
+.trust-index{font:italic 1rem Georgia,serif;color:#98765c;padding-top:5px}
+.trust-point h3{font-size:1.43rem;letter-spacing:-.035em;margin-bottom:8px}
+.trust-point p{color:#586573;font-size:.9rem;margin:0;max-width:500px}
+.closing-description{margin:-12px auto 30px;max-width:540px;color:#c0c9d0;font-size:.95rem}
+@media(max-width:1080px){.collection-price-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.collection-price-card{min-height:285px}.trust-layout{gap:7%}}
+@media(max-width:650px){
+.collection-price-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.collection-price-card{padding:23px 16px;min-height:295px}
+.collection-price-card h3{font-size:1.22rem;margin-top:25px}.price-card-desc{font-size:.77rem;min-height:78px}
+.collection-price{font-size:2.7rem}.price-card-includes{font-size:.67rem}
+.trust-layout{grid-template-columns:1fr;gap:29px}.trust-point{gap:13px}.trust-point h3{font-size:1.25rem}
+.closing-description{font-size:.88rem}
+}
+@media(max-width:370px){.collection-price-grid{grid-template-columns:1fr}.collection-price-card{min-height:auto}.price-card-desc{min-height:0}.collection-price{margin:10px 0 0}}
