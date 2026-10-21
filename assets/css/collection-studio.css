@@ -226,3 +226,21 @@
 .studio[data-size="6"] .studio-slot .studio-watch-art{height:76px;width:100%}
 @media(max-width:1150px){.studio-size-option__photo{width:65px;height:49px}.studio-size-option{gap:9px}.studio-size-option__price{font-size:1.18rem}}
 @media(max-width:700px){.studio-size-option__photo{width:100%;height:90px}.studio-size-option{min-height:214px;gap:10px}.studio-box-visual-note{font-size:.57rem;line-height:1.8;margin-top:13px}.studio-size-option__price{font-size:1.35rem}}
+/* Overhead photos and watch overlays share a calibrated, responsive coordinate system. */
+.studio-box-display{width:100%}
+.studio-box-overhead{position:relative;isolation:isolate;width:100%;aspect-ratio:var(--box-ratio);overflow:hidden;border-radius:4px}
+.studio-box-overhead[data-tray-size="1"]{width:min(100%,148px);margin-inline:auto}
+.studio-box-overhead__image{position:absolute;left:var(--box-image-left);top:var(--box-image-top);width:var(--box-image-width);max-width:none;height:auto;display:block;pointer-events:none;user-select:none}
+.studio .studio-box-overhead .studio-box{position:absolute;inset:var(--box-top) var(--box-right) var(--box-bottom) var(--box-left);display:grid;grid-template-columns:repeat(var(--box-columns),minmax(0,1fr));gap:var(--box-gap);width:auto;height:auto;min-height:0;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+.studio .studio-box-overhead .studio-slot{position:relative;display:grid;place-items:center;min-width:0;min-height:0;height:auto;margin:0;padding:0;border:2px solid transparent;border-radius:6px;background:transparent;box-shadow:none;overflow:visible;color:#F3E6D4}
+.studio .studio-box-overhead .studio-slot:before{display:none}
+.studio .studio-box-overhead .studio-slot:hover{border-color:#E7D5B780;background:#FFFFFF0D}
+.studio .studio-box-overhead .studio-slot.is-target{border-color:#ECF6FC;background:#C9E8FF19}
+.studio .studio-box-overhead .studio-slot .studio-watch-art{position:relative;width:86%;height:90%;max-width:100%;max-height:100%;margin:0;transform:none;filter:drop-shadow(0 2px 2px #130C08A8);pointer-events:none}
+.studio .studio-box-overhead[data-tray-size="1"] .studio-slot .studio-watch-art{width:77%;height:84%}
+.studio .studio-box-overhead .studio-slot-number{left:4px;bottom:2px;color:#F1DFCA;text-shadow:0 1px 3px #000;font-size:.45rem;opacity:.8}
+.studio .studio-box-overhead .studio-slot-plus{font-size:1.1rem;color:#F3E6D4;text-shadow:0 1px 5px #24170D;opacity:.7}
+.studio-review-overhead{width:100%;max-width:650px;margin:22px auto 27px;padding:19px 16px;border-radius:10px;background:var(--deep)}
+@media(max-width:700px){.studio-review-overhead{padding:14px 10px;margin:19px 0 23px}.studio .studio-box-overhead .studio-slot-number{font-size:.38rem;left:2px;bottom:1px}.studio .studio-box-overhead .studio-slot-plus{font-size:.9rem}}
+.studio .studio-box-overhead .studio-box{opacity:0;transition:opacity .15s}
+.studio .studio-box-overhead.is-ready .studio-box{opacity:1}

@@ -28,7 +28,7 @@
   const colour = (value, fallback) => /^#[0-9a-f]{6}$/i.test(value || '') ? value : fallback;
 
   /** Original vector concepts. No product or material specification is implied. */
-  function watchArt(watch) {
+  function watchArt(watch, overhead) {
     const id = 'studio-watch-' + (++svgId);
     const palette = watch.palette || {};
     const dial = colour(palette.dial, '#163754');
@@ -65,7 +65,7 @@
       complication = `<rect x="143" y="150" width="13" height="10" rx="1" fill="${mark}" fill-opacity=".9"/><text x="149.5" y="157.5" text-anchor="middle" font-size="6.5" font-family="Arial" fill="${edge}">21</text>`;
     }
     const sportBezel = watch.style === 'sport' ? `<circle cx="120" cy="155" r="59" fill="none" stroke="${edge}" stroke-width="9"/><path d="m120 93-3 6h6Z" fill="${mark}"/><circle cx="174" cy="155" r="1.4" fill="${mark}"/><circle cx="66" cy="155" r="1.4" fill="${mark}"/>` : '';
-    return `<svg class="studio-watch-art" viewBox="0 0 240 320" fill="none" aria-hidden="true" focusable="false"><defs><linearGradient id="${id}-band" x1="80" y1="0" x2="159" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="${band}"/><stop offset=".3" stop-color="${band}"/><stop offset=".5" stop-color="${metalBand ? metal : band}"/><stop offset="1" stop-color="${band}"/></linearGradient><linearGradient id="${id}-metal" x1="64" y1="100" x2="180" y2="216" gradientUnits="userSpaceOnUse"><stop stop-color="#F8FAFB"/><stop offset=".18" stop-color="${metal}"/><stop offset=".4" stop-color="#62717A"/><stop offset=".53" stop-color="${metal}"/><stop offset=".8" stop-color="#EEF3F5"/><stop offset="1" stop-color="${metal}"/></linearGradient><radialGradient id="${id}-dial"><stop stop-color="${dial}"/><stop offset="1" stop-color="${edge}"/></radialGradient><linearGradient id="${id}-glass" x1="72" y1="97" x2="161" y2="211" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFFFF" stop-opacity=".21"/><stop offset=".5" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".07"/></linearGradient><clipPath id="${id}-clip"><rect x="83" y="9" width="74" height="300" rx="16"/></clipPath></defs><ellipse cx="123" cy="302" rx="57" ry="7" fill="#102A4F" fill-opacity=".12"/><rect x="83" y="9" width="74" height="300" rx="16" fill="url(#${id}-band)" stroke="${edge}" stroke-opacity=".2"/><g clip-path="url(#${id}-clip)">${bandDetails}</g><path d="m78 104 5-25h16v27m42 0V79h16l5 25M78 205l5 25h16v-27m42 0v27h16l5-25" fill="url(#${id}-metal)"/><rect x="179" y="147" width="12" height="17" rx="4" fill="url(#${id}-metal)"/><path d="M183 149v13m3-13v13" stroke="${edge}" stroke-opacity=".4"/>${watch.style === 'chronograph' ? `<rect x="173" y="116" width="11" height="9" rx="3" fill="${metal}"/><rect x="173" y="186" width="11" height="9" rx="3" fill="${metal}"/>` : ''}<circle cx="120" cy="158" r="66" fill="#071724" fill-opacity=".22"/><circle cx="120" cy="155" r="65" fill="url(#${id}-metal)" stroke="${metal}" stroke-width="1.4"/><circle cx="120" cy="155" r="58" fill="url(#${id}-dial)" stroke="${edge}" stroke-width="2"/>${sportBezel}<g${watch.style === 'sport' ? ' transform="translate(120 155) scale(.9) translate(-120 -155)"' : ''}>${marks}${complication}<path d="M120 155 100 128" stroke="#071724" stroke-width="5" stroke-linecap="round"/><path d="M120 155 100 128" stroke="${mark}" stroke-width="3.4" stroke-linecap="round"/><path d="M120 155 153 132" stroke="#071724" stroke-width="4" stroke-linecap="round"/><path d="M120 155 153 132" stroke="${mark}" stroke-width="2.4" stroke-linecap="round"/><path d="m115 176 17-71" stroke="${watch.style === 'sport' ? '#D68C68' : metal}" stroke-width=".9"/><circle cx="120" cy="155" r="3.2" fill="${metal}"/><circle cx="120" cy="155" r="1.1" fill="${edge}"/></g><circle cx="120" cy="155" r="56" fill="url(#${id}-glass)"/><path d="M79 124a49 49 0 0 1 60-15" stroke="#FFFFFF" stroke-opacity=".28" stroke-width="1.1"/></svg>`;
+    return `<svg class="studio-watch-art${overhead ? ' studio-watch-art--overhead' : ''}" viewBox="${overhead ? '45 26 150 258' : '0 0 240 320'}" fill="none" aria-hidden="true" focusable="false"><defs><linearGradient id="${id}-band" x1="80" y1="0" x2="159" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="${band}"/><stop offset=".3" stop-color="${band}"/><stop offset=".5" stop-color="${metalBand ? metal : band}"/><stop offset="1" stop-color="${band}"/></linearGradient><linearGradient id="${id}-metal" x1="64" y1="100" x2="180" y2="216" gradientUnits="userSpaceOnUse"><stop stop-color="#F8FAFB"/><stop offset=".18" stop-color="${metal}"/><stop offset=".4" stop-color="#62717A"/><stop offset=".53" stop-color="${metal}"/><stop offset=".8" stop-color="#EEF3F5"/><stop offset="1" stop-color="${metal}"/></linearGradient><radialGradient id="${id}-dial"><stop stop-color="${dial}"/><stop offset="1" stop-color="${edge}"/></radialGradient><linearGradient id="${id}-glass" x1="72" y1="97" x2="161" y2="211" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFFFF" stop-opacity=".21"/><stop offset=".5" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".07"/></linearGradient><clipPath id="${id}-clip"><rect x="83" y="9" width="74" height="300" rx="16"/></clipPath></defs><ellipse cx="123" cy="302" rx="57" ry="7" fill="#102A4F" fill-opacity=".12"/><rect x="83" y="9" width="74" height="300" rx="16" fill="url(#${id}-band)" stroke="${edge}" stroke-opacity=".2"/><g clip-path="url(#${id}-clip)">${bandDetails}</g><path d="m78 104 5-25h16v27m42 0V79h16l5 25M78 205l5 25h16v-27m42 0v27h16l5-25" fill="url(#${id}-metal)"/><rect x="179" y="147" width="12" height="17" rx="4" fill="url(#${id}-metal)"/><path d="M183 149v13m3-13v13" stroke="${edge}" stroke-opacity=".4"/>${watch.style === 'chronograph' ? `<rect x="173" y="116" width="11" height="9" rx="3" fill="${metal}"/><rect x="173" y="186" width="11" height="9" rx="3" fill="${metal}"/>` : ''}<circle cx="120" cy="158" r="66" fill="#071724" fill-opacity=".22"/><circle cx="120" cy="155" r="65" fill="url(#${id}-metal)" stroke="${metal}" stroke-width="1.4"/><circle cx="120" cy="155" r="58" fill="url(#${id}-dial)" stroke="${edge}" stroke-width="2"/>${sportBezel}<g${watch.style === 'sport' ? ' transform="translate(120 155) scale(.9) translate(-120 -155)"' : ''}>${marks}${complication}<path d="M120 155 100 128" stroke="#071724" stroke-width="5" stroke-linecap="round"/><path d="M120 155 100 128" stroke="${mark}" stroke-width="3.4" stroke-linecap="round"/><path d="M120 155 153 132" stroke="#071724" stroke-width="4" stroke-linecap="round"/><path d="M120 155 153 132" stroke="${mark}" stroke-width="2.4" stroke-linecap="round"/><path d="m115 176 17-71" stroke="${watch.style === 'sport' ? '#D68C68' : metal}" stroke-width=".9"/><circle cx="120" cy="155" r="3.2" fill="${metal}"/><circle cx="120" cy="155" r="1.1" fill="${edge}"/></g><circle cx="120" cy="155" r="56" fill="url(#${id}-glass)"/><path d="M79 124a49 49 0 0 1 60-15" stroke="#FFFFFF" stroke-opacity=".28" stroke-width="1.1"/></svg>`;
   }
 
   function notify(message) {
@@ -104,12 +104,42 @@
     notice.hidden = state.target === null;
     notice.innerHTML = state.target === null ? '' : `<span>Choose a watch for slot ${state.target + 1}${state.slots[state.target] ? ', replacing ' + escape(watches.get(state.slots[state.target]).name) : ''}.</span><button type="button" class="studio-quiet-button" data-action="cancel-replace">Cancel</button>`;
   }
+  function traySlots() {
+    return state.slots.map((id, index) => `<button type="button" class="studio-slot${id ? ' is-filled' : ''}${state.target === index ? ' is-target' : ''}" data-action="slot" data-slot="${index}" aria-label="${id ? 'Edit slot ' + (index + 1) + ': ' + escape(watches.get(id).name) : 'Choose a watch for empty slot ' + (index + 1)}">${id ? watchArt(watches.get(id), true) : '<span class="studio-slot-plus" aria-hidden="true">+</span>'}<span class="studio-slot-number">${String(index + 1).padStart(2, '0')}</span></button>`).join('');
+  }
+  function prepareOverheadImages() {
+    root.querySelectorAll('.studio-box-overhead__image').forEach(image => {
+      const reveal = () => image.parentElement.classList.add('is-ready');
+      if (image.complete && image.naturalWidth > 0) reveal();
+      else image.addEventListener('load', reveal, { once: true });
+    });
+  }
+  function boxMarkup() {
+    const box = config.boxes && config.boxes[state.size];
+    if (!box) return `<div class="studio-box" data-box-tray role="group" aria-label="Your presentation box preview">${traySlots()}</div>`;
+    const [x, y, width, height] = box.frame;
+    const [left, top, areaWidth, areaHeight] = box.area;
+    const style = [
+      '--box-ratio:' + width + '/' + height,
+      '--box-columns:' + state.size,
+      '--box-image-width:' + (box.width / width * 100) + '%',
+      '--box-image-left:' + (-x / width * 100) + '%',
+      '--box-image-top:' + (-y / height * 100) + '%',
+      '--box-left:' + ((left - x) / width * 100) + '%',
+      '--box-top:' + ((top - y) / height * 100) + '%',
+      '--box-right:' + ((x + width - left - areaWidth) / width * 100) + '%',
+      '--box-bottom:' + ((y + height - top - areaHeight) / height * 100) + '%',
+      '--box-gap:' + (box.gap / areaWidth * 100) + '%'
+    ].join(';');
+    return `<div class="studio-box-overhead" data-tray-size="${state.size}" style="${style}"><img class="studio-box-overhead__image" src="${escape(box.src)}" srcset="${escape(box.small)} ${box.smallWidth}w, ${escape(box.src)} ${box.width}w" sizes="${state.size === 1 ? '200px' : '(max-width: 700px) 94vw, 760px'}" width="${box.width}" height="${box.height}" alt="" decoding="async" draggable="false"><div class="studio-box" data-box-tray role="group" aria-label="Overhead view of your ${state.size}-watch presentation box">${traySlots()}</div></div>`;
+  }
   function renderBox() {
     const count = model.count(state);
     const price = model.price(state);
     root.dataset.size = state.size;
     $('[data-box-count]').textContent = count + ' / ' + state.size;
-    $('[data-box-tray]').innerHTML = state.slots.map((id, index) => `<button type="button" class="studio-slot${id ? ' is-filled' : ''}${state.target === index ? ' is-target' : ''}" data-action="slot" data-slot="${index}" aria-label="${id ? 'Edit slot ' + (index + 1) + ': ' + escape(watches.get(id).name) : 'Choose a watch for empty slot ' + (index + 1)}">${id ? watchArt(watches.get(id)) : '<span class="studio-slot-plus" aria-hidden="true">+</span>'}<span class="studio-slot-number">${String(index + 1).padStart(2, '0')}</span></button>`).join('');
+    $('[data-box-display]').innerHTML = boxMarkup();
+    prepareOverheadImages();
     $('[data-box-progress]').style.width = (count / state.size * 100) + '%';
     $('[data-box-hint]').textContent = count === 0 ? 'Your first choice sets the tone. Start with a watch that feels like you.' : count === state.size ? 'All together. Tap any watch to change it, or see your complete collection.' : (state.size - count) + ' more to make it yours. Mix styles, or stay with a look you love.';
     $('[data-box-price]').textContent = money(price);
@@ -138,8 +168,9 @@
     restoreFocus(focusKey);
   }
   function openDialog(content, mode, opener) {
-    dialogOpener = opener || document.activeElement;
+    if (!dialog.open) dialogOpener = opener || document.activeElement;
     dialogContent.innerHTML = content;
+    prepareOverheadImages();
     if (!dialog.open) dialog.showModal();
     dialog.scrollTop = 0;
     const heading = dialogContent.querySelector('h2');
@@ -174,7 +205,7 @@
   }
   function showReview(opener) {
     const full = model.count(state) === state.size;
-    openDialog(`<div class="studio-review">${title('YOUR COLLECTION / ' + model.count(state) + ' OF ' + state.size + ' CHOSEN', full ? 'That looks like you.' : 'See it coming together.')}<p class="studio-review-intro">Every piece has its place. Replace, remove or rearrange until it feels right.</p><ol class="studio-review-list">${reviewRows()}</ol><div class="studio-review-total"><div><span>Planned collection price</span><strong class="${model.price(state) === null ? 'is-pending' : ''}">${money(model.price(state))}${model.price(state) === null ? '' : ' <small>USD</small>'}</strong></div><p>${state.size} ${state.size === 1 ? 'watch' : 'watches'} of your choice + presentation box.<br>Shipping and taxes to be confirmed before launch.</p></div><p class="studio-review-note">Design preview only. These are concept watches, not confirmed inventory. Orders and checkout are not available.</p><button type="button" class="studio-primary" data-action="${full ? 'keep' : 'continue'}">${full ? 'Keep this selection' : 'Continue choosing'}<span aria-hidden="true">↗</span></button><p class="studio-save-note">${storageAvailable ? 'Your selection is saved on this device. No account needed.' : 'Your selection is kept for this visit. Browser storage is unavailable.'}</p></div>`, 'review', opener);
+    openDialog(`<div class="studio-review">${title('YOUR COLLECTION / ' + model.count(state) + ' OF ' + state.size + ' CHOSEN', full ? 'That looks like you.' : 'See it coming together.')}<p class="studio-review-intro">Every piece has its place. Replace, remove or rearrange until it feels right.</p><div class="studio-review-overhead">${boxMarkup()}</div><ol class="studio-review-list">${reviewRows()}</ol><div class="studio-review-total"><div><span>Planned collection price</span><strong class="${model.price(state) === null ? 'is-pending' : ''}">${money(model.price(state))}${model.price(state) === null ? '' : ' <small>USD</small>'}</strong></div><p>${state.size} ${state.size === 1 ? 'watch' : 'watches'} of your choice + presentation box.<br>Shipping and taxes to be confirmed before launch.</p></div><p class="studio-review-note">Design preview only. These are concept watches, not confirmed inventory. Orders and checkout are not available.</p><button type="button" class="studio-primary" data-action="${full ? 'keep' : 'continue'}">${full ? 'Keep this selection' : 'Continue choosing'}<span aria-hidden="true">↗</span></button><p class="studio-save-note">${storageAvailable ? 'Your selection is saved on this device. No account needed.' : 'Your selection is kept for this visit. Browser storage is unavailable.'}</p></div>`, 'review', opener);
     document.body.classList.add('studio-dialog-open');
   }
   function requestSize(size, opener) {

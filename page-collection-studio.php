@@ -10,7 +10,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 get_header();
 $packages = watch_collections_packages();
-$config   = array( 'watches' => watch_collections_studio_catalog(), 'packages' => $packages, 'defaultSize' => 3 );
+$box_views = array(
+	1 => array( 'width' => 1024, 'height' => 1536, 'frame' => array( 128, 64, 768, 1414 ), 'area' => array( 250, 270, 524, 1050 ), 'gap' => 0, 'smallWidth' => 384 ),
+	3 => array( 'width' => 1536, 'height' => 1024, 'frame' => array( 60, 100, 1416, 850 ), 'area' => array( 163, 270, 1206, 550 ), 'gap' => 33, 'smallWidth' => 768 ),
+	6 => array( 'width' => 2172, 'height' => 724, 'frame' => array( 48, 48, 2076, 632 ), 'area' => array( 130, 170, 1925, 410 ), 'gap' => 25, 'smallWidth' => 1024 ),
+);
+foreach ( $box_views as $count => &$box_view ) {
+	$base              = get_template_directory_uri() . '/assets/boxes/box-' . $count . '-overhead';
+	$box_view['src']    = add_query_arg( 'ver', wp_get_theme()->get( 'Version' ), $base . '.webp' );
+	$box_view['small']  = add_query_arg( 'ver', wp_get_theme()->get( 'Version' ), $base . '-small.webp' );
+}
+unset( $box_view );
+$config = array( 'watches' => watch_collections_studio_catalog(), 'packages' => $packages, 'defaultSize' => 3, 'boxes' => $box_views );
 ?>
 <main id="main" class="studio" data-collection-studio>
 	<div class="container studio-container">
@@ -49,7 +60,7 @@ $config   = array( 'watches' => watch_collections_studio_catalog(), 'packages' =
 			</section>
 			<aside class="studio-box-panel" aria-labelledby="studio-box-title">
 				<div class="studio-box-heading"><div><p class="studio-kicker">03 / <?php esc_html_e( 'COMING TOGETHER', 'watch-collections' ); ?></p><h2 id="studio-box-title"><?php esc_html_e( 'Your collection.', 'watch-collections' ); ?></h2></div><span data-box-count></span></div>
-				<div class="studio-box" data-box-tray aria-label="<?php esc_attr_e( 'Your presentation box preview', 'watch-collections' ); ?>"></div>
+				<div class="studio-box-display" data-box-display></div>
 				<div class="studio-box-progress"><span data-box-progress></span></div><p class="studio-box-hint" data-box-hint></p>
 				<div class="studio-box-price"><div><span><?php esc_html_e( 'Planned collection price', 'watch-collections' ); ?></span><small data-box-inclusions></small></div><strong data-box-price></strong></div>
 				<button type="button" class="studio-primary studio-review-button" data-action="review"><?php esc_html_e( 'See my collection', 'watch-collections' ); ?><span aria-hidden="true">↗</span></button>

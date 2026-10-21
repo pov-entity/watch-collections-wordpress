@@ -1,6 +1,14 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
-**Status:** Prototype v0.7.1. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
+**Status:** Prototype v0.7.2. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
+
+## Overhead collection tray — v0.7.2
+
+The live Studio tray and collection review use dedicated top-down 1/3/6 box visuals. Each asset has calibrated frame and compartment coordinates in the page configuration; watch overlays use a centered, upright view, with no card rotation or floor shadow. Six watches stay in a single row. The mobile box review includes the same overhead tray above the editable selection list. The angled product photographs remain in the package choices.
+
+The generated visuals are stored as alpha-preserving WebP files and smaller responsive variants in `assets/boxes/`. The source images are not destructively cropped: the interface frames them in CSS and positions interactive compartments in the same coordinate system. Selection, replacement and reorder behavior continues to use the existing state model. Prices remain unchanged. Import theme **0.7.2** for this update.
+
+Validation: JavaScript syntax and PHP 7.4 template checks passed. Browser QA verified all 1/3/6 tray images, upright watch placement, six centered watch faces fitting their compartments, and mobile review/reordering without horizontal overflow. Generation briefs and asset sizes: `assets/boxes/overhead-prompts.md`.
 
 ## Realistic box visuals — v0.7.1
 
@@ -26,7 +34,7 @@ Use **Build your collection** in the header or homepage hero, or choose a packag
 
 **Validation:** `node --test tests/collection-state.test.cjs` covers size eligibility, capacity, explicit replacement, downsizing confirmation, sparse selections, reordering, storage sanitization and null-price handling. PHP 7.4 parsing and rendered-template integration checks passed using WordPress function stubs. Browser QA verified desktop and a 390px mobile frame. A full WordPress/Playground integration test is still required after importing the theme.
 
-**Preview update:** Import the latest repository into a new WordPress Playground instance and confirm theme version **0.7.1**. Refreshing an older saved Playground does not fetch new commits.
+**Preview update:** Import the latest repository into a new WordPress Playground instance and confirm theme version **0.7.2**. Refreshing an older saved Playground does not fetch new commits.
 
 ### Decision log — 2026-10-21
 
