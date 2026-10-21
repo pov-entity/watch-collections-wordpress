@@ -196,7 +196,7 @@ unset( $week_scene );
 				<?php foreach ( $collection_options as $option ) : ?>
 				<article class="editorial-package">
 					<div class="editorial-package__top"><span><?php echo esc_html( sprintf( _n( '%s WATCH', '%s WATCHES', $option['count'], 'watch-collections' ), number_format_i18n( $option['count'] ) ) ); ?></span><span aria-hidden="true">↗</span></div>
-					<div class="editorial-package__box" aria-hidden="true"><div class="editorial-package__wood"><?php for ( $n = 0; $n < $option['count']; $n++ ) : ?><span class="editorial-package__compartment"><i></i></span><?php endfor; ?></div></div>
+					<div class="editorial-package__box editorial-package__box--photo" aria-hidden="true"><?php watch_collections_box_image( $option['count'], 'editorial-package__photo', '(max-width: 700px) 90vw, 420px' ); ?></div>
 					<h3><?php echo esc_html( $option['name'] ); ?></h3>
 					<p><?php echo esc_html( $option['detail'] ); ?></p>
 					<?php if ( null !== $option['price'] ) : ?>
@@ -208,7 +208,7 @@ unset( $week_scene );
 				</article>
 				<?php endforeach; ?>
 			</div>
-			<p class="editorial-caption"><?php esc_html_e( 'Package boxes are illustrative diagrams, not final product photographs. Prices are provisional; eligible watches, final box specifications, stock, taxes, shipping charges and purchase terms will be confirmed before launch. Orders are not being accepted.', 'watch-collections' ); ?></p>
+			<p class="editorial-caption"><?php esc_html_e( 'Box images are AI-generated visuals based on supplier references; the single-watch box is a concept. Prices are provisional. Eligible watches, final box specifications, stock, taxes, shipping charges and purchase terms will be confirmed before launch. Orders are not being accepted.', 'watch-collections' ); ?></p>
 		</div>
 	</section>
 

@@ -17,6 +17,19 @@ function watch_collections_packages() {
 	);
 }
 
+/** Responsive generated box visuals; the one-slot version is a concept. */
+function watch_collections_box_image( $count, $class, $sizes ) {
+	if ( ! in_array( (int) $count, array( 1, 3, 6 ), true ) ) {
+		return;
+	}
+	$base    = get_template_directory_uri() . '/assets/boxes/box-' . (int) $count;
+	$version = wp_get_theme()->get( 'Version' );
+	$full    = add_query_arg( 'ver', $version, $base . '.webp' );
+	$small   = add_query_arg( 'ver', $version, $base . '-480.webp' );
+	// The adjacent package label supplies the image's accessible description.
+	echo '<img class="' . esc_attr( $class ) . '" src="' . esc_url( $full ) . '" srcset="' . esc_url( $small ) . ' 480w, ' . esc_url( $full ) . ' 1448w" sizes="' . esc_attr( $sizes ) . '" width="1448" height="1086" alt="" loading="lazy" decoding="async">';
+}
+
 /** Portable even in Playground installations without pretty permalinks. */
 function watch_collections_studio_url( $size = 0 ) {
 	$args = array( 'collection-studio' => 1 );

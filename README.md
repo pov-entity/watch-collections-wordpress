@@ -1,6 +1,12 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
-**Status:** Prototype v0.7.0. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
+**Status:** Prototype v0.7.1. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
+
+## Realistic box visuals — v0.7.1
+
+The homepage package cards and Studio size selector now use a consistent set of generated product images in `assets/boxes/`. The three- and six-slot boxes follow the founder's supplied walnut-finish, brown-lined, glass-lid references; the single-slot image is an explicitly provisional adaptation. The six-slot box and selection tray use one row of six compartments. Images contain empty pillows rather than unverified watch models, and omit supplier-photo labels, measurements and background props.
+
+Each visual has a 1448 × 1086 WebP and a 480 × 360 responsive variant. The interface identifies these as AI-generated visuals; they do not verify final dimensions, construction materials or fulfillment specifications. The original PNG generations remain separate. The prompts and provenance are recorded in `assets/boxes/README.md`. Package prices remain unchanged pending founder approval. Import theme **0.7.1** to see this update.
 
 ## Collection Studio — current version
 
@@ -20,7 +26,7 @@ Use **Build your collection** in the header or homepage hero, or choose a packag
 
 **Validation:** `node --test tests/collection-state.test.cjs` covers size eligibility, capacity, explicit replacement, downsizing confirmation, sparse selections, reordering, storage sanitization and null-price handling. PHP 7.4 parsing and rendered-template integration checks passed using WordPress function stubs. Browser QA verified desktop and a 390px mobile frame. A full WordPress/Playground integration test is still required after importing the theme.
 
-**Preview update:** Import the latest repository into a new WordPress Playground instance and confirm theme version **0.7.0**. Refreshing an older saved Playground does not fetch new commits.
+**Preview update:** Import the latest repository into a new WordPress Playground instance and confirm theme version **0.7.1**. Refreshing an older saved Playground does not fetch new commits.
 
 ### Decision log — 2026-10-21
 

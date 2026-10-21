@@ -26,12 +26,13 @@ $config   = array( 'watches' => watch_collections_studio_catalog(), 'packages' =
 			<div class="studio-size-options" role="group" aria-label="<?php esc_attr_e( 'Choose your collection size', 'watch-collections' ); ?>">
 			<?php foreach ( $packages as $package ) : ?>
 				<button type="button" class="studio-size-option" data-action="size" data-size="<?php echo esc_attr( $package['count'] ); ?>" aria-pressed="false">
-					<span class="studio-size-option__art" aria-hidden="true"><?php for ( $slot = 0; $slot < $package['count']; $slot++ ) : ?><i></i><?php endfor; ?></span>
+					<span class="studio-size-option__photo" aria-hidden="true"><?php watch_collections_box_image( $package['count'], 'studio-box-photo', '(max-width: 700px) 28vw, 112px' ); ?></span>
 					<span class="studio-size-option__copy"><strong><?php echo esc_html( sprintf( _n( '%d watch', '%d watches', $package['count'], 'watch-collections' ), $package['count'] ) ); ?></strong><small><?php echo esc_html( $package['name'] ); ?></small></span>
 					<span class="studio-size-option__price"><?php if ( null !== $package['price'] ) : ?>$<?php echo esc_html( $package['price'] ); ?><small>USD / <?php esc_html_e( 'planned', 'watch-collections' ); ?></small><?php else : ?><span class="studio-price-pending"><?php esc_html_e( 'Price to be confirmed', 'watch-collections' ); ?></span><?php endif; ?></span><span class="studio-radio" aria-hidden="true"></span>
 				</button>
 			<?php endforeach; ?>
 			</div>
+			<p class="studio-box-visual-note"><?php esc_html_e( 'AI-generated box visuals based on supplier references. The single-watch box is a concept; final box details are to be confirmed.', 'watch-collections' ); ?></p>
 		</section>
 		<div class="studio-workspace">
 			<section class="studio-catalog" aria-labelledby="studio-catalog-title">
