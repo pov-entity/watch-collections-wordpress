@@ -20,6 +20,8 @@
   let toastTimer;
   let dialogOpener;
   let carouselWatches = [];
+  let carouselLoop = false;
+  let activeSlideIndex = null;
   let activeWatchId = (config.watches[1] || config.watches[0] || {}).id;
   let carouselTarget = null;
   let scrollFrame;
@@ -90,65 +92,99 @@
     const element = root.querySelector(key);
     if (element) element.focus({ preventScroll: true });
   }
-  function carouselSlide(watch, index, total) {
-    return `<div class="studio-carousel-slide" data-carousel-slide data-id="${escape(watch.id)}" role="group" aria-roledescription="slide" aria-label="${index + 1} of ${total}: ${escape(watch.name)}"><button type="button" class="studio-carousel-visual" data-action="focus-watch" data-id="${escape(watch.id)}" aria-label="Choose ${escape(watch.name)}" aria-pressed="false" tabindex="-1">${watchArt(watch)}<span class="studio-carousel-selected" hidden><span aria-hidden="true">✓</span> In your box</span></button></div>`;
+  function carouselSlide(watch, index, total, physicalIndex) {
+    return `<div class="studio-carousel-slide" data-carousel-slide data-carousel-index="${physicalIndex}" data-id="${escape(watch.id)}" role="group" aria-roledescription="slide" aria-label="${index + 1} of ${total}: ${escape(watch.name)}" aria-hidden="true"><button type="button" class="studio-carousel-visual" data-action="focus-watch" data-id="${escape(watch.id)}" data-carousel-index="${physicalIndex}" aria-label="Choose ${escape(watch.name)}" aria-pressed="false" tabindex="-1">${watchArt(watch)}<span class="studio-carousel-selected" hidden><span aria-hidden="true">✓</span> In your box</span></button></div>`;
   }
   function renderFeatured(watch) {
     const selected = state.slots.includes(watch.id);
     const label = selected ? 'In your box' : (state.target !== null ? 'Replace watch' : (model.count(state) === state.size ? 'Swap into box' : 'Add to my box'));
-    $('[data-watch-feature]').innerHTML = `<p class="studio-feature-style">${escape(watch.styleLabel)}<span>Concept ${String(config.watches.indexOf(watch) + 1).padStart(2, '0')}</span></p><h3 id="studio-feature-title">${escape(watch.name)}</h3><p class="studio-feature-description">${escape(watch.description)}</p><dl class="studio-feature-specs"><div><dt>Dial</dt><dd>${escape(watch.dial)}</dd></div><div><dt>Finish</dt><dd>${escape(watch.finish)}</dd></div><div><dt>Strap design</dt><dd>${escape(watch.strapLabel)}</dd></div></dl><div class="studio-feature-actions"><button type="button" class="studio-primary studio-feature-add${selected ? ' is-in-box' : ''}" data-feature-add data-action="${selected ? 'review' : 'add'}" data-id="${escape(watch.id)}" aria-label="${escape(label + ': ' + watch.name)}">${label}<span aria-hidden="true">${selected ? '✓' : '+'}</span></button><button type="button" class="studio-feature-details" data-action="details" data-id="${escape(watch.id)}">View full details <span aria-hidden="true">↗</span></button></div>`;
+    $('[data-watch-selection]').innerHTML = `<button type="button" class="studio-primary studio-feature-add${selected ? ' is-in-box' : ''}" data-feature-add data-action="${selected ? 'review' : 'add'}" data-id="${escape(watch.id)}" aria-label="${escape(label + ': ' + watch.name)}">${label}<span aria-hidden="true">${selected ? '✓' : '+'}</span></button>`;
+    $('[data-watch-feature]').innerHTML = `<p class="studio-feature-style">${escape(watch.styleLabel)}<span>Concept ${String(config.watches.indexOf(watch) + 1).padStart(2, '0')}</span></p><h3 id="studio-feature-title">${escape(watch.name)}</h3><p class="studio-feature-description">${escape(watch.description)}</p><dl class="studio-feature-specs"><div><dt>Dial</dt><dd>${escape(watch.dial)}</dd></div><div><dt>Finish</dt><dd>${escape(watch.finish)}</dd></div><div><dt>Strap design</dt><dd>${escape(watch.strapLabel)}</dd></div></dl><button type="button" class="studio-feature-details" data-action="details" data-id="${escape(watch.id)}">View full details <span aria-hidden="true">↗</span></button>`;
   }
-  function setActiveWatch(id, refresh) {
+  function setActiveWatch(id, refresh, physicalIndex) {
     const index = carouselWatches.findIndex(watch => watch.id === id);
     if (index < 0) return;
+    if (physicalIndex === undefined) physicalIndex = index;
     const changed = activeWatchId !== id;
-    if (!changed && !refresh) return;
+    if (!changed && activeSlideIndex === physicalIndex && !refresh) return;
     activeWatchId = id;
+    activeSlideIndex = physicalIndex;
     track.querySelectorAll('[data-carousel-slide]').forEach(slide => {
-      const active = slide.dataset.id === id;
+      const distance = Math.abs(Number(slide.dataset.carouselIndex) - physicalIndex);
+      const active = distance === 0;
       slide.classList.toggle('is-active', active);
+      slide.classList.toggle('is-near', distance === 1);
+      slide.classList.toggle('is-far', distance === 2);
+      slide.setAttribute('aria-hidden', String(!active));
       const button = slide.querySelector('button');
+      button.setAttribute('aria-hidden', String(!active));
       button.setAttribute('aria-pressed', String(active));
       button.tabIndex = active ? 0 : -1;
     });
-    $('[data-action="previous-watch"]').disabled = index === 0;
-    $('[data-action="next-watch"]').disabled = index === carouselWatches.length - 1;
-    $('[data-carousel-position]').textContent = String(index + 1).padStart(2, '0') + ' / ' + String(carouselWatches.length).padStart(2, '0');
-    $('[data-carousel-announcement]').textContent = ': ' + carouselWatches[index].name;
-    $('[data-carousel-progress]').style.width = ((index + 1) / carouselWatches.length * 100) + '%';
-    if (changed || refresh) renderFeatured(carouselWatches[index]);
+    $('[data-action="previous-watch"]').disabled = !carouselLoop && index === 0;
+    $('[data-action="next-watch"]').disabled = !carouselLoop && index === carouselWatches.length - 1;
+    if (changed || refresh) {
+      $('[data-carousel-position]').textContent = String(index + 1).padStart(2, '0') + ' / ' + String(carouselWatches.length).padStart(2, '0');
+      $('[data-carousel-announcement]').textContent = ': ' + carouselWatches[index].name;
+      $('[data-carousel-progress]').style.width = ((index + 1) / carouselWatches.length * 100) + '%';
+      renderFeatured(carouselWatches[index]);
+    }
   }
   function nearestWatch() {
-    if (!carouselWatches.length || carouselTarget) return;
+    if (!carouselWatches.length || carouselTarget !== null) return;
     const center = track.getBoundingClientRect().left + track.clientWidth / 2;
     let nearest = null;
     let distance = Infinity;
     track.querySelectorAll('[data-carousel-slide]').forEach(slide => {
       const rect = slide.getBoundingClientRect();
       const offset = Math.abs(rect.left + rect.width / 2 - center);
-      if (offset < distance) { distance = offset; nearest = slide.dataset.id; }
+      if (offset < distance) { distance = offset; nearest = slide; }
     });
-    if (nearest) setActiveWatch(nearest);
+    if (nearest) setActiveWatch(nearest.dataset.id, false, Number(nearest.dataset.carouselIndex));
   }
   function settleCarousel() {
     clearTimeout(scrollTimer);
     carouselTarget = null;
     nearestWatch();
+    if (carouselLoop && (activeSlideIndex < 0 || activeSlideIndex >= carouselWatches.length)) {
+      const index = (activeSlideIndex % carouselWatches.length + carouselWatches.length) % carouselWatches.length;
+      centerWatch(activeWatchId, false, index);
+    }
   }
-  function centerWatch(id, animate) {
-    const slide = track.querySelector(`[data-carousel-slide][data-id="${id}"]`);
+  function centerWatch(id, animate, physicalIndex) {
+    let slide;
+    if (physicalIndex !== undefined && physicalIndex !== null) slide = track.querySelector(`[data-carousel-slide][data-carousel-index="${physicalIndex}"]`);
+    else {
+      const copies = Array.from(track.querySelectorAll(`[data-carousel-slide][data-id="${id}"]`));
+      copies.sort((a, b) => Math.abs(Number(a.dataset.carouselIndex) - activeSlideIndex) - Math.abs(Number(b.dataset.carouselIndex) - activeSlideIndex));
+      slide = copies[0];
+    }
     if (!slide) return;
-    setActiveWatch(id);
-    carouselTarget = id;
+    const focused = document.activeElement.closest('[data-carousel-slide]');
+    const keepFocus = !animate && focused && track.contains(focused) && focused.classList.contains('is-active');
+    const selectedIndex = Number(slide.dataset.carouselIndex);
+    const instant = !animate || !motion;
+    if (instant) track.classList.add('is-recentering');
+    setActiveWatch(id, false, selectedIndex);
+    carouselTarget = selectedIndex;
     const offset = slide.offsetLeft + slide.offsetWidth / 2 - track.clientWidth / 2;
     track.scrollTo({ left: offset, behavior: animate && motion ? 'smooth' : 'instant' });
+    if (instant) {
+      // Commit the equivalent copy at its final scale before restoring transitions.
+      void track.offsetWidth;
+      requestAnimationFrame(() => track.classList.remove('is-recentering'));
+    }
+    if (keepFocus) slide.querySelector('button').focus({ preventScroll: true });
     clearTimeout(scrollTimer);
     scrollTimer = setTimeout(settleCarousel, 160);
   }
   function moveCarousel(direction) {
     const index = carouselWatches.findIndex(watch => watch.id === activeWatchId);
-    const next = carouselWatches[index + direction];
-    if (next) centerWatch(next.id, true);
+    const nextIndex = carouselLoop ? (index + direction + carouselWatches.length) % carouselWatches.length : index + direction;
+    const next = carouselWatches[nextIndex];
+    if (!next) return;
+    const adjacent = activeSlideIndex + direction;
+    centerWatch(next.id, true, track.querySelector(`[data-carousel-slide][data-carousel-index="${adjacent}"]`) ? adjacent : nextIndex);
   }
   function renderCatalog() {
     const list = config.watches.filter(watch => {
@@ -157,6 +193,7 @@
     });
     const changed = list.map(watch => watch.id).join() !== carouselWatches.map(watch => watch.id).join();
     carouselWatches = list;
+    carouselLoop = list.length >= 5;
     if (!list.some(watch => watch.id === activeWatchId)) activeWatchId = list.length ? list[0].id : null;
     $('[data-watch-carousel]').hidden = list.length === 0;
     if (changed) {
@@ -164,7 +201,10 @@
       cancelAnimationFrame(centerFrame);
       clearTimeout(scrollTimer);
       carouselTarget = null;
-      track.innerHTML = list.map((watch, index) => carouselSlide(watch, index, list.length)).join('');
+      activeSlideIndex = list.findIndex(watch => watch.id === activeWatchId);
+      // Copies keep two neighbors visible across the ends; only the centered slide enters the tab order.
+      const copies = carouselLoop ? [-1, 0, 1] : [0];
+      track.innerHTML = copies.map(copy => list.map((watch, index) => carouselSlide(watch, index, list.length, index + copy * list.length)).join('')).join('');
     }
     track.querySelectorAll('[data-carousel-slide]').forEach(slide => {
       const selected = state.slots.includes(slide.dataset.id);
@@ -172,8 +212,8 @@
       slide.querySelector('.studio-carousel-selected').hidden = !selected;
     });
     if (list.length) {
-      setActiveWatch(activeWatchId, true);
-      if (changed) centerFrame = requestAnimationFrame(() => centerWatch(activeWatchId, false));
+      setActiveWatch(activeWatchId, true, activeSlideIndex);
+      if (changed) centerFrame = requestAnimationFrame(() => centerWatch(activeWatchId, false, activeSlideIndex));
     }
     $('[data-result-count]').textContent = list.length + ' concept ' + (list.length === 1 ? 'watch' : 'watches') + (filter === 'all' && strap === 'all' && !search ? ' · Find your next favourite.' : ' found');
     $('[data-catalog-empty]').hidden = list.length > 0;
@@ -218,7 +258,7 @@
     root.dataset.size = state.size;
     $('[data-box-count]').textContent = count + ' / ' + state.size;
     $('[data-box-display]').innerHTML = boxMarkup();
-    prepareOverheadImages();
+    $('[data-mobile-box-display]').innerHTML = boxMarkup();
     $('[data-box-progress]').style.width = (count / state.size * 100) + '%';
     $('[data-box-hint]').textContent = count === 0 ? 'Your first choice sets the tone. Start with a watch that feels like you.' : count === state.size ? 'All together. Tap any watch to change it, or see your complete collection.' : (state.size - count) + ' more to make it yours. Mix styles, or stay with a look you love.';
     $('[data-box-price]').textContent = money(price);
@@ -227,9 +267,9 @@
     $('[data-save-status]').textContent = storageAvailable ? 'Saved on this device' : 'Kept for this visit';
     $('[data-action="clear"]').disabled = count === 0;
     root.querySelectorAll('[data-action="size"]').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.size) === state.size)));
-    $('[data-mobile-thumbs]').innerHTML = state.slots.slice(0, 3).map(id => `<span>${id ? watchArt(watches.get(id)) : '<i></i>'}</span>`).join('');
     $('[data-mobile-count]').textContent = count + ' of ' + state.size + ' chosen';
     $('[data-mobile-price]').textContent = price === null ? 'Price to be confirmed' : money(price) + ' USD · planned';
+    prepareOverheadImages();
   }
   function render() {
     root.dataset.motion = motion ? 'on' : 'off';
@@ -301,7 +341,8 @@
   function flyToBox(watch, rect, index) {
     if (!motion || !rect || !Element.prototype.animate) return;
     const mobile = window.matchMedia('(max-width: 960px)').matches;
-    const destination = mobile ? $('[data-mobile-thumbs]') : $(`[data-box-tray] [data-slot="${index}"]`);
+    const box = mobile ? $('[data-mobile-box-display]') : $('[data-box-display]');
+    const destination = box.querySelector(`[data-box-tray] [data-slot="${index}"]`);
     if (!destination) return;
     const to = destination.getBoundingClientRect();
     if (to.top >= window.innerHeight || to.bottom <= 0) return;
@@ -324,7 +365,7 @@
     }
     const index = exactSlot === undefined ? (state.target === null ? state.slots.indexOf(null) : state.target) : exactSlot;
     const previous = state.slots[index];
-    const visual = track.querySelector(`[data-carousel-slide][data-id="${id}"] .studio-carousel-visual`);
+    const visual = track.querySelector(`[data-carousel-slide].is-active[data-id="${id}"] .studio-carousel-visual > .studio-watch-art`);
     const rect = visual && !dialog.open ? visual.getBoundingClientRect() : null;
     closeDialog();
     commit(model.put(state, id, index), watch.name + (previous ? ' replaced ' + watches.get(previous).name + '.' : ' added to your box.'), '[data-feature-add]');
@@ -349,7 +390,7 @@
         renderCatalog(); $('[data-studio-search]').focus(); break;
       case 'size': requestSize(Number(button.dataset.size), button); break;
       case 'confirm-size': closeDialog(); commit(model.resize(state, Number(button.dataset.size), true), 'Your box size has been updated.'); break;
-      case 'focus-watch': centerWatch(id, true); break;
+      case 'focus-watch': centerWatch(id, true, Number(button.dataset.carouselIndex)); break;
       case 'previous-watch': moveCarousel(-1); break;
       case 'next-watch': moveCarousel(1); break;
       case 'details': showDetails(id, button); break;
@@ -389,21 +430,18 @@
   track.addEventListener('wheel', () => { carouselTarget = null; }, { passive: true });
   track.addEventListener('keydown', event => {
     if (event.altKey || event.ctrlKey || event.metaKey || !carouselWatches.length) return;
-    const index = carouselWatches.findIndex(watch => watch.id === activeWatchId);
-    const next = event.key === 'ArrowLeft' ? index - 1 : event.key === 'ArrowRight' ? index + 1 : event.key === 'Home' ? 0 : event.key === 'End' ? carouselWatches.length - 1 : -1;
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault();
-    if (carouselWatches[next]) {
-      centerWatch(carouselWatches[next].id, true);
-      if (event.target !== track) track.querySelector(`[data-action="focus-watch"][data-id="${activeWatchId}"]`).focus({ preventScroll: true });
-    }
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') moveCarousel(event.key === 'ArrowLeft' ? -1 : 1);
+    else centerWatch(carouselWatches[event.key === 'Home' ? 0 : carouselWatches.length - 1].id, true);
+    if (event.target !== track) track.querySelector(`[data-carousel-slide][data-carousel-index="${activeSlideIndex}"] button`).focus({ preventScroll: true });
   });
   let carouselWidth = 0;
   function resizeCarousel() {
     if (!track.clientWidth || track.clientWidth === carouselWidth) return;
     carouselWidth = track.clientWidth;
     cancelAnimationFrame(centerFrame);
-    centerFrame = requestAnimationFrame(() => centerWatch(activeWatchId, false));
+    centerFrame = requestAnimationFrame(() => centerWatch(activeWatchId, false, activeSlideIndex));
   }
   if (window.ResizeObserver) new ResizeObserver(resizeCarousel).observe(track);
   else window.addEventListener('resize', resizeCarousel);

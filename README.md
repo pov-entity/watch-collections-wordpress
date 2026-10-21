@@ -1,6 +1,16 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
-**Status:** Prototype v0.8.0. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
+**Status:** Prototype v0.8.1. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
+
+## Five-watch view and mobile box — v0.8.1
+
+The full catalog shows a large centered watch and two previews on either side. Inner previews are smaller and faded; outer previews shrink and fade further. Catalogs with at least five matches wrap in both directions so the four previews stay present at the first and last watch. Shorter filtered lists show only their matching watches. Equivalent track copies preserve the native scrolling experience; only the centered watch enters the keyboard tab order and accessibility tree.
+
+The add/replace button sits directly underneath the watch artwork, before the navigation controls and descriptive details. On mobile, a compact, interactive overhead box sits above the carousel and stays at the top while browsing. It shows the complete 1/3/6-slot tray, selection count, current price status and a View box action. This replaces the bottom selection bar. Adding updates the visible overhead tray and preserves the centered watch.
+
+Validation: JavaScript syntax and PHP 7.4 template checks passed. Desktop and 390px mobile browser checks covered five visible watches, progressive fading, artwork centering, outer-preview clicks, wrapping in both directions, five-result loops, single/empty filters and adding through the repositioned action. The mobile page fits its viewport, the box appears before the carousel, and adding updates the six-slot tray immediately. Prices remain unchanged. Import theme **0.8.1** for this update.
+
+[Mobile layout preview](docs/collection-studio-mobile.jpg) shows the overhead box, five-watch view and immediate add action, with the carousel's keyboard focus visible.
 
 ## Watch carousel — v0.8.0
 
@@ -30,7 +40,7 @@ Use **Build your collection** in the header or homepage hero, or choose a packag
 
 - Twelve original, clearly labeled vector concept watches in a swipeable center-focused carousel, with style, strap and text search filters.
 - Watch details show visual design information separately from unverified movement, materials, dimensions, functions and water resistance.
-- Persistent desktop presentation-box preview and fixed mobile selection bar.
+- Persistent desktop presentation-box preview and a sticky overhead box above the mobile carousel.
 - Add, replace, remove and reorder watches; confirm before a smaller box discards selections. Full boxes require choosing which watch to replace.
 - Browser-local persistence with corrupt-data validation and an in-memory fallback when storage is unavailable.
 - Native keyboard-accessible dialogs, reduced-motion support and a motion toggle.
@@ -42,7 +52,7 @@ Use **Build your collection** in the header or homepage hero, or choose a packag
 
 **Validation:** `node --test tests/collection-state.test.cjs` covers size eligibility, capacity, explicit replacement, downsizing confirmation, sparse selections, reordering, storage sanitization and null-price handling. PHP 7.4 parsing and rendered-template integration checks passed using WordPress function stubs. Browser QA verified desktop and a 390px mobile frame. A full WordPress/Playground integration test is still required after importing the theme.
 
-**Preview update:** Import the latest repository into a new WordPress Playground instance and confirm theme version **0.8.0**. Refreshing an older saved Playground does not fetch new commits.
+**Preview update:** Import the latest repository into a new WordPress Playground instance and confirm theme version **0.8.1**. Refreshing an older saved Playground does not fetch new commits.
 
 ### Decision log — 2026-10-21
 

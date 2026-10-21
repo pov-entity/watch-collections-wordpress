@@ -54,10 +54,15 @@ $config = array( 'watches' => watch_collections_studio_catalog(), 'packages' => 
 				</div>
 				<div class="studio-results-bar"><p data-result-count role="status"></p><button type="button" class="studio-quiet-button" data-action="reset-filters" hidden><?php esc_html_e( 'Clear filters', 'watch-collections' ); ?></button></div>
 				<div class="studio-replace-notice" data-replace-notice hidden></div>
+				<section class="studio-mobile-box" data-mobile-box aria-labelledby="studio-mobile-box-title">
+					<div class="studio-mobile-box-heading"><h2 id="studio-mobile-box-title"><?php esc_html_e( 'Your collection.', 'watch-collections' ); ?></h2><span data-mobile-count></span></div>
+					<div class="studio-mobile-box-body"><div class="studio-mobile-box-display" data-mobile-box-display></div><div class="studio-mobile-box-summary"><p data-mobile-price></p><button type="button" class="studio-primary" data-action="review"><?php esc_html_e( 'View box', 'watch-collections' ); ?><span aria-hidden="true">↗</span></button></div></div>
+				</section>
 				<div class="studio-carousel" data-watch-carousel role="region" aria-roledescription="carousel" aria-label="<?php esc_attr_e( 'Watch collection', 'watch-collections' ); ?>">
 					<div class="studio-carousel-stage">
 						<p class="studio-carousel-eyebrow"><?php esc_html_e( 'A WATCH FOR EVERY SIDE OF YOU', 'watch-collections' ); ?></p>
 						<div id="studio-watch-track" class="studio-carousel-track" data-watch-track tabindex="0" role="group" aria-label="<?php esc_attr_e( 'Browse watch designs', 'watch-collections' ); ?>" aria-describedby="studio-carousel-help"></div>
+						<div class="studio-carousel-selection" data-watch-selection></div>
 						<div class="studio-carousel-navigation">
 							<button type="button" class="studio-carousel-arrow" data-action="previous-watch" aria-label="<?php esc_attr_e( 'Previous watch', 'watch-collections' ); ?>" aria-controls="studio-watch-track"><span aria-hidden="true">←</span></button>
 							<p class="studio-carousel-position" role="status" aria-live="polite" aria-atomic="true"><span data-carousel-position></span><span class="screen-reader-text" data-carousel-announcement></span></p>
@@ -82,7 +87,6 @@ $config = array( 'watches' => watch_collections_studio_catalog(), 'packages' => 
 			</aside>
 		</div>
 	</div>
-	<div class="studio-mobile-tray"><div class="studio-mobile-thumbs" data-mobile-thumbs aria-hidden="true"></div><div class="studio-mobile-summary"><strong data-mobile-count></strong><span data-mobile-price></span></div><button type="button" class="studio-primary" data-action="review"><?php esc_html_e( 'View box', 'watch-collections' ); ?><span aria-hidden="true">↗</span></button></div>
 	<div class="studio-toast" data-studio-toast role="status" aria-live="polite" aria-atomic="true"></div>
 	<dialog class="studio-dialog" data-studio-dialog aria-labelledby="studio-dialog-title"><button type="button" class="studio-dialog-close" data-action="close-dialog" aria-label="<?php esc_attr_e( 'Close dialog', 'watch-collections' ); ?>">×</button><div data-dialog-content></div></dialog>
 	<script type="application/json" data-studio-config><?php echo wp_json_encode( $config, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT ); // Safe JSON for an HTML script element. ?></script>
