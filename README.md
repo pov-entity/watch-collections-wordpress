@@ -1,6 +1,6 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
-**Status:** Prototype v0.1.0. Not a live store. Brand name is a working title.
+**Status:** Prototype v0.3.0. Not a live store. Brand name is a working title.
 
 A custom responsive WordPress classic theme for a multi-brand everyday watch collection store. The repository root is the installable theme, for direct use with the **WordPress Playground → From GitHub** importer.
 
@@ -56,3 +56,31 @@ Copy the repository folder to wp-content/themes/watch-collections-wordpress/ and
 This public repository must never include WordPress credentials, API keys, private supplier records, .env secrets, order records, customer information, or production database dumps. Do not invent reviews, delivery guarantees, endorsements, certifications, or policy terms. Pricing should be validated and configurable rather than coded into the theme.
 
 License: GPL-2.0-or-later.
+
+
+## Seven-day homepage hero (v0.3.0)
+
+The homepage now opens with a cinematic seven-day visual sequence:
+- Monday Classic; Tuesday Chronograph; Wednesday Minimal; Thursday Moonphase-inspired; Friday Dress; Saturday Sport; Sunday Skeleton-inspired.
+- The same illustrated character, fixed camera perspective and wristwatch placement appear in all seven placeholder scenes.
+- Crossfade transitions automatically every 3 seconds. Seven accessible day buttons, pause/play control, mobile swipe, arrow keys and reduced-motion support are included.
+- Automatic playback pauses when the tab is hidden or hero is offscreen. Clicking a day pauses automatic cycling.
+- All imagery currently consists of editorial **SVG concept illustrations**, NOT photos of real stock or products.
+
+### Swap in your seven real campaign images
+
+Export one image for each weekday as 16:9 WebP, ideally 2560 × 1440 or larger, with the same character in the same position and sufficient empty space on the left. Use the exact filenames:
+
+- assets/hero-days/monday.webp
+- assets/hero-days/tuesday.webp
+- assets/hero-days/wednesday.webp
+- assets/hero-days/thursday.webp
+- assets/hero-days/friday.webp
+- assets/hero-days/saturday.webp
+- assets/hero-days/sunday.webp
+
+Commit these images alongside the theme. The PHP template automatically prefers each WebP when the corresponding file exists, otherwise falling back to the SVG prototype. Do not delete the SVG fallback assets. The preview disclaimer disappears when all seven WebP files exist.
+
+The text is live HTML for readability, accessibility and translation; don't bake it into photos. For mobile, test the portrait crop so the face, outfit and watch remain in view. Aim for compressed file sizes and consistent color grading. If product watches aren't based on approved real SKUs, avoid presenting them as exact purchasable product photos.
+
+No checkout, payments, production deploy, inventory purchase or external image licensing has been performed.

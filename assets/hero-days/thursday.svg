@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Illustrated wardrobe concept">
+<defs>
+<linearGradient id="scene" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#494c52"/><stop offset="100%" stop-color="#837667"/></linearGradient>
+<linearGradient id="shading" x1="0" x2="1"><stop stop-color="#0c1827" stop-opacity=".96"/><stop offset=".47" stop-color="#142334" stop-opacity=".65"/><stop offset=".74" stop-color="#142334" stop-opacity=".02"/><stop offset="1" stop-color="#142334" stop-opacity=".1"/></linearGradient>
+<linearGradient id="cloth" x1="0" x2="1"><stop stop-color="#090d14" stop-opacity=".35"/><stop offset=".32" stop-color="#30363c"/><stop offset=".7" stop-color="#30363c"/><stop offset="1" stop-color="#090d14" stop-opacity=".32"/></linearGradient>
+<radialGradient id="softLight"><stop stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<filter id="blur"><feGaussianBlur stdDeviation="37"/></filter>
+<filter id="personShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="12" dy="26" stdDeviation="20" flood-color="#17202b" flood-opacity=".24"/></filter>
+</defs>
+<rect width="1600" height="900" fill="url(#scene)"/>
+<rect x="770" y="0" width="830" height="900" fill="url(#softLight)"/>
+<g opacity=".8"><path d="M820 0H1600V645H820Z" fill="#d4c5aa" opacity=".17"/><rect x="885" y="180" width="205" height="325" fill="#948875" stroke="#e7d8bf" stroke-width="20"/><path d="M940 390Q965 220 1018 355T1057 280" stroke="#483b35" stroke-width="18" fill="none" opacity=".55"/><rect x="1395" y="128" width="160" height="375" fill="#6a6460" stroke="#d4c5b6" stroke-width="14"/><circle cx="1476" cy="325" r="57" stroke="#c8b4a0" stroke-width="9" fill="none"/><path d="M810 625H1600" stroke="#d6cab7" stroke-width="6"/></g>
+<ellipse cx="1260" cy="840" rx="260" ry="48" fill="#111e28" opacity=".20" filter="url(#blur)"/>
+<path d="M700 703H1600V900H700Z" fill="#47494b" opacity=".38"/>
+<g filter="url(#personShadow)">
+<!-- Same character's face, hairstyle, pose, and proportions across all seven frames -->
+<path d="M1111 377Q1090 385 1074 416L1034 573L971 646L1012 694L1093 639L1136 498L1146 870H1334L1330 514L1353 655L1390 694L1425 660L1401 580L1376 416Q1354 375 1309 366Z" fill="url(#cloth)" stroke="#151d28" stroke-opacity=".16" stroke-width="4"/>
+<path d="M1099 410L1056 571L986 653" stroke="#525862" stroke-opacity=".8" stroke-width="14" fill="none" stroke-linecap="round"/>
+<path d="M1364 405L1387 592L1410 655" stroke="#525862" stroke-opacity=".48" stroke-width="12" fill="none" stroke-linecap="round"/>
+<path d="M1143 368L1204 442L1251 373L1298 376L1251 522L1179 512L1118 376Z" fill="#525862" opacity=".84"/>
+<path d="M1199 342L1196 400L1252 405L1257 334Z" fill="#a87658"/>
+<path d="M1137 220Q1135 149 1176 138Q1211 118 1252 144Q1290 164 1295 226L1285 292Q1273 333 1226 350Q1191 352 1161 320Q1138 290 1137 220Z" fill="#b98565"/>
+<path d="M1149 205Q1141 181 1166 160Q1180 128 1227 131Q1273 130 1290 176L1284 214Q1272 189 1252 176Q1223 202 1179 188Q1165 211 1149 216Z" fill="#26272a"/>
+<path d="M1147 223Q1128 205 1138 243Q1140 256 1150 253M1292 222Q1308 205 1297 240L1288 255" fill="#a87658"/>
+<path d="M1178 239Q1191 229 1207 237M1242 238Q1256 229 1270 237" fill="none" stroke="#3d3130" stroke-width="6" stroke-linecap="round"/>
+<path d="M1192 253L1198 253M1250 253L1256 253" stroke="#24242b" stroke-width="5" stroke-linecap="round"/>
+<path d="M1224 253L1217 292L1230 292" fill="none" stroke="#946b54" stroke-width="4" stroke-linecap="round"/>
+<path d="M1204 311Q1223 319 1244 306" stroke="#714c40" stroke-width="4" fill="none" stroke-linecap="round"/>
+<path d="M1148 216Q1145 185 1161 168" fill="none" stroke="#1d1e22" stroke-width="12"/>
+<path d="M1096 368Q1126 396 1145 468L1161 873" stroke="#fff" stroke-opacity=".16" stroke-width="5" fill="none"/>
+<path d="M1314 375L1295 470L1288 879" stroke="#fff" stroke-opacity=".1" stroke-width="5" fill="none"/>
+<!-- Left wrist and honest illustrative watch -->
+<path d="M973 641Q970 638 955 647L939 680Q945 709 971 709L1008 683L1007 661Z" fill="#ba8969"/>
+<path d="M972 645L1007 651L1003 692L965 684Z" fill="#5b4031"/>
+<circle cx="988" cy="671" r="20" fill="#c8c3b8" stroke="#747875" stroke-width="3"/>
+<circle cx="988" cy="671" r="15" fill="#243755" stroke="#dad5ca" stroke-width="2"/>
+<path d="M988 660V672L997 678" stroke="#e9e7e0" stroke-width="2" fill="none" stroke-linecap="round"/>
+<path d="M1389 682Q1398 700 1412 698L1432 683Q1438 668 1420 659Z" fill="#b98565"/>
+</g>
+<!-- Left text-protection gradient is deliberately part of the reusable composition -->
+<rect width="1600" height="900" fill="url(#shading)"/>
+<rect width="1600" height="900" fill="#0b1522" opacity=".06"/>
+</svg>

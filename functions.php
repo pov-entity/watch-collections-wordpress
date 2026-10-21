@@ -32,6 +32,21 @@ function watch_collections_assets() {
 	wp_enqueue_style( 'watch-collections-style', get_stylesheet_uri(), array(), $version );
 	wp_enqueue_style( 'watch-collections-site', get_template_directory_uri() . '/assets/css/site.css', array( 'watch-collections-style' ), $version );
 	wp_enqueue_script( 'watch-collections-site', get_template_directory_uri() . '/assets/js/site.js', array(), $version, true );
+	if ( is_front_page() ) {
+		wp_enqueue_style(
+			'watch-collections-week-hero',
+			get_template_directory_uri() . '/assets/css/week-hero.css',
+			array( 'watch-collections-site' ),
+			$version
+		);
+		wp_enqueue_script(
+			'watch-collections-week-hero',
+			get_template_directory_uri() . '/assets/js/week-hero.js',
+			array(),
+			$version,
+			true
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'watch_collections_assets' );
 
