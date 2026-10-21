@@ -1,0 +1,169 @@
+/*
+ * DialByDay Collections – Typography and unmistakable brand treatments.
+ * Fonts selected from the founder's typography reference:
+ * Inter (readability), Montserrat (bold headings / CTAs),
+ * Lora (editorial expression), Space Mono (small metadata).
+ * Loaded AFTER theme styles for predictable CSS cascade.
+ */
+:root{
+ --font-body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+ --font-display:'Montserrat','Inter',Arial,sans-serif;
+ --font-editorial:'Lora',Georgia,'Times New Roman',serif;
+ --font-detail:'Space Mono',ui-monospace,'SFMono-Regular',Consolas,monospace;
+ --font-brand:'Montserrat','Inter',sans-serif;
+}
+html,body,button,input,select,textarea,
+.woocommerce,.woocommerce button,.woocommerce input,.woocommerce select,
+.wp-block-button__link,.wp-block-navigation{
+ font-family:var(--font-body);
+}
+body{font-size:16px;line-height:1.6}
+p,li{font-family:var(--font-body)}
+h1,h2,h3,h4,h5,h6,
+.woocommerce ul.products li.product .woocommerce-loop-product__title,
+.woocommerce div.product .product_title,
+.woocommerce-checkout h3,
+.woocommerce-cart h2{
+ font-family:var(--font-display);
+ font-weight:650;
+ letter-spacing:-.04em;
+}
+h1 em,h2 em,h3 em,
+.prose blockquote,.wp-block-quote,
+.concept-copy h2 em,.closing-inner h2 em{
+ font-family:var(--font-editorial);
+ font-weight:500;
+ letter-spacing:-.045em;
+}
+.eyebrow,.editorial-tag,.collection-kicker,.collection-price-card .price-card-top,
+.week-hero__eyebrow,.week-hero__tab-number,.week-hero__watch,
+.week-hero__day-count,.hero-art-heading,.hero-art-footer,
+.art-index,.announcement-bar,.editorial-caption,
+.editorial-package__top,.editorial-occasion__inner>p,
+.editorial-fulfillment__timeline article>span,.footer-bottom,
+.prototype-price-note{
+ font-family:var(--font-detail);
+ letter-spacing:.075em;
+}
+.button,.button-primary,.button-light,.header-action,
+.editorial-button,.week-hero__cta,.week-hero__secondary,
+.woocommerce a.button,.woocommerce button.button,
+.woocommerce input.button,.wp-block-button__link,
+.site-nav a{
+ font-family:var(--font-display);
+ font-weight:650;
+ letter-spacing:-.012em;
+}
+/* Hero: dynamic and immediately distinct from the old Georgia-only layout. */
+.home .week-hero__copy h1{
+ font-family:var(--font-display);
+ font-weight:700;
+ letter-spacing:-.065em;
+ font-size:clamp(3rem,5.7vw,6.35rem);
+ line-height:1.03;
+}
+.home .week-hero__copy h1 em{
+ font-family:var(--font-editorial);
+ font-weight:500;
+ font-style:italic;
+ letter-spacing:-.055em;
+ color:#DCEAF2;
+}
+.home .week-hero__statement{
+ font-family:var(--font-body);
+ font-weight:600;
+ letter-spacing:-.03em;
+}
+.home .week-hero__current{
+ font-family:var(--font-editorial);
+ font-weight:500;
+}
+.home .week-hero__tab-name,.home .week-hero__day-card .week-hero__moment{
+ font-family:var(--font-body);
+}
+.home .editorial-intro__content h2,
+.home .editorial-section-top h2,
+.home .editorial-occasions h2,
+.home .editorial-quality__intro h2,
+.home .editorial-process .editorial-section-top h2,
+.home .editorial-packages .editorial-section-top h2,
+.home .editorial-fulfillment__intro h2,
+.home .editorial-assurance h2,
+.home .editorial-closing h2{
+ font-family:var(--font-display);
+ font-weight:650;
+ letter-spacing:-.06em;
+}
+.home .editorial-intro__content h2 em,
+.home .editorial-section-top h2 em,
+.home .editorial-quality__intro h2 em,
+.home .editorial-fulfillment__intro h2 em,
+.home .editorial-assurance h2 em,
+.home .editorial-closing h2 em{
+ font-family:var(--font-editorial);
+ font-weight:500;
+ font-style:italic;
+ letter-spacing:-.055em;
+}
+.home .editorial-occasion__inner h3,
+.home .editorial-quality__details h3,
+.home .editorial-process__steps h3,
+.home .editorial-fulfillment__timeline h3,
+.home .editorial-package h3{
+ font-family:var(--font-display);
+ font-weight:600;
+ letter-spacing:-.045em;
+}
+.home .editorial-montage__label strong,
+.home .editorial-package__price,
+.collection-price{
+ font-family:var(--font-editorial);
+ font-weight:500;
+}
+/* Use actual approved logo file. White on photo/dark sections; navy on pale pages. */
+.brand .brand-logo{
+ display:block;
+ width:clamp(200px,19vw,268px);
+ height:auto;
+ filter:brightness(0) saturate(100%) invert(14%) sepia(51%) saturate(1374%) hue-rotate(180deg) brightness(91%) contrast(95%);
+}
+.home .brand .brand-logo{
+ filter:none;
+ width:clamp(204px,19vw,274px);
+}
+.site-footer .brand-logo,
+.site-footer .footer-wordmark .brand-logo{
+ width:clamp(196px,20vw,267px);
+ height:auto;
+ filter:none;
+}
+.brand-link,.footer-wordmark{min-height:42px;align-items:center}
+/* Make the palette visually legible throughout the site, beyond the color tokens. */
+body:not(.home) .site-header{background:#F5F7F9;border-bottom:1px solid #CED3D9}
+body:not(.home) .announcement-bar{background:#0B203D;color:#F5F7F9}
+.site-nav a:hover,.footer-links a:hover{color:#90B1C2}
+.editorial-button,.button-primary,
+.woocommerce a.button.alt,.woocommerce button.button.alt{
+ background-color:#102A4F;color:#F5F7F9;
+}
+.editorial-button:hover,.button-primary:hover{
+ background-color:#1B426C;color:#fff;
+}
+.home .editorial-tag span,.eyebrow-line{background-color:#B77B57}
+.home .editorial-assurance__copy li:before{color:#99603E}
+.home .editorial-packages{background:#DCE4EA}
+.home .editorial-quality{background:#E6EDF2}
+.home .editorial-fulfillment,
+.home .editorial-closing,
+.site-footer{background:#0B203D}
+@media(max-width:850px){
+ .brand .brand-logo,.home .brand .brand-logo{width:clamp(175px,42vw,224px)}
+}
+@media(max-width:700px){
+ .home .week-hero__copy h1{font-size:clamp(2.55rem,9.4vw,4.6rem)}
+ .home .week-hero__eyebrow{font-size:.6rem;letter-spacing:.055em}
+ .editorial-tag,.week-hero__watch,.week-hero__day-count{letter-spacing:.04em}
+}
+@media(prefers-reduced-motion:reduce){
+ *{scroll-behavior:auto!important}
+}
