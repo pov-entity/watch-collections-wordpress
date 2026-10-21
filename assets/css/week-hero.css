@@ -8,36 +8,36 @@
 .week-hero{
   --hero-period:3000ms;
   position:relative;isolation:isolate;overflow:hidden;
-  color:#fff;background:#132235;
+  color:#fff;background:#102A4F;
   min-height:min(790px,calc(100svh - 82px));
   min-height:clamp(650px,calc(100svh - 82px),820px);
 }
 .week-hero__visual,.week-hero__scene,.week-hero__shade{position:absolute;inset:0}
-.week-hero__visual{z-index:-1;background:#192638;pointer-events:none}
+.week-hero__visual{z-index:-1;background:#0B203D;pointer-events:none}
 .week-hero__scene{opacity:0;transform:scale(1.035);transition:opacity 950ms cubic-bezier(.22,1,.36,1),transform 4900ms ease-out;will-change:opacity}
 .week-hero__scene.is-active{opacity:1;transform:scale(1)}
 .week-hero__scene img{display:block;width:100%;height:100%;object-fit:cover;object-position:center center}
 .week-hero__shade{z-index:1;background:linear-gradient(90deg,rgba(8,17,30,.55) 0%,rgba(8,17,30,.25) 41%,transparent 73%),linear-gradient(0deg,rgba(8,17,30,.76),transparent 21%)}
 .week-hero__layout{position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(185px,.8fr);grid-template-rows:1fr auto auto;column-gap:48px;min-height:inherit;padding-top:clamp(55px,8vh,110px);padding-bottom:22px}
 .week-hero__copy{align-self:center;grid-column:1;grid-row:1;padding:20px 0 65px;max-width:675px;text-shadow:0 2px 24px rgba(5,12,20,.12)}
-.week-hero__eyebrow{font-size:.74rem;letter-spacing:.24em;font-weight:700;line-height:1.4;margin-bottom:26px;color:#e2c8ae}
+.week-hero__eyebrow{font-size:.74rem;letter-spacing:.24em;font-weight:700;line-height:1.4;margin-bottom:26px;color:#C9DAE6}
 .week-hero__copy h1{font-size:clamp(3.25rem,5.9vw,6.35rem);line-height:.995;letter-spacing:-.065em;max-width:740px;font-weight:580;margin:0 0 17px}
-.week-hero__copy h1 em{display:block;color:#f1dac6;font-weight:400}
-.week-hero__statement{font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.32rem,2.3vw,2rem);letter-spacing:-.03em;margin:0 0 23px;color:#f5f2ed;line-height:1.2}
-.week-hero__description{font-size:1rem;color:#e0e5e9;max-width:472px;line-height:1.7;margin:0 0 28px}
+.week-hero__copy h1 em{display:block;color:#DCEAF2;font-weight:400}
+.week-hero__statement{font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.32rem,2.3vw,2rem);letter-spacing:-.03em;margin:0 0 23px;color:#F5F7F9;line-height:1.2}
+.week-hero__description{font-size:1rem;color:#D7E4EC;max-width:472px;line-height:1.7;margin:0 0 28px}
 .week-hero__actions{display:flex;align-items:center;flex-wrap:wrap;gap:23px}
-.week-hero__cta{display:inline-flex;align-items:center;justify-content:space-between;gap:30px;background:#f1e9de;border:1px solid #f1e9de;color:#102033;padding:17px 19px;min-height:54px;font-weight:700;font-size:.88rem;text-shadow:none;transition:background .18s,transform .18s}
-.week-hero__cta:hover{background:#fff;color:#102033;transform:translateY(-2px)}
+.week-hero__cta{display:inline-flex;align-items:center;justify-content:space-between;gap:30px;background:#F5F7F9;border:1px solid #F5F7F9;color:#102A4F;padding:17px 19px;min-height:54px;font-weight:700;font-size:.88rem;text-shadow:none;transition:background .18s,transform .18s}
+.week-hero__cta:hover{background:#fff;color:#102A4F;transform:translateY(-2px)}
 .week-hero__secondary{display:inline-flex;align-items:center;gap:11px;font-size:.83rem;font-weight:600;color:#fff;padding:12px 0;border-bottom:1px solid #ffffff80;transition:color .18s}
-.week-hero__secondary:hover{color:#e6bf9e}
-.week-hero__promise{font-size:.77rem;letter-spacing:.035em;color:#e3d7cd;margin:26px 0 0}
+.week-hero__secondary:hover{color:#BED6E6}
+.week-hero__promise{font-size:.77rem;letter-spacing:.035em;color:#CADDE9;margin:26px 0 0}
 .week-hero__day-card{align-self:end;justify-self:end;grid-column:2;grid-row:1;padding:0 0 75px;text-align:right;min-width:200px;text-shadow:0 2px 22px rgba(0,0,0,.45)}
-.week-hero__day-count{font-size:.82rem;letter-spacing:.11em;margin-bottom:10px;color:#e8d8c8}
+.week-hero__day-count{font-size:.82rem;letter-spacing:.11em;margin-bottom:10px;color:#CEDFEB}
 .week-hero__day-count [data-hero-count]{font-family:Georgia,serif;font-size:2rem;font-style:italic;color:#fff}
 .week-hero__current{font:400 clamp(1.7rem,2.6vw,2.5rem)/1.1 Georgia,serif;letter-spacing:-.04em;margin:0 0 8px}
-.week-hero__moment{color:#e2e4e7;font-size:.78rem;margin:0}
-.week-hero__watch{margin-top:12px;font-size:.68rem;letter-spacing:.17em;text-transform:uppercase;color:#e8d7c8;display:flex;justify-content:flex-end;align-items:center;gap:10px}
-.week-hero__watch-line{display:inline-block;width:28px;height:1px;background:#d6b7a0}
+.week-hero__moment{color:#E0EBF1;font-size:.78rem;margin:0}
+.week-hero__watch{margin-top:12px;font-size:.68rem;letter-spacing:.17em;text-transform:uppercase;color:#BFD5E3;display:flex;justify-content:flex-end;align-items:center;gap:10px}
+.week-hero__watch-line{display:inline-block;width:28px;height:1px;background:#B77B57}
 .week-hero__bottom{grid-column:1 / -1;grid-row:2;display:flex;align-items:center;gap:30px;border-top:1px solid rgba(255,255,255,.35);padding:18px 0 0}
 .week-hero__selector{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;width:100%;flex:1}
 .week-hero__tab{display:flex;position:relative;flex-direction:column;align-items:flex-start;gap:6px;background:transparent;color:#ffffffbc;text-align:left;border:0;padding:5px 0 8px;min-width:0;transition:color .2s}
@@ -45,7 +45,7 @@
 .week-hero__tab-number{font-size:.58rem;letter-spacing:.12em;opacity:.65}
 .week-hero__tab-name{font-size:.8rem;font-weight:750;letter-spacing:.18em}
 .week-hero__tab-track{display:block;position:absolute;bottom:0;left:0;width:100%;height:2px;background:rgba(255,255,255,.25);overflow:hidden}
-.week-hero__tab-track span{display:block;width:100%;height:100%;background:#f1e1d0;transform:scaleX(0);transform-origin:left}
+.week-hero__tab-track span{display:block;width:100%;height:100%;background:#B77B57;transform:scaleX(0);transform-origin:left}
 .week-hero.is-playing .week-hero__tab.is-current .week-hero__tab-track span{animation:week-hero-progress var(--hero-period) linear forwards}
 .week-hero:not(.is-playing) .week-hero__tab.is-current .week-hero__tab-track span{transform:scaleX(1)}
 @keyframes week-hero-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -99,4 +99,16 @@
 .week-hero__scene{transition:none!important;transform:none!important}
 .week-hero__tab-track span{animation:none!important}
 .week-hero__motion{display:none}
+}
+
+/* Navy/silver hero integration; photographs and motion remain unchanged. */
+.week-hero__shade{background:linear-gradient(90deg,rgba(7,22,43,.79) 0%,rgba(12,35,64,.57) 34%,rgba(16,42,79,.12) 68%,transparent 88%),linear-gradient(0deg,rgba(7,22,43,.78),transparent 25%)}
+.week-hero__cta{background:#F5F7F9;color:#102A4F;border-color:#F5F7F9}
+.week-hero__cta:hover{background:#DCE8EF;color:#102A4F}
+.week-hero__tab-track span{background:#90B1C2}
+.week-hero__day-card [data-hero-count]{color:#F5F7F9}
+.week-hero__watch-line{background:#90B1C2}
+.week-hero__motion:focus-visible,.week-hero__tab:focus-visible{outline:3px solid #DCEAF2;outline-offset:3px}
+@media(max-width:700px){
+.week-hero__shade{background:linear-gradient(180deg,rgba(7,22,43,.91) 0%,rgba(7,22,43,.68) 33%,rgba(7,22,43,.08) 64%,rgba(7,22,43,.88) 100%),linear-gradient(90deg,rgba(16,42,79,.27),transparent 85%)}
 }
