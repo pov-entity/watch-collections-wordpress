@@ -11,7 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<footer class="site-footer">
 		<div class="container footer-main">
 			<div>
-				<a class="footer-wordmark" href="<?php echo esc_url( home_url( '/' ) ); ?>">WATCH<span>COLLECTIONS</span></a>
+				<a class="footer-wordmark" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'DialByDay Collections home', 'watch-collections' ); ?>">
+					<img class="brand-logo" src="<?php echo esc_url( watch_collections_brand_asset_url( 'dialbyday-logo.svg' ) ); ?>" width="1770" height="430" alt="<?php esc_attr_e( 'DialByDay Collections', 'watch-collections' ); ?>" loading="lazy" decoding="async">
+				</a>
 				<p><?php esc_html_e( 'For the workdays, the weekends, and everything in between.', 'watch-collections' ); ?></p>
 			</div>
 			<div class="footer-links">

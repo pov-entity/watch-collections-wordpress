@@ -77,3 +77,38 @@ function watch_collections_body_classes( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'watch_collections_body_classes' );
+
+/**
+ * Versioned assets from the founder's DialByDay brand kit.
+ */
+function watch_collections_brand_asset_url( $filename ) {
+	return add_query_arg(
+		'ver',
+		wp_get_theme()->get( 'Version' ),
+		get_template_directory_uri() . '/assets/brand/' . $filename
+	);
+}
+
+/**
+ * Use the approved mark through WordPress's native icon output, including
+ * installations with no uploaded Site Icon or a previous prototype icon.
+ * Leave another site's icons alone when queried from a multisite installation.
+ */
+function watch_collections_site_icon_url( $url, $size, $blog_id ) {
+	if ( $blog_id && get_current_blog_id() !== (int) $blog_id ) {
+		return $url;
+	}
+	$size = in_array( (int) $size, array( 32, 180, 192, 270 ), true ) ? (int) $size : 512;
+	return watch_collections_brand_asset_url( 'favicon-' . $size . '.png' );
+}
+add_filter( 'get_site_icon_url', 'watch_collections_site_icon_url', 10, 3 );
+
+/**
+ * Supplement native PNG and Apple icons with a scalable favicon and ICO fallback.
+ */
+function watch_collections_site_icon_tags( $tags ) {
+	array_unshift( $tags, '<link rel="icon" href="' . esc_url( watch_collections_brand_asset_url( 'favicon.ico' ) ) . '" sizes="16x16 32x32 48x48" type="image/x-icon">' );
+	$tags[] = '<link rel="icon" href="' . esc_url( watch_collections_brand_asset_url( 'favicon.svg' ) ) . '" sizes="any" type="image/svg+xml">';
+	return $tags;
+}
+add_filter( 'site_icon_meta_tags', 'watch_collections_site_icon_tags' );

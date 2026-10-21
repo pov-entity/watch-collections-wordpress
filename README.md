@@ -1,6 +1,6 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
-**Status:** Prototype v0.4.0. Not a live store. Brand name is a working title.
+**Status:** Prototype v0.4.1. Not a live store. Uses the founder's DialByDay Collections identity.
 
 A custom responsive WordPress classic theme for a multi-brand everyday watch collection store. The repository root is the installable theme, for direct use with the **WordPress Playground → From GitHub** importer.
 
@@ -40,7 +40,7 @@ Interactive watch-box builder, configurable collection sizes, cart rules, packag
 
 ## Development roadmap
 
-1. Finalize logo, naming, brand palette and homepage.
+1. Validate the homepage and continue the Collection Studio prototype; the approved DialByDay logo and icons are installed.
 2. Add real WooCommerce watch SKUs with accurate specifications, variant data and stock.
 3. Build the box builder as a **separate plugin** using WooCommerce server-side cart and price validation.
 4. Add packaging, tested bundle prices and accurate shipping/returns/legal pages.
@@ -56,6 +56,15 @@ Copy the repository folder to wp-content/themes/watch-collections-wordpress/ and
 This public repository must never include WordPress credentials, API keys, private supplier records, .env secrets, order records, customer information, or production database dumps. Do not invent reviews, delivery guarantees, endorsements, certifications, or policy terms. Pricing should be validated and configurable rather than coded into the theme.
 
 License: GPL-2.0-or-later.
+
+## DialByDay brand integration (v0.4.1)
+
+- Header and footer use the original vector horizontal logo from `dialbyday_brand_kit.zip`, included in `assets/brand/dialbyday-logo.svg`. The header is white over the homepage hero and black on light interior pages.
+- The matching standalone mark supplies the SVG favicon, multi-size ICO, PNG browser icons and Apple touch icon. A navy tile keeps the white mark visible in both light and dark browser tabs.
+- Native WordPress Site Icon filters supply the theme icons without requiring a media upload. Versioned asset URLs refresh browser caches with theme updates.
+- This is a theme update: re-import the repository into WordPress Playground to load it. Refreshing an older Playground instance does not update its installed theme.
+
+Decision log — 2026-10-21: apply the founder's existing refined DialByDay identity to the website and favicon; retain the supplied artwork. Next development priorities remain the Collection Studio, sample/QC validation and commerce backend selection.
 
 
 ## Seven-day homepage hero (v0.3.0)

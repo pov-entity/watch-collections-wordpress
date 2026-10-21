@@ -23,14 +23,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<header class="site-header" id="top">
 		<div class="container header-inner">
 			<div class="brand">
-				<?php if ( has_custom_logo() ) : ?>
-					<?php the_custom_logo(); ?>
-				<?php else : ?>
-					<a class="brand-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'Watch Collections home', 'watch-collections' ); ?>">
-						<span class="brand-symbol" aria-hidden="true"><span></span></span>
-						<span class="brand-text">WATCH<span>COLLECTIONS</span></span>
-					</a>
-				<?php endif; ?>
+				<a class="brand-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'DialByDay Collections home', 'watch-collections' ); ?>">
+					<img class="brand-logo" src="<?php echo esc_url( watch_collections_brand_asset_url( 'dialbyday-logo.svg' ) ); ?>" width="1770" height="430" alt="<?php esc_attr_e( 'DialByDay Collections', 'watch-collections' ); ?>" decoding="async">
+				</a>
 			</div>
 			<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="<?php esc_attr_e( 'Toggle navigation', 'watch-collections' ); ?>">
 				<span></span><span></span><span></span>

@@ -10,11 +10,7 @@
 .home .header-inner{width:min(1300px,calc(100% - 88px));min-height:70px;gap:22px}
 .home .brand{min-width:190px}
 .home .brand-link,.home .brand-link:hover{color:white}
-.home .brand-text{font-family:Georgia,"Times New Roman",serif;font-size:1.08rem;letter-spacing:.12em;font-style:italic;font-weight:500}
-.home .brand-text span{font-family:Arial,sans-serif;font-style:normal;font-size:.47rem;font-weight:550;letter-spacing:.3em}
-.home .brand-symbol{border-color:#fff;width:32px;height:32px}
-.home .brand-symbol:before{border-color:#ffffff90}
-.home .brand-symbol span{border-color:#fff}
+.home .brand .brand-logo{filter:none}
 .home .site-nav{border:1px solid #ffffff70;border-radius:999px;background:rgba(6,22,39,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:0 18px;margin:auto}
 .home .nav-list{gap:25px;font-size:.72rem;letter-spacing:.035em;flex-wrap:nowrap}
 .home .nav-list a{padding:13px 0;color:#f7f8f8;white-space:nowrap}
@@ -195,7 +191,6 @@
 @media(max-width:650px){
 .home .header-inner{width:calc(100% - 36px)}
 .home .brand{min-width:0}
-.home .brand-text{font-size:.91rem}.home .brand-text span{font-size:.42rem}
 .home .week-hero{min-height:810px;min-height:max(810px,100svh)}
 .home .week-hero__layout{width:calc(100% - 40px);padding-top:110px;padding-bottom:105px}
 .home .week-hero__copy h1{font-size:clamp(2.8rem,10.2vw,4.5rem)}
