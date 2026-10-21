@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<p><?php esc_html_e( 'For the workdays, the weekends, and everything in between.', 'watch-collections' ); ?></p>
 			</div>
 			<div class="footer-links">
-				<a href="<?php echo esc_url( home_url( '/#collections' ) ); ?>"><?php esc_html_e( 'Collections', 'watch-collections' ); ?></a>
+				<a href="<?php echo esc_url( home_url( '/#collection-options' ) ); ?>"><?php esc_html_e( 'Collections', 'watch-collections' ); ?></a>
 				<a href="<?php echo esc_url( home_url( '/#how-it-works' ) ); ?>"><?php esc_html_e( 'How it works', 'watch-collections' ); ?></a>
 				<a href="<?php echo esc_url( watch_collections_shop_url() ); ?>"><?php esc_html_e( 'Shop', 'watch-collections' ); ?></a>
 			</div>
