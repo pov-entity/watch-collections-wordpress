@@ -60,7 +60,29 @@
       ]
     },
     "typography": {
-      "fluid": true
+      "fluid": true,
+      "fontFamilies": [
+        {
+          "name": "Inter — readable body",
+          "slug": "inter",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif"
+        },
+        {
+          "name": "Montserrat — headings and actions",
+          "slug": "montserrat",
+          "fontFamily": "'Montserrat', 'Inter', Arial, sans-serif"
+        },
+        {
+          "name": "Lora — editorial accent",
+          "slug": "lora",
+          "fontFamily": "'Lora', Georgia, serif"
+        },
+        {
+          "name": "Space Mono — labels and detail",
+          "slug": "space-mono",
+          "fontFamily": "'Space Mono', Consolas, monospace"
+        }
+      ]
     }
   },
   "styles": {
@@ -75,6 +97,10 @@
           "text": "#F5F7F9"
         }
       }
+    },
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--inter)",
+      "fontSize": "16px"
     }
   }
 }
