@@ -109,3 +109,11 @@ No unverifiable product specs, warehouse QC proof, shipment times, carrier promi
 
 ### Theme CSS scope
 assets/css/editorial-home.css is only enqueued on the front page after week-hero.css. Other WP pages and WooCommerce views keep their original templates.
+
+## Using the seven generated lifestyle images in the hero
+
+The seven-day hero is already built into `front-page.php` and `assets/js/week-hero.js` with smooth fades, a day selector and a pause button. It automatically uses `assets/hero-days/monday.webp` through `sunday.webp` when those files exist, otherwise it shows SVG illustrations.
+
+The founder-approved campaign image pack has been prepared outside this repository for upload. Unzip `watch-collections-seven-day-hero-assets.zip` and upload the seven WebP files to `assets/hero-days/` using GitHub **Add file → Upload files**; commit them to `main`. WordPress Playground needs a **new import** after GitHub updates; a normal browser refresh does not sync the source code.
+
+The images are AI-generated lifestyle concepts, **not confirmed inventory or verified brand photography**. Product listings must use accurate, rights-cleared watch images and descriptions. 
