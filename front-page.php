@@ -97,6 +97,29 @@ unset( $week_scene );
 	</section>
 
 
+	<section class="editorial-quality" id="quality" aria-labelledby="quality-title">
+		<div class="container editorial-quality__layout">
+			<div class="editorial-quality__intro">
+				<p class="editorial-tag"><span></span><?php esc_html_e( '01 / THE DETAILS', 'watch-collections' ); ?></p>
+				<h2 id="quality-title"><?php esc_html_e( 'A beautiful dial catches your eye.', 'watch-collections' ); ?> <em><?php esc_html_e( 'The details deserve a closer look.', 'watch-collections' ); ?></em></h2>
+				<p><?php esc_html_e( 'There is more to a watch than the way it photographs. We are building product listings around the details that matter for real ownership.', 'watch-collections' ); ?></p>
+				<div class="editorial-quality__visual" role="img" aria-label="<?php esc_attr_e( 'Decorative illustration of a watch movement and dial', 'watch-collections' ); ?>">
+					<div class="editorial-quality__ring"><div class="editorial-quality__dial"><i></i><b></b></div></div>
+					<span><?php esc_html_e( 'FORM / FUNCTION / FIT', 'watch-collections' ); ?></span>
+				</div>
+			</div>
+			<div class="editorial-quality__details">
+				<article><span>01</span><div><h3><?php esc_html_e( 'Movement', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Quartz, automatic or hand-wound. You should know what powers each model and what care it requires.', 'watch-collections' ); ?></p></div></article>
+				<article><span>02</span><div><h3><?php esc_html_e( 'Materials & finishing', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Understand the case, strap and clasp materials, plus the details that affect feel and appearance.', 'watch-collections' ); ?></p></div></article>
+				<article><span>03</span><div><h3><?php esc_html_e( 'Crystal & durability', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Crystal type, water-resistance rating and practical wearing limits matter more than broad durability claims.', 'watch-collections' ); ?></p></div></article>
+				<article><span>04</span><div><h3><?php esc_html_e( 'Fit & comfort', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Case diameter, thickness, weight and strap details help you choose a watch for your wrist.', 'watch-collections' ); ?></p></div></article>
+				<article><span>05</span><div><h3><?php esc_html_e( 'Real functions', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Functional chronographs and moonphases should be distinguished from decorative subdials and day-night designs.', 'watch-collections' ); ?></p></div></article>
+				<p class="editorial-quality__note"><?php esc_html_e( 'Exact specifications will be published per verified model. We do not claim identical materials or performance across every watch.', 'watch-collections' ); ?></p>
+			</div>
+		</div>
+	</section>
+
+
 	<section class="editorial-intro" id="the-idea" aria-labelledby="intro-title">
 		<div class="container editorial-intro__grid">
 			<div class="editorial-montage">
@@ -113,7 +136,7 @@ unset( $week_scene );
 				<span class="editorial-montage__caption"><?php esc_html_e( 'Concept visuals • final watch photography to follow', 'watch-collections' ); ?></span>
 			</div>
 			<div class="editorial-intro__content">
-				<p class="editorial-tag"><span></span><?php esc_html_e( '01 / THE IDEA', 'watch-collections' ); ?></p>
+				<p class="editorial-tag"><span></span><?php esc_html_e( '02 / THE IDEA', 'watch-collections' ); ?></p>
 				<h2 id="intro-title"><?php esc_html_e( 'Not one watch for everything.', 'watch-collections' ); ?> <em><?php esc_html_e( 'A choice for every moment.', 'watch-collections' ); ?></em></h2>
 				<p class="editorial-lede"><?php esc_html_e( 'What feels right for Monday morning might not be what you want on Saturday night. A collection gives you the freedom to choose.', 'watch-collections' ); ?></p>
 				<p><?php esc_html_e( 'We bring different watch styles together through one simple idea: you choose the watches you want, we present them as a collection in a dedicated box. No mystery assortment. No pressure to dress the same way every day.', 'watch-collections' ); ?></p>
@@ -151,28 +174,6 @@ unset( $week_scene );
 					<h3><?php esc_html_e( 'Clarity through delivery', 'watch-collections' ); ?></h3>
 					<p><?php esc_html_e( 'See available shipping terms before payment, including estimated timing and applicable delivery charges.', 'watch-collections' ); ?></p>
 				</article>
-			</div>
-		</div>
-	</section>
-
-	<section class="editorial-quality" id="quality" aria-labelledby="quality-title">
-		<div class="container editorial-quality__layout">
-			<div class="editorial-quality__intro">
-				<p class="editorial-tag"><span></span><?php esc_html_e( '02 / THE DETAILS', 'watch-collections' ); ?></p>
-				<h2 id="quality-title"><?php esc_html_e( 'A beautiful dial catches your eye.', 'watch-collections' ); ?> <em><?php esc_html_e( 'The details deserve a closer look.', 'watch-collections' ); ?></em></h2>
-				<p><?php esc_html_e( 'There is more to a watch than the way it photographs. We are building product listings around the details that matter for real ownership.', 'watch-collections' ); ?></p>
-				<div class="editorial-quality__visual" role="img" aria-label="<?php esc_attr_e( 'Decorative illustration of a watch movement and dial', 'watch-collections' ); ?>">
-					<div class="editorial-quality__ring"><div class="editorial-quality__dial"><i></i><b></b></div></div>
-					<span><?php esc_html_e( 'FORM / FUNCTION / FIT', 'watch-collections' ); ?></span>
-				</div>
-			</div>
-			<div class="editorial-quality__details">
-				<article><span>01</span><div><h3><?php esc_html_e( 'Movement', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Quartz, automatic or hand-wound. You should know what powers each model and what care it requires.', 'watch-collections' ); ?></p></div></article>
-				<article><span>02</span><div><h3><?php esc_html_e( 'Materials & finishing', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Understand the case, strap and clasp materials, plus the details that affect feel and appearance.', 'watch-collections' ); ?></p></div></article>
-				<article><span>03</span><div><h3><?php esc_html_e( 'Crystal & durability', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Crystal type, water-resistance rating and practical wearing limits matter more than broad durability claims.', 'watch-collections' ); ?></p></div></article>
-				<article><span>04</span><div><h3><?php esc_html_e( 'Fit & comfort', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Case diameter, thickness, weight and strap details help you choose a watch for your wrist.', 'watch-collections' ); ?></p></div></article>
-				<article><span>05</span><div><h3><?php esc_html_e( 'Real functions', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Functional chronographs and moonphases should be distinguished from decorative subdials and day-night designs.', 'watch-collections' ); ?></p></div></article>
-				<p class="editorial-quality__note"><?php esc_html_e( 'Exact specifications will be published per verified model. We do not claim identical materials or performance across every watch.', 'watch-collections' ); ?></p>
 			</div>
 		</div>
 	</section>
