@@ -1,6 +1,6 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
-**Status:** Prototype v0.4.1. Not a live store. Uses the founder's DialByDay Collections identity.
+**Status:** Prototype v0.6.0. Not a live store. Uses the founder's DialByDay Collections identity.
 
 A custom responsive WordPress classic theme for a multi-brand everyday watch collection store. The repository root is the installable theme, for direct use with the **WordPress Playground → From GitHub** importer.
 
@@ -146,3 +146,18 @@ The visual identity uses the founder-provided reference's colors only (not its l
 Implemented in `assets/css/site.css`, `assets/css/editorial-home.css`, `assets/css/week-hero.css`, and WordPress `theme.json`; version `0.5.0` refreshes stylesheet cache. The seven-day lifestyle pictures, builder economics, and page copy are unchanged.
 
 **Preview:** Import the latest GitHub version into a *new* WordPress Playground installation or update the theme files in your saved one. A browser refresh does not import new commits. Verify mobile contrast and WooCommerce checkout styling before live launch.
+
+## Typography and Playground refresh — v0.6.0
+
+The founder's typography reference has been interpreted as a focused four-family system, rather than loading all the fonts in the reference:
+
+- **Montserrat** for strong headings, titles and buttons.
+- **Inter** for easy-to-read body text and shopping interfaces.
+- **Lora** for selective editorial/italic headings and collection price figures.
+- **Space Mono** for day counters, small metadata and feature labels.
+
+Implemented via Google Fonts + `assets/css/typography.css`, queued last after homepage, hero and base CSS. Fallback system fonts remain available if a Playground device cannot connect to fonts.googleapis.com. These families are also selectable under the WordPress editor's typography presets.
+
+The logo is not a text font: the header and footer already reference `assets/brand/dialbyday-logo.svg` (the transparent white founder mark), colored white on the homepage hero and navy on light pages. `assets/brand/favicon.svg` also uses the approved navy `#102A4F`. Existing PNG favicon variants may retain a slightly darker background; they should be regenerated from the approved original logo before launch.
+
+**Seeing changes in WordPress Playground:** an existing *saved* Playground instance is not continuously connected to GitHub. Refreshing Safari or clicking Autosaved does not pull the new theme. Open **New → From GitHub**, import `https://github.com/pov-entity/watch-collections-wordpress`, select **Theme** and `/`, and activate it. Under **Appearance → Themes**, confirm Watch Collections **version 0.6.0**. Open the homepage in that *new* Playground. If fonts do not load, temporarily disable blockers and check connection to Google Fonts; fallback typography will still render. Back up any existing content before replacing an old Playground instance.
