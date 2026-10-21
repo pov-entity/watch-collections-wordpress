@@ -56,3 +56,15 @@ Copy the repository folder to wp-content/themes/watch-collections-wordpress/ and
 This public repository must never include WordPress credentials, API keys, private supplier records, .env secrets, order records, customer information, or production database dumps. Do not invent reviews, delivery guarantees, endorsements, certifications, or policy terms. Pricing should be validated and configurable rather than coded into the theme.
 
 License: GPL-2.0-or-later.
+
+## Homepage update v0.2.0 (October 2026)
+
+The homepage now leads with a clear collection-building proposition, black/ivory/walnut editorial direction, a conceptual 3-watch box illustration, five style categories, a true front-end **1 / 3 / 5 / 7 slot interactive box preview**, visible proposed prices ($160 / $299 / $499 / $639), and explicit preview-only / unverified-product disclosures. All page interactions are client-side demos; no cart, payments, or customer data are collected. The package selection and price display do not create WooCommerce products or orders. CSS/JS live in assets/css/home.css and assets/js/home.js, loaded only on the front page.
+
+### Homepage QA before launch
+
+- Test all four package selections and correct box slot counts and package totals.
+- Test iPhone and desktop layouts, nav, tap targets, focus-visible, and reduced-motion preferences.
+- Replace conceptual box/watch visuals with verified supplier photos before real product listings.
+- Replace copy/promises when exact box dimensions, taxes, shipping and warranty terms are confirmed.
+- Build the actual watch selector in a separate plugin with server-side cart validation.
