@@ -54,33 +54,6 @@ h1 em,h2 em,h3 em,
  font-weight:650;
  letter-spacing:-.012em;
 }
-/* Hero: dynamic and immediately distinct from the old Georgia-only layout. */
-.home .week-hero__copy h1{
- font-family:var(--font-display);
- font-weight:700;
- letter-spacing:-.065em;
- font-size:clamp(3rem,5.7vw,6.35rem);
- line-height:1.03;
-}
-.home .week-hero__copy h1 em{
- font-family:var(--font-editorial);
- font-weight:500;
- font-style:italic;
- letter-spacing:-.055em;
- color:#DCEAF2;
-}
-.home .week-hero__statement{
- font-family:var(--font-body);
- font-weight:600;
- letter-spacing:-.03em;
-}
-.home .week-hero__current{
- font-family:var(--font-editorial);
- font-weight:500;
-}
-.home .week-hero__tab-name,.home .week-hero__day-card .week-hero__moment{
- font-family:var(--font-body);
-}
 .home .editorial-intro__content h2,
 .home .editorial-section-top h2,
 .home .editorial-occasions h2,
@@ -160,8 +133,6 @@ body:not(.home) .announcement-bar{background:#0B203D;color:#F5F7F9}
  .brand .brand-logo,.home .brand .brand-logo{width:clamp(175px,42vw,224px)}
 }
 @media(max-width:700px){
- .home .week-hero__copy h1{font-size:clamp(2.55rem,9.4vw,4.6rem)}
- .home .week-hero__eyebrow{font-size:.6rem;letter-spacing:.055em}
  .editorial-tag,.week-hero__watch,.week-hero__day-count{letter-spacing:.04em}
 }
 @media(prefers-reduced-motion:reduce){
