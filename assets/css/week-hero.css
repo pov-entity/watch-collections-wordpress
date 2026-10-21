@@ -112,3 +112,10 @@
 @media(max-width:700px){
 .week-hero__shade{background:linear-gradient(180deg,rgba(7,22,43,.91) 0%,rgba(7,22,43,.68) 33%,rgba(7,22,43,.08) 64%,rgba(7,22,43,.88) 100%),linear-gradient(90deg,rgba(16,42,79,.27),transparent 85%)}
 }
+
+/* Approved hero message uses two concise supporting paragraphs. */
+.week-hero__copy .week-hero__description:not(.week-hero__description--closing){margin-bottom:10px}
+@media(max-width:700px){
+  .week-hero{min-height:max(850px,100svh)}
+  .week-hero__copy .week-hero__description:not(.week-hero__description--closing){margin-bottom:8px}
+}
