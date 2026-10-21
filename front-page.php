@@ -15,13 +15,13 @@ $collection_options = array(
 );
 
 $week_scenes = array(
-	array( 'slug' => 'monday', 'day' => __( 'Monday', 'watch-collections' ), 'short' => __( 'MON', 'watch-collections' ), 'scene' => __( 'The first impression', 'watch-collections' ), 'style' => __( 'Classic', 'watch-collections' ) ),
-	array( 'slug' => 'tuesday', 'day' => __( 'Tuesday', 'watch-collections' ), 'short' => __( 'TUE', 'watch-collections' ), 'scene' => __( 'The everyday meeting', 'watch-collections' ), 'style' => __( 'Chronograph', 'watch-collections' ) ),
-	array( 'slug' => 'wednesday', 'day' => __( 'Wednesday', 'watch-collections' ), 'short' => __( 'WED', 'watch-collections' ), 'scene' => __( 'Out in the city', 'watch-collections' ), 'style' => __( 'Minimal', 'watch-collections' ) ),
-	array( 'slug' => 'thursday', 'day' => __( 'Thursday', 'watch-collections' ), 'short' => __( 'THU', 'watch-collections' ), 'scene' => __( 'A little more refined', 'watch-collections' ), 'style' => __( 'Moonphase-inspired', 'watch-collections' ) ),
-	array( 'slug' => 'friday', 'day' => __( 'Friday', 'watch-collections' ), 'short' => __( 'FRI', 'watch-collections' ), 'scene' => __( 'Plans after dark', 'watch-collections' ), 'style' => __( 'Dress', 'watch-collections' ) ),
-	array( 'slug' => 'saturday', 'day' => __( 'Saturday', 'watch-collections' ), 'short' => __( 'SAT', 'watch-collections' ), 'scene' => __( 'The weekend begins', 'watch-collections' ), 'style' => __( 'Sport', 'watch-collections' ) ),
-	array( 'slug' => 'sunday', 'day' => __( 'Sunday', 'watch-collections' ), 'short' => __( 'SUN', 'watch-collections' ), 'scene' => __( 'Room to slow down', 'watch-collections' ), 'style' => __( 'Skeleton-inspired', 'watch-collections' ) ),
+	array( 'slug' => 'monday', 'day' => __( 'Monday', 'watch-collections' ), 'short' => __( 'MON', 'watch-collections' ), 'scene' => __( 'Ready for the day', 'watch-collections' ), 'style' => __( 'Blue-dial moonphase style', 'watch-collections' ) ),
+	array( 'slug' => 'tuesday', 'day' => __( 'Tuesday', 'watch-collections' ), 'short' => __( 'TUE', 'watch-collections' ), 'scene' => __( 'An easy afternoon', 'watch-collections' ), 'style' => __( 'Ice-blue chronograph style', 'watch-collections' ) ),
+	array( 'slug' => 'wednesday', 'day' => __( 'Wednesday', 'watch-collections' ), 'short' => __( 'WED', 'watch-collections' ), 'scene' => __( 'A more refined moment', 'watch-collections' ), 'style' => __( 'Dress moonphase style', 'watch-collections' ) ),
+	array( 'slug' => 'thursday', 'day' => __( 'Thursday', 'watch-collections' ), 'short' => __( 'THU', 'watch-collections' ), 'scene' => __( 'The evening shift', 'watch-collections' ), 'style' => __( 'Gold day-date style', 'watch-collections' ) ),
+	array( 'slug' => 'friday', 'day' => __( 'Friday', 'watch-collections' ), 'short' => __( 'FRI', 'watch-collections' ), 'scene' => __( 'Plans after dark', 'watch-collections' ), 'style' => __( 'Gold chronograph style', 'watch-collections' ) ),
+	array( 'slug' => 'saturday', 'day' => __( 'Saturday', 'watch-collections' ), 'short' => __( 'SAT', 'watch-collections' ), 'scene' => __( 'Out and about', 'watch-collections' ), 'style' => __( 'Sport diver style', 'watch-collections' ) ),
+	array( 'slug' => 'sunday', 'day' => __( 'Sunday', 'watch-collections' ), 'short' => __( 'SUN', 'watch-collections' ), 'scene' => __( 'Room to slow down', 'watch-collections' ), 'style' => __( 'Casual chronograph style', 'watch-collections' ) ),
 );
 $week_images_are_previews = false;
 foreach ( $week_scenes as &$week_scene ) {
@@ -87,6 +87,7 @@ unset( $week_scene );
 					<span data-hero-motion-label><?php esc_html_e( 'Pause', 'watch-collections' ); ?></span>
 				</button>
 			</div>
+			<p class="week-hero__preview-note"><?php esc_html_e( 'AI-generated lifestyle concepts. Actual watch models and specifications will be confirmed in the catalog.', 'watch-collections' ); ?></p>
 			<?php if ( $week_images_are_previews ) : ?>
 				<p class="week-hero__preview-note"><?php esc_html_e( 'Illustrated concept preview. Final campaign photography will replace these scenes.', 'watch-collections' ); ?></p>
 			<?php endif; ?>
