@@ -45,7 +45,7 @@ function watch_collections_shop_url() {
 			return $url;
 		}
 	}
-	return home_url( '/#collections' );
+	return home_url( '/#collection-options' );
 }
 
 /**
