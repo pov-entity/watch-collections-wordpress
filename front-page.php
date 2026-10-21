@@ -154,37 +154,10 @@ unset( $week_scene );
 		</div>
 	</section>
 
-	<section class="editorial-occasions" aria-labelledby="occasions-title">
-		<div class="container">
-			<div class="editorial-section-top">
-				<div><p class="editorial-tag"><span></span><?php esc_html_e( '02 / THE STYLES', 'watch-collections' ); ?></p><h2 id="occasions-title"><?php esc_html_e( 'Which side of your week', 'watch-collections' ); ?> <em><?php esc_html_e( 'will you wear?', 'watch-collections' ); ?></em></h2></div>
-				<a class="editorial-button editorial-button--dark" href="#how-it-works"><?php esc_html_e( 'The collection idea', 'watch-collections' ); ?><span aria-hidden="true">↗</span></a>
-			</div>
-			<div class="editorial-occasion-grid">
-				<article class="editorial-occasion">
-					<img src="<?php echo esc_url( $week_scenes[0]['image'] ); ?>" alt="<?php esc_attr_e( 'Concept illustration of office clothing and a classic watch', 'watch-collections' ); ?>" width="1600" height="900" loading="lazy" decoding="async">
-					<div class="editorial-occasion__inner"><p><?php esc_html_e( 'MONDAY / THE EVERYDAY', 'watch-collections' ); ?></p><h3><?php esc_html_e( 'Keep it classic.', 'watch-collections' ); ?></h3><span><?php esc_html_e( 'A considered finish to the usual routine.', 'watch-collections' ); ?></span></div>
-					<a class="editorial-occasion__arrow" href="#quality" aria-label="<?php esc_attr_e( 'Learn about classic watch design and quality', 'watch-collections' ); ?>">↗</a>
-				</article>
-				<article class="editorial-occasion">
-					<img src="<?php echo esc_url( $week_scenes[3]['image'] ); ?>" alt="<?php esc_attr_e( 'Concept illustration of an evening outfit and a refined watch', 'watch-collections' ); ?>" width="1600" height="900" loading="lazy" decoding="async">
-					<div class="editorial-occasion__inner"><p><?php esc_html_e( 'THURSDAY / THE OCCASION', 'watch-collections' ); ?></p><h3><?php esc_html_e( 'Change the mood.', 'watch-collections' ); ?></h3><span><?php esc_html_e( 'When the details deserve more attention.', 'watch-collections' ); ?></span></div>
-					<a class="editorial-occasion__arrow" href="#quality" aria-label="<?php esc_attr_e( 'Explore watch styles and details', 'watch-collections' ); ?>">↗</a>
-				</article>
-				<article class="editorial-occasion">
-					<img src="<?php echo esc_url( $week_scenes[5]['image'] ); ?>" alt="<?php esc_attr_e( 'Concept illustration of weekend clothes and a sport watch', 'watch-collections' ); ?>" width="1600" height="900" loading="lazy" decoding="async">
-					<div class="editorial-occasion__inner"><p><?php esc_html_e( 'SATURDAY / THE WEEKEND', 'watch-collections' ); ?></p><h3><?php esc_html_e( 'Make room for easy.', 'watch-collections' ); ?></h3><span><?php esc_html_e( 'A different watch for a different pace.', 'watch-collections' ); ?></span></div>
-					<a class="editorial-occasion__arrow" href="#quality" aria-label="<?php esc_attr_e( 'Learn about materials and everyday wear', 'watch-collections' ); ?>">↗</a>
-				</article>
-			</div>
-			<p class="editorial-caption"><?php esc_html_e( 'These are illustrative style scenes, not photographs of currently available products.', 'watch-collections' ); ?></p>
-		</div>
-	</section>
-
 	<section class="editorial-quality" id="quality" aria-labelledby="quality-title">
 		<div class="container editorial-quality__layout">
 			<div class="editorial-quality__intro">
-				<p class="editorial-tag"><span></span><?php esc_html_e( '03 / THE DETAILS', 'watch-collections' ); ?></p>
+				<p class="editorial-tag"><span></span><?php esc_html_e( '02 / THE DETAILS', 'watch-collections' ); ?></p>
 				<h2 id="quality-title"><?php esc_html_e( 'A beautiful dial catches your eye.', 'watch-collections' ); ?> <em><?php esc_html_e( 'The details deserve a closer look.', 'watch-collections' ); ?></em></h2>
 				<p><?php esc_html_e( 'There is more to a watch than the way it photographs. We are building product listings around the details that matter for real ownership.', 'watch-collections' ); ?></p>
 				<div class="editorial-quality__visual" role="img" aria-label="<?php esc_attr_e( 'Decorative illustration of a watch movement and dial', 'watch-collections' ); ?>">
@@ -206,7 +179,7 @@ unset( $week_scene );
 	<section class="editorial-process" id="how-it-works" aria-labelledby="process-title">
 		<div class="container">
 			<div class="editorial-section-top">
-				<div><p class="editorial-tag"><span></span><?php esc_html_e( '04 / THE EXPERIENCE', 'watch-collections' ); ?></p><h2 id="process-title"><?php esc_html_e( 'Choose the watches.', 'watch-collections' ); ?> <em><?php esc_html_e( 'We bring the box together.', 'watch-collections' ); ?></em></h2></div>
+				<div><p class="editorial-tag"><span></span><?php esc_html_e( '03 / THE EXPERIENCE', 'watch-collections' ); ?></p><h2 id="process-title"><?php esc_html_e( 'Choose the watches.', 'watch-collections' ); ?> <em><?php esc_html_e( 'We bring the box together.', 'watch-collections' ); ?></em></h2></div>
 				<p><?php esc_html_e( 'The Collection Studio is being developed separately. This is the intended ordering experience.', 'watch-collections' ); ?></p>
 			</div>
 			<div class="editorial-process__steps">
@@ -220,7 +193,7 @@ unset( $week_scene );
 	<section class="editorial-packages" id="collection-options" aria-labelledby="collection-options-title">
 		<div class="container">
 			<div class="editorial-section-top">
-				<div><p class="editorial-tag"><span></span><?php esc_html_e( '05 / YOUR COLLECTION', 'watch-collections' ); ?></p><h2 id="collection-options-title"><?php esc_html_e( 'A place for every piece.', 'watch-collections' ); ?> <em><?php esc_html_e( 'Start with your number.', 'watch-collections' ); ?></em></h2></div>
+				<div><p class="editorial-tag"><span></span><?php esc_html_e( '04 / YOUR COLLECTION', 'watch-collections' ); ?></p><h2 id="collection-options-title"><?php esc_html_e( 'A place for every piece.', 'watch-collections' ); ?> <em><?php esc_html_e( 'Start with your number.', 'watch-collections' ); ?></em></h2></div>
 				<p><?php esc_html_e( 'Choose the size of your collection. Each package pairs the specified number of eligible watches with a presentation box.', 'watch-collections' ); ?></p>
 			</div>
 			<div class="editorial-packages__grid">
@@ -241,7 +214,7 @@ unset( $week_scene );
 	<section class="editorial-fulfillment" id="fulfillment" aria-labelledby="fulfillment-title">
 		<div class="container">
 			<div class="editorial-fulfillment__intro">
-				<p class="editorial-tag editorial-tag--light"><?php esc_html_e( '06 / BEYOND CHECKOUT', 'watch-collections' ); ?></p>
+				<p class="editorial-tag editorial-tag--light"><?php esc_html_e( '05 / BEYOND CHECKOUT', 'watch-collections' ); ?></p>
 				<h2 id="fulfillment-title"><?php esc_html_e( 'Your choices deserve', 'watch-collections' ); ?> <em><?php esc_html_e( 'a careful journey.', 'watch-collections' ); ?></em></h2>
 				<p><?php esc_html_e( 'Your collection should arrive with the models you selected, not unexplained substitutions. We are designing our fulfillment around order matching, item checks, protective packing and clear delivery information.', 'watch-collections' ); ?></p>
 			</div>
@@ -257,7 +230,7 @@ unset( $week_scene );
 
 	<section class="editorial-assurance" id="confidence" aria-labelledby="assurance-title">
 		<div class="container editorial-assurance__grid">
-			<div><p class="editorial-tag"><span></span><?php esc_html_e( '07 / NO GUESSWORK', 'watch-collections' ); ?></p><h2 id="assurance-title"><?php esc_html_e( 'A purchase should make sense', 'watch-collections' ); ?> <em><?php esc_html_e( 'before you make it.', 'watch-collections' ); ?></em></h2></div>
+			<div><p class="editorial-tag"><span></span><?php esc_html_e( '06 / NO GUESSWORK', 'watch-collections' ); ?></p><h2 id="assurance-title"><?php esc_html_e( 'A purchase should make sense', 'watch-collections' ); ?> <em><?php esc_html_e( 'before you make it.', 'watch-collections' ); ?></em></h2></div>
 			<div class="editorial-assurance__copy">
 				<p><?php esc_html_e( 'You deserve to know what is inside your box, what each watch is made from, what the full order costs and what happens if something goes wrong.', 'watch-collections' ); ?></p>
 				<ul>
