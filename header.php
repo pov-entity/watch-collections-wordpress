@@ -40,14 +40,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'nav-list', 'depth' => 2 ) ); ?>
 				<?php else : ?>
 					<ul class="nav-list">
-						<li><a href="<?php echo esc_url( home_url( '/#collections' ) ); ?>"><?php esc_html_e( 'The collections', 'watch-collections' ); ?></a></li>
+						<li><a href="<?php echo esc_url( home_url( '/#collection-options' ) ); ?>"><?php esc_html_e( 'The collections', 'watch-collections' ); ?></a></li>
 						<li><a href="<?php echo esc_url( home_url( '/#how-it-works' ) ); ?>"><?php esc_html_e( 'The idea', 'watch-collections' ); ?></a></li>
 						<li><a href="<?php echo esc_url( watch_collections_shop_url() ); ?>"><?php esc_html_e( 'Shop', 'watch-collections' ); ?></a></li>
 					</ul>
 				<?php endif; ?>
 			</nav>
 			<a class="header-action" href="<?php echo esc_url( watch_collections_shop_url() ); ?>">
-				<?php esc_html_e( 'Explore watches', 'watch-collections' ); ?><span aria-hidden="true"> ↗</span>
+				<?php esc_html_e( 'Collection options', 'watch-collections' ); ?><span aria-hidden="true"> ↗</span>
 			</a>
 		</div>
 	</header>
