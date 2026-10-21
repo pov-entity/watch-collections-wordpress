@@ -1,0 +1,51 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": {
+      "contentSize": "760px",
+      "wideSize": "1260px"
+    },
+    "color": {
+      "palette": [
+        {
+          "slug": "navy",
+          "name": "Navy",
+          "color": "#142334"
+        },
+        {
+          "slug": "cream",
+          "name": "Cream",
+          "color": "#f1eadd"
+        },
+        {
+          "slug": "paper",
+          "name": "Paper",
+          "color": "#f9f8f5"
+        },
+        {
+          "slug": "copper",
+          "name": "Copper",
+          "color": "#ad8669"
+        },
+        {
+          "slug": "white",
+          "name": "White",
+          "color": "#ffffff"
+        }
+      ]
+    },
+    "spacing": {
+      "units": [
+        "px",
+        "rem",
+        "%",
+        "vw"
+      ]
+    },
+    "typography": {
+      "fluid": true
+    }
+  }
+}

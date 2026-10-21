@@ -1,0 +1,15 @@
+/*
+Theme Name: Watch Collections
+Theme URI: https://github.com/pov-entity/watch-collections-wordpress
+Author: Watch Collections
+Description: An editorial, mobile-first WooCommerce-ready theme for a watch wardrobe built around real everyday occasions.
+Version: 0.1.0
+Requires at least: 6.3
+Requires PHP: 7.4
+Text Domain: watch-collections
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Tags: e-commerce, custom-logo, custom-menu, featured-images, responsive-layout
+*/
+
+/* Main styles are in assets/css/site.css and are enqueued by functions.php. */

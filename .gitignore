@@ -1,0 +1,18 @@
+# Development-only files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+node_modules/
+vendor/
+*.log
+.env
+.env.*
+!.env.example
+# Never commit WordPress core, generated database exports or uploads.
+wp-config.php
+wp-content/uploads/
+wp-content/database/
+*.sql
+*.sqlite
+*.zip
