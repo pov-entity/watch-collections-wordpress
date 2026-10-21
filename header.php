@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <?php wp_body_open(); ?>
 <a class="skip-link screen-reader-text" href="#main"><?php esc_html_e( 'Skip to content', 'watch-collections' ); ?></a>
 <div class="site-shell">
-	<div class="announcement-bar"><span class="announcement-dot" aria-hidden="true"></span><?php esc_html_e( 'A rotation for real life. One watch at a time.', 'watch-collections' ); ?></div>
+	<div class="announcement-bar"><span class="announcement-dot" aria-hidden="true"></span><?php esc_html_e( 'Collection studio preview — website in development.', 'watch-collections' ); ?></div>
 	<header class="site-header" id="top">
 		<div class="container header-inner">
 			<div class="brand">
@@ -40,14 +40,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'nav-list', 'depth' => 2 ) ); ?>
 				<?php else : ?>
 					<ul class="nav-list">
-						<li><a href="<?php echo esc_url( home_url( '/#collection-options' ) ); ?>"><?php esc_html_e( 'The collections', 'watch-collections' ); ?></a></li>
-						<li><a href="<?php echo esc_url( home_url( '/#how-it-works' ) ); ?>"><?php esc_html_e( 'The idea', 'watch-collections' ); ?></a></li>
-						<li><a href="<?php echo esc_url( watch_collections_shop_url() ); ?>"><?php esc_html_e( 'Shop', 'watch-collections' ); ?></a></li>
+						<li><a href="<?php echo esc_url( home_url( '/#build-preview' ) ); ?>"><?php esc_html_e( 'Build a box', 'watch-collections' ); ?></a></li>
+						<li><a href="<?php echo esc_url( home_url( '/#styles' ) ); ?>"><?php esc_html_e( 'Watch styles', 'watch-collections' ); ?></a></li>
+						<li><a href="<?php echo esc_url( home_url( '/#how-it-works' ) ); ?>"><?php esc_html_e( 'How it works', 'watch-collections' ); ?></a></li>
 					</ul>
 				<?php endif; ?>
 			</nav>
-			<a class="header-action" href="<?php echo esc_url( watch_collections_shop_url() ); ?>">
-				<?php esc_html_e( 'Collection options', 'watch-collections' ); ?><span aria-hidden="true"> ↗</span>
+			<a class="header-action" href="<?php echo esc_url( home_url( '/#build-preview' ) ); ?>">
+				<?php esc_html_e( 'Build your collection', 'watch-collections' ); ?><span aria-hidden="true"> ↗</span>
 			</a>
 		</div>
 	</header>
