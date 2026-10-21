@@ -17,7 +17,7 @@ $collection_options = array(
 $week_scenes = array(
 	array( 'slug' => 'monday', 'day' => __( 'Monday', 'watch-collections' ), 'short' => __( 'MON', 'watch-collections' ), 'scene' => __( 'Ready for the day', 'watch-collections' ), 'style' => __( 'Blue-dial moonphase style', 'watch-collections' ) ),
 	array( 'slug' => 'tuesday', 'day' => __( 'Tuesday', 'watch-collections' ), 'short' => __( 'TUE', 'watch-collections' ), 'scene' => __( 'An easy afternoon', 'watch-collections' ), 'style' => __( 'Ice-blue chronograph style', 'watch-collections' ) ),
-	array( 'slug' => 'wednesday', 'day' => __( 'Wednesday', 'watch-collections' ), 'short' => __( 'WED', 'watch-collections' ), 'scene' => __( 'A more refined moment', 'watch-collections' ), 'style' => __( 'Dress moonphase style', 'watch-collections' ) ),
+	array( 'slug' => 'wednesday', 'day' => __( 'Wednesday', 'watch-collections' ), 'short' => __( 'WED', 'watch-collections' ), 'scene' => __( 'A change of pace', 'watch-collections' ), 'style' => __( 'Blue-dial sport style', 'watch-collections' ), 'position' => '50% center' ),
 	array( 'slug' => 'thursday', 'day' => __( 'Thursday', 'watch-collections' ), 'short' => __( 'THU', 'watch-collections' ), 'scene' => __( 'The evening shift', 'watch-collections' ), 'style' => __( 'Gold day-date style', 'watch-collections' ) ),
 	array( 'slug' => 'friday', 'day' => __( 'Friday', 'watch-collections' ), 'short' => __( 'FRI', 'watch-collections' ), 'scene' => __( 'Plans after dark', 'watch-collections' ), 'style' => __( 'Gold chronograph style', 'watch-collections' ) ),
 	array( 'slug' => 'saturday', 'day' => __( 'Saturday', 'watch-collections' ), 'short' => __( 'SAT', 'watch-collections' ), 'scene' => __( 'Out and about', 'watch-collections' ), 'style' => __( 'Sport diver style', 'watch-collections' ) ),
@@ -27,7 +27,7 @@ $week_images_are_previews = false;
 foreach ( $week_scenes as &$week_scene ) {
 	$webp_path = '/assets/hero-days/' . $week_scene['slug'] . '.webp';
 	if ( file_exists( get_template_directory() . $webp_path ) ) {
-		$week_scene['image'] = get_template_directory_uri() . $webp_path;
+		$week_scene['image'] = add_query_arg( 'ver', (string) filemtime( get_template_directory() . $webp_path ), get_template_directory_uri() . $webp_path );
 	} else {
 		$week_scene['image'] = get_template_directory_uri() . '/assets/hero-days/' . $week_scene['slug'] . '.svg';
 		$week_images_are_previews = true;
@@ -43,6 +43,7 @@ unset( $week_scene );
 					<img
 						src="<?php echo esc_url( $scene['image'] ); ?>"
 						alt=""
+						<?php if ( isset( $scene['position'] ) ) : ?>style="object-position:<?php echo esc_attr( $scene['position'] ); ?>"<?php endif; ?>
 						<?php echo 0 === $index ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"'; ?>
 						decoding="async"
 						width="1600"
