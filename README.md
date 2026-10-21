@@ -1,6 +1,14 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
-**Status:** Prototype v0.7.2. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
+**Status:** Prototype v0.8.0. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
+
+## Watch carousel — v0.8.0
+
+The Studio catalog is a horizontal carousel with native touch/trackpad scrolling and center snapping. The centered watch appears at full size; neighboring watches appear smaller. A detail panel underneath follows the centered watch and shows its name, description, dial, finish, strap design, full-details link and add/replace action. Browsing alone does not change the box.
+
+Customers can swipe, click a neighboring watch, use the previous/next controls, or use Left/Right and Home/End keys while focused on the carousel. There is no autoplay. The motion toggle and reduced-motion preference apply to centering and transitions. Filters preserve the featured watch when it still matches; one-result and empty states are handled. Adding or replacing a watch refreshes its selected state without rebuilding the carousel or losing its position. The existing overhead 1/3/6 trays and package prices are preserved.
+
+Validation: JavaScript syntax, all ten collection-state tests and PHP 7.4 template checks passed. Browser checks covered desktop and a 390px mobile frame, centered-watch sizing, keyboard and arrow navigation, add/swap/targeted replacement, style/strap/search filters, single/empty results and mobile page fit. A physical-device touch check and a full WordPress integration check remain appropriate before launch. Import theme **0.8.0** to see this update.
 
 ## Overhead collection tray — v0.7.2
 
@@ -20,7 +28,7 @@ Each visual has a 1448 × 1086 WebP and a 480 × 360 responsive variant. The int
 
 Use **Build your collection** in the header or homepage hero, or choose a package on the homepage. The portable `/?collection-studio=1` route works without a database page or permalink reset. `&box=1`, `&box=3` and `&box=6` request a box size. A native WordPress page can also use the **Collection Studio** page template.
 
-- Twelve original, clearly labeled vector concept watches, with style, strap and text search filters.
+- Twelve original, clearly labeled vector concept watches in a swipeable center-focused carousel, with style, strap and text search filters.
 - Watch details show visual design information separately from unverified movement, materials, dimensions, functions and water resistance.
 - Persistent desktop presentation-box preview and fixed mobile selection bar.
 - Add, replace, remove and reorder watches; confirm before a smaller box discards selections. Full boxes require choosing which watch to replace.
@@ -34,7 +42,7 @@ Use **Build your collection** in the header or homepage hero, or choose a packag
 
 **Validation:** `node --test tests/collection-state.test.cjs` covers size eligibility, capacity, explicit replacement, downsizing confirmation, sparse selections, reordering, storage sanitization and null-price handling. PHP 7.4 parsing and rendered-template integration checks passed using WordPress function stubs. Browser QA verified desktop and a 390px mobile frame. A full WordPress/Playground integration test is still required after importing the theme.
 
-**Preview update:** Import the latest repository into a new WordPress Playground instance and confirm theme version **0.7.2**. Refreshing an older saved Playground does not fetch new commits.
+**Preview update:** Import the latest repository into a new WordPress Playground instance and confirm theme version **0.8.0**. Refreshing an older saved Playground does not fetch new commits.
 
 ### Decision log — 2026-10-21
 

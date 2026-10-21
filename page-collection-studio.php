@@ -54,7 +54,20 @@ $config = array( 'watches' => watch_collections_studio_catalog(), 'packages' => 
 				</div>
 				<div class="studio-results-bar"><p data-result-count role="status"></p><button type="button" class="studio-quiet-button" data-action="reset-filters" hidden><?php esc_html_e( 'Clear filters', 'watch-collections' ); ?></button></div>
 				<div class="studio-replace-notice" data-replace-notice hidden></div>
-				<div class="studio-watch-grid" data-watch-grid></div>
+				<div class="studio-carousel" data-watch-carousel role="region" aria-roledescription="carousel" aria-label="<?php esc_attr_e( 'Watch collection', 'watch-collections' ); ?>">
+					<div class="studio-carousel-stage">
+						<p class="studio-carousel-eyebrow"><?php esc_html_e( 'A WATCH FOR EVERY SIDE OF YOU', 'watch-collections' ); ?></p>
+						<div id="studio-watch-track" class="studio-carousel-track" data-watch-track tabindex="0" role="group" aria-label="<?php esc_attr_e( 'Browse watch designs', 'watch-collections' ); ?>" aria-describedby="studio-carousel-help"></div>
+						<div class="studio-carousel-navigation">
+							<button type="button" class="studio-carousel-arrow" data-action="previous-watch" aria-label="<?php esc_attr_e( 'Previous watch', 'watch-collections' ); ?>" aria-controls="studio-watch-track"><span aria-hidden="true">←</span></button>
+							<p class="studio-carousel-position" role="status" aria-live="polite" aria-atomic="true"><span data-carousel-position></span><span class="screen-reader-text" data-carousel-announcement></span></p>
+							<button type="button" class="studio-carousel-arrow" data-action="next-watch" aria-label="<?php esc_attr_e( 'Next watch', 'watch-collections' ); ?>" aria-controls="studio-watch-track"><span aria-hidden="true">→</span></button>
+						</div>
+						<div class="studio-carousel-progress" aria-hidden="true"><span data-carousel-progress></span></div>
+						<p id="studio-carousel-help" class="studio-carousel-help"><?php esc_html_e( 'Swipe to explore · Use the arrows or left and right keys', 'watch-collections' ); ?></p>
+					</div>
+					<div class="studio-feature" data-watch-feature aria-labelledby="studio-feature-title"></div>
+				</div>
 				<div class="studio-empty" data-catalog-empty hidden><span aria-hidden="true">↗</span><h3><?php esc_html_e( 'A fresh look?', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'No watches match those filters. Try another style or open up the selection.', 'watch-collections' ); ?></p><button type="button" class="studio-primary" data-action="reset-filters"><?php esc_html_e( 'Show all watches', 'watch-collections' ); ?></button></div>
 				<p class="studio-catalog-footnote"><?php esc_html_e( 'Original concept illustrations. Dial designs do not confirm functional chronographs, moonphases, materials or water resistance.', 'watch-collections' ); ?></p>
 			</section>
