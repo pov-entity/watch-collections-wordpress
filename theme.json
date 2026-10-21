@@ -11,28 +11,43 @@
       "palette": [
         {
           "slug": "navy",
-          "name": "Navy",
-          "color": "#142334"
+          "name": "Deep navy",
+          "color": "#102A4F"
         },
         {
-          "slug": "cream",
-          "name": "Cream",
-          "color": "#f1eadd"
+          "slug": "midnight",
+          "name": "Midnight navy",
+          "color": "#0B203D"
         },
         {
-          "slug": "paper",
-          "name": "Paper",
-          "color": "#f9f8f5"
+          "slug": "steel-blue",
+          "name": "Steel blue",
+          "color": "#90B1C2"
+        },
+        {
+          "slug": "silver-grey",
+          "name": "Silver grey",
+          "color": "#CED3D9"
+        },
+        {
+          "slug": "cool-white",
+          "name": "Cool white",
+          "color": "#F5F7F9"
         },
         {
           "slug": "copper",
           "name": "Copper",
-          "color": "#ad8669"
+          "color": "#B77B57"
         },
         {
-          "slug": "white",
-          "name": "White",
-          "color": "#ffffff"
+          "slug": "copper-ink",
+          "name": "Copper for readable text",
+          "color": "#99603E"
+        },
+        {
+          "slug": "slate",
+          "name": "Slate text",
+          "color": "#526577"
         }
       ]
     },
@@ -46,6 +61,20 @@
     },
     "typography": {
       "fluid": true
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "#F5F7F9",
+      "text": "#102A4F"
+    },
+    "elements": {
+      "button": {
+        "color": {
+          "background": "#102A4F",
+          "text": "#F5F7F9"
+        }
+      }
     }
   }
 }
