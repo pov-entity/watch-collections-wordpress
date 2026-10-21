@@ -102,11 +102,11 @@ unset( $week_scene );
 				<p class="editorial-tag"><span></span><?php esc_html_e( '01 / THE DETAILS', 'watch-collections' ); ?></p>
 				<h2 id="quality-title"><?php esc_html_e( 'A beautiful dial catches your eye.', 'watch-collections' ); ?> <em><?php esc_html_e( 'The details deserve a closer look.', 'watch-collections' ); ?></em></h2>
 				<p><?php esc_html_e( 'There is more to a watch than the way it photographs. We are building product listings around the details that matter for real ownership.', 'watch-collections' ); ?></p>
-				<figure class="editorial-quality__visual">
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/watch-exploded.webp' ); ?>" alt="<?php esc_attr_e( 'Illustrative exploded view of watch components including crystal, bezel, dial, movement, case and bracelet', 'watch-collections' ); ?>" loading="lazy" decoding="async" width="941" height="1672">
-					<figcaption><?php esc_html_e( 'Illustrative component diagram — specifications vary by model.', 'watch-collections' ); ?></figcaption>
-				</figure>
 			</div>
+			<figure class="editorial-quality__visual">
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/watch-exploded.webp' ); ?>" alt="<?php esc_attr_e( 'Illustrative exploded view of watch components including crystal, bezel, dial, movement, case and bracelet', 'watch-collections' ); ?>" loading="lazy" decoding="async" width="941" height="1672">
+				<figcaption><?php esc_html_e( 'Illustrative component diagram — specifications vary by model.', 'watch-collections' ); ?></figcaption>
+			</figure>
 			<div class="editorial-quality__details">
 				<article><span>01</span><div><h3><?php esc_html_e( 'Movement', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Quartz, automatic or hand-wound. You should know what powers each model and what care it requires.', 'watch-collections' ); ?></p></div></article>
 				<article><span>02</span><div><h3><?php esc_html_e( 'Materials & finishing', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Understand the case, strap and clasp materials, plus the details that affect feel and appearance.', 'watch-collections' ); ?></p></div></article>

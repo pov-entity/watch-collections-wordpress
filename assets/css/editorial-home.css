@@ -73,20 +73,23 @@
 .editorial-occasion__arrow{position:absolute;top:21px;right:21px;width:42px;height:42px;border-radius:50%;background:#fff;color:var(--editorial-deep);display:grid;place-items:center;font-size:1.2rem;transition:background .2s,transform .2s}
 .editorial-occasion__arrow:hover{background:#C8DCE9;color:var(--editorial-deep);transform:translate(2px,-2px)}
 .editorial-quality{background:#E5EBF0;padding:115px 0}
-.editorial-quality__layout{display:grid;grid-template-columns:minmax(0,.98fr) minmax(0,1.02fr);gap:12%;align-items:start}
-.editorial-quality__intro h2{font:400 clamp(2.45rem,3.35vw,4.1rem)/1.11 Georgia,serif;letter-spacing:-.055em;margin:0 0 24px}
+.editorial-quality__layout{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1fr) minmax(0,1.15fr);gap:clamp(24px,3vw,44px);align-items:start}
+.editorial-quality__layout>*{min-width:0}
+.editorial-quality__intro h2{font:400 clamp(2rem,2.6vw,2.65rem)/1.13 Georgia,serif;letter-spacing:-.055em;margin:0 0 24px}
 .editorial-quality__intro h2 em{color:#99603E}
-.editorial-quality__intro>p:not(.editorial-tag){font-size:.98rem;color:#526577;max-width:470px}
-.editorial-quality__visual{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-top:33px;height:280px;background:radial-gradient(circle at 60% 32%,#E9F0F4,transparent 46%),linear-gradient(130deg,#B8CDD9,#DCE5EB 70%,#A8C3D1)}
+.editorial-quality__intro>p:not(.editorial-tag){font-size:.92rem;color:#526577;max-width:470px}
+.editorial-quality__visual{position:relative;display:block;width:100%;height:auto;margin:0;background:#f6f6f6}
+.editorial-quality__visual img{display:block;width:100%;height:auto;object-fit:contain}
+.editorial-quality__visual figcaption{padding:10px 12px;font-size:.72rem;line-height:1.5;color:#526577;text-align:center;background:#E5EBF0}
 .editorial-quality__ring{width:205px;height:205px;border-radius:50%;display:grid;place-items:center;border:11px solid #698DA6;background:#CBD8E0;box-shadow:0 15px 26px #102A4F48,0 0 0 4px #8DAFC0, inset 0 0 0 3px #E5EDF2;transform:rotate(-12deg)}
 .editorial-quality__dial{position:relative;width:100%;height:100%;border-radius:50%;background:repeating-conic-gradient(from -2deg,#2E516A 0deg 1.5deg,transparent 1.5deg 30deg),radial-gradient(circle,#EDF3F6,#B9C9D4);border:8px solid #DEE8EE}
 .editorial-quality__dial i,.editorial-quality__dial b{position:absolute;bottom:50%;left:50%;width:3px;height:31%;background:#23445F;transform-origin:bottom;transform:rotate(45deg)}
 .editorial-quality__dial b{height:23%;transform:rotate(-77deg)}
 .editorial-quality__visual>span{position:absolute;left:17px;bottom:16px;font-size:.59rem;letter-spacing:.14em;color:#526577;font-weight:700}
-.editorial-quality__details article{display:grid;grid-template-columns:44px 1fr;gap:16px;border-top:1px solid #BFCDD6;padding:23px 0 19px}
+.editorial-quality__details article{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;border-top:1px solid #BFCDD6;padding:18px 0}
 .editorial-quality__details article>span{font:italic 1.15rem Georgia,serif;color:#99603E}
-.editorial-quality__details h3{font:400 1.65rem/1.15 Georgia,serif;letter-spacing:-.04em;margin:0 0 8px}
-.editorial-quality__details p{color:#68717a;font-size:.85rem;margin:0;line-height:1.7}
+.editorial-quality__details h3{font:400 clamp(1.1rem,1.5vw,1.35rem)/1.25 Georgia,serif;letter-spacing:-.04em;margin:0 0 8px}
+.editorial-quality__details p{color:#68717a;font-size:.875rem;margin:0;line-height:1.7}
 .editorial-quality__note{border-top:1px solid #BFCDD6;padding-top:18px;color:#66737d;font-size:.74rem}
 .editorial-process{padding:100px 0 112px;background:var(--editorial-paper)}
 .editorial-process .editorial-section-top h2,.editorial-packages .editorial-section-top h2{font:400 clamp(2.55rem,3.55vw,4.35rem)/1.12 Georgia,serif;letter-spacing:-.05em}
@@ -142,6 +145,14 @@
 .editorial-features{gap:12px}.editorial-feature{padding:22px 16px}
 .editorial-package{padding:19px 15px}
 }
+/* Keep the three parts distinct as the available width changes. */
+@media(max-width:1100px){
+.editorial-quality__layout{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px}
+.editorial-quality__intro{grid-column:1/-1;max-width:760px}
+.editorial-quality__intro h2{font-size:clamp(2.25rem,4.5vw,3rem)}
+.editorial-quality__intro>p:not(.editorial-tag){max-width:650px}
+.editorial-quality__visual{max-width:360px;justify-self:center}
+}
 @media(max-width:850px){
 .home .site-header{top:10px}
 .home .header-inner{min-height:62px}
@@ -162,8 +173,6 @@
 .editorial-occasion__inner{left:17px;right:20px;bottom:19px}
 .editorial-occasion__inner h3{font-size:1.7rem}
 .editorial-occasion__arrow{width:36px;height:36px;right:14px;top:14px}
-.editorial-quality__layout{grid-template-columns:1fr;gap:43px}
-.editorial-quality__visual{max-width:520px}
 .editorial-process__steps{gap:10px}
 .editorial-process__steps>div{padding:23px 17px}
 .editorial-packages__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -199,10 +208,7 @@
 .editorial-occasion__inner{left:23px;right:60px;bottom:25px}
 .editorial-occasion__inner h3{font-size:2rem}
 .editorial-quality{padding:75px 0}
-.editorial-quality__intro h2{font-size:clamp(2.25rem,9vw,3rem)}
-.editorial-quality__visual{height:225px}
 .editorial-quality__ring{width:160px;height:160px}
-.editorial-quality__details h3{font-size:1.5rem}
 .editorial-process{padding:80px 0}
 .editorial-process__steps{grid-template-columns:1fr;gap:11px}
 .editorial-process__steps>div{padding:23px}
@@ -232,6 +238,14 @@
 .editorial-closing{padding:77px 0 90px}
 .editorial-closing h2{font-size:clamp(2.45rem,9vw,3.4rem)}
 }
+@media(max-width:700px){
+.editorial-quality{padding:72px 0}
+.editorial-quality__layout{grid-template-columns:minmax(0,1fr);gap:32px}
+.editorial-quality__intro{grid-column:auto}
+.editorial-quality__intro h2{font-size:clamp(2.05rem,7.6vw,2.75rem)}
+.editorial-quality__visual{max-width:400px}
+.editorial-quality__details h3{font-size:1.25rem}
+}
 @media(max-width:375px){
 .editorial-features{grid-template-columns:1fr}
 .editorial-feature{min-height:auto}
@@ -256,7 +270,3 @@
 .home .editorial-assurance__copy li{border-color:#C3D0DA}
 .home .editorial-button:focus-visible,.home .week-hero__cta:focus-visible{outline:3px solid #F5F7F9;outline-offset:4px}
 
-/* Exploded watch component diagram */
-.editorial-quality__visual{display:block;height:auto;margin:33px 0 0;background:#f6f6f6;overflow:visible}
-.editorial-quality__visual img{display:block;width:100%;height:auto;object-fit:contain}
-.editorial-quality__visual figcaption{padding:10px 12px;font-size:.72rem;line-height:1.5;color:#526577;text-align:center;background:#E5EBF0}
