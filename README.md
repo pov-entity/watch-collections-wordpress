@@ -1,6 +1,14 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
-**Status:** Prototype v0.8.1. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
+**Status:** Prototype v0.8.2. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
+
+## Dial-picture style selection — v0.8.2
+
+The style filters now show circular dial close-ups for Classic, Chronograph, Moonphase style, Sport and Skeleton style. Each portrait comes from the matching catalog concept, with a cropped SVG view of its face; All watches shows a small three-dial composition. These remain original concept illustrations. Labels, pressed states, native keyboard interaction and the existing filter actions are retained.
+
+The selector uses one row on desktop and a three-column, two-row layout on mobile. Selecting a dial filters the carousel without changing the customer's box. The five-watch carousel, immediate add action and overhead mobile box remain in place.
+
+Validation: JavaScript syntax and PHP 7.4 template rendering passed. Browser checks verified every style's expected result count, dial-only view boxes, selected states, the mobile grid, combined-filter empty/reset behavior and a 375px page fitting its viewport. [Desktop preview](docs/dial-style-picker.jpg). Import theme **0.8.2** to see this update.
 
 ## Five-watch view and mobile box — v0.8.1
 
@@ -52,7 +60,7 @@ Use **Build your collection** in the header or homepage hero, or choose a packag
 
 **Validation:** `node --test tests/collection-state.test.cjs` covers size eligibility, capacity, explicit replacement, downsizing confirmation, sparse selections, reordering, storage sanitization and null-price handling. PHP 7.4 parsing and rendered-template integration checks passed using WordPress function stubs. Browser QA verified desktop and a 390px mobile frame. A full WordPress/Playground integration test is still required after importing the theme.
 
-**Preview update:** Import the latest repository into a new WordPress Playground instance and confirm theme version **0.8.1**. Refreshing an older saved Playground does not fetch new commits.
+**Preview update:** Import the latest repository into a new WordPress Playground instance and confirm theme version **0.8.2**. Refreshing an older saved Playground does not fetch new commits.
 
 ### Decision log — 2026-10-21
 
