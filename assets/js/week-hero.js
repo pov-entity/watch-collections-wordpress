@@ -133,16 +133,14 @@
   }
 
   function selectDay(index) {
-    if (index === active && destination === -1) {
-      seekAndHold(index);
-      return;
-    }
-    if (reducedMotion) {
-      seekAndHold(index);
-      return;
-    }
-    var stop = safeTime(index);
     var now = video.currentTime || 0;
+    var stop = safeTime(index);
+    // If this day's transition is still underway, play to its settled frame
+    // rather than jumping straight to a still pose.
+    if (reducedMotion || (index === active && destination === -1 && (video.paused || now >= stop - 0.018))) {
+      seekAndHold(index);
+      return;
+    }
     needWrap = now >= stop - 0.018;
     hasWrapped = false;
     destination = index;
