@@ -386,3 +386,14 @@
   .week-hero--interactive .week-hero__tab-indicator{display:none}
   .week-hero--interactive .week-hero__rail-actions{max-width:500px}
 }
+
+/* If the theme's MP4 has not yet been uploaded, show existing daily imagery.
+   This avoids shipping a blank, frozen, or visibly broken homepage. */
+.week-hero--interactive .week-hero__fallback-scenes {display:none;position:absolute;inset:0;overflow:hidden}
+.week-hero--interactive .week-hero__fallback-image {
+  position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+  object-position:center center;opacity:0;transition:opacity 700ms ease;
+}
+.week-hero--interactive .week-hero__fallback-image.is-active {opacity:1}
+.week-hero--interactive.has-video-error .week-hero__video {display:none}
+.week-hero--interactive.has-video-error .week-hero__fallback-scenes {display:block}
