@@ -213,7 +213,7 @@
 .week-hero--video .week-hero__current {font-size:clamp(1.8rem,2.6vw,2.5rem);margin:0 0 7px;}
 .week-hero--video .week-hero__watch {justify-content:flex-start;margin:0 0 9px;color:#F8E4CC;line-height:1.4;font-size:.66rem;letter-spacing:.09em;}
 .week-hero--video .week-hero__moment {font-size:.78rem;color:#F0F1F2;line-height:1.5;max-width:28ch;}
-.week-hero--video .week-hero__tab-track span {animation:none!important;transform:scaleX(var(--hero-fill,0));transition:none;}
+ .week-hero--video .week-hero__tab-track span {animation:none!important;transform:scaleX(var(--hero-fill,0))!important;transition:none;}
 @media(max-width:850px){
   .week-hero--video{min-height:850px}
   .week-hero--video .week-hero__visual{inset:255px 0 180px;}
