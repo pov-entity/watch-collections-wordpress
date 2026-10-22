@@ -77,7 +77,7 @@
         paused ? 'Paused on this look' : 'Playing the week';
     }
     motion.setAttribute('aria-pressed', paused ? 'true' : 'false');
-    motion.setAttribute('aria-label', paused ? 'Play the weekly video' : 'Pause the weekly video');
+    motion.setAttribute('aria-label', paused ? 'Play the weekly video' : 'Pause at the next still pose');
     if (motionLabel) motionLabel.textContent = paused ? 'Play' : 'Pause';
   }
 
@@ -181,10 +181,10 @@
     if (video.paused) {
       play();
     } else {
-      destination = -1;
-      userPaused = true;
-      video.pause();
-      refresh();
+      // Even manual pause respects the model's settled positions.
+      var now = video.currentTime || 0;
+      var next = stopFrames.findIndex(function (stop) { return stop > now + 0.12; });
+      selectDay(next >= 0 ? next : 0);
     }
   });
 
