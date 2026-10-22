@@ -1,6 +1,6 @@
 /**
- * DialByDay weekly hero: sync live labels to the seven watches already present
- * in the founder's 10-second footage. Playback drives state; no slideshow.
+ * Seven-day fashion hero with frame-specific clickable pause destinations.
+ * Actual settled-pose timings determined from the 10s / 24fps source footage.
  */
 (function () {
   'use strict';
@@ -14,140 +14,237 @@
   var day = hero.querySelector('[data-hero-day]');
   var moment = hero.querySelector('[data-hero-moment]');
   var style = hero.querySelector('[data-hero-style]');
+  var status = hero.querySelector('[data-hero-status]');
   var announcer = hero.querySelector('[data-hero-announcer]');
-  if (!video || tabs.length !== 7 || !motion || !day || !style || !moment || !count) return;
+  if (!video || tabs.length !== 7 || !motion || !day || !count || !moment || !style) return;
 
-  // Scene boundaries measured against gemini_generated_video_9604232b.mp4.
-  // Slightly offset from the dissolves so labels switch with the new watch.
-  var starts = [0, 1.83, 3.13, 4.34, 5.82, 7.23, 8.76];
-  var fullDuration = 10.0;
+  // Low-motion moments in the supplied Gemini video, in seconds:
+  // Mon 0.67, Tue 2.25, Wed 3.75, Thu 5.21, Fri 6.63, Sat 7.71, Sun 9.13.
+  var stopFrames = [0.667, 2.25, 3.75, 5.208, 6.625, 7.708, 9.125];
+  // Scene boundaries are independent of the destination freeze frames.
+  var boundaries = [0, 1.78, 3.08, 4.46, 5.88, 7.20, 8.65];
   var active = -1;
-  var manualPause = false;
+  var destination = -1;
+  var needWrap = false;
+  var hasWrapped = false;
+  var lastTime = 0;
+  var userPaused = false;
   var inViewport = true;
-  var wasPlaying = false;
-  var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var touchX = null, touchY = null;
+  var animationId = 0;
+  var reducedMotionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var reducedMotion = Boolean(reducedMotionQuery && reducedMotionQuery.matches);
+  var touchX = null;
+  var touchY = null;
 
-  function getIndex(t) {
-    for (var i = starts.length - 1; i >= 0; i--) {
-      if (t >= starts[i]) return i;
+  function indexAt(time) {
+    for (var i = boundaries.length - 1; i >= 0; i--) {
+      if (time >= boundaries[i]) return i;
     }
     return 0;
   }
 
-  function paint(index, announce) {
-    if (active !== index) {
-      active = index;
-      var tab = tabs[index];
-      count.textContent = String(index + 1).padStart(2, '0');
-      day.textContent = tab.getAttribute('data-day') || '';
-      moment.textContent = tab.getAttribute('data-moment') || '';
-      style.textContent = tab.getAttribute('data-style') || '';
-      tabs.forEach(function (item, n) {
-        item.classList.toggle('is-current', n === index);
-        item.setAttribute('aria-pressed', n === index ? 'true' : 'false');
-      });
-    }
-    if (announce && announcer) {
-      announcer.textContent = day.textContent + ': ' + style.textContent + '. ' + moment.textContent;
-    }
+  function safeTime(index) {
+    var limit = Number.isFinite(video.duration) && video.duration > 0 ? video.duration : 10;
+    return Math.min(stopFrames[index], Math.max(0, limit - (1 / 24)));
   }
 
-  function updateProgress() {
-    var t = Math.min(Math.max(video.currentTime || 0, 0), fullDuration - 0.001);
-    var idx = getIndex(t);
-    paint(idx, false);
-    var end = idx === starts.length - 1 ? fullDuration : starts[idx + 1];
-    var progress = Math.max(0, Math.min(1, (t - starts[idx]) / (end - starts[idx])));
-    tabs.forEach(function (tab, n) {
-      tab.style.setProperty('--hero-fill', n === idx ? progress : (n < idx ? 1 : 0));
+  function announceSelection() {
+    if (announcer) announcer.textContent = day.textContent + ', ' + style.textContent + '. ' + moment.textContent;
+  }
+
+  function paint(index) {
+    if (index === active) return;
+    active = index;
+    count.textContent = String(index + 1).padStart(2, '0');
+    day.textContent = tabs[index].getAttribute('data-day') || '';
+    style.textContent = tabs[index].getAttribute('data-style') || '';
+    moment.textContent = tabs[index].getAttribute('data-moment') || '';
+    tabs.forEach(function (tab, i) {
+      tab.classList.toggle('is-current', index === i);
+      tab.setAttribute('aria-pressed', index === i ? 'true' : 'false');
     });
   }
 
-  function refreshControl() {
-    var paused = video.paused || manualPause;
+  function refresh() {
+    var paused = video.paused;
+    var movingToDay = destination >= 0 && !paused;
     hero.classList.toggle('is-playing', !paused);
+    tabs.forEach(function (tab, i) {
+      tab.classList.toggle('is-target', movingToDay && i === destination);
+    });
+    if (status) {
+      status.textContent = movingToDay ? 'Moving to ' + (tabs[destination].getAttribute('data-day') || '') :
+        paused ? 'Paused on this look' : 'Playing the week';
+    }
     motion.setAttribute('aria-pressed', paused ? 'true' : 'false');
     motion.setAttribute('aria-label', paused ? 'Play the weekly video' : 'Pause the weekly video');
     if (motionLabel) motionLabel.textContent = paused ? 'Play' : 'Pause';
   }
 
-  function playIfAllowed() {
-    if (manualPause || !inViewport || document.hidden || reducedMotion) return;
-    var promise = video.play();
-    if (promise && typeof promise.catch === 'function') {
-      promise.catch(function () { refreshControl(); });
+  function stopAtDestination() {
+    if (destination < 0) return;
+    var i = destination;
+    destination = -1;
+    video.pause();
+    video.currentTime = safeTime(i); // Exact settled frame, not a moving dissolve.
+    lastTime = safeTime(i);
+    paint(i);
+    userPaused = true;
+    refresh();
+    announceSelection();
+  }
+
+  function tick() {
+    animationId = 0;
+    var time = video.currentTime || 0;
+    if (time + 0.25 < lastTime) hasWrapped = true;
+    lastTime = time;
+
+    if (destination >= 0) {
+      var stop = safeTime(destination);
+      // Never pause on a dissolve or a moving pose: stop only at the recorded freeze frame.
+      if ((!needWrap || hasWrapped) && time >= stop - 0.018) {
+        stopAtDestination();
+      } else {
+        paint(indexAt(time));
+      }
+    } else if (!video.paused) {
+      paint(indexAt(time));
+    }
+    if (!video.paused && animationId === 0) {
+      animationId = window.requestAnimationFrame(tick);
     }
   }
 
-  function choose(index) {
-    manualPause = true;
-    video.pause();
-    // Seek past the dissolve to a clean frame featuring the selected watch.
-    var end = index === 6 ? fullDuration : starts[index + 1];
-    video.currentTime = starts[index] + Math.min(0.37, Math.max(0.1, (end - starts[index]) / 3));
-    paint(index, true);
-    updateProgress();
-    refreshControl();
+  function startTicker() {
+    if (!animationId) animationId = window.requestAnimationFrame(tick);
   }
 
-  tabs.forEach(function (tab, i) {
-    tab.addEventListener('click', function () { choose(i); });
+  function seekAndHold(index) {
+    // A reduced-motion preference skips the intervening video animation.
+    destination = -1;
+    video.pause();
+    video.currentTime = safeTime(index);
+    lastTime = safeTime(index);
+    paint(index);
+    userPaused = true;
+    refresh();
+    announceSelection();
+  }
+
+  function selectDay(index) {
+    if (index === active && destination === -1) {
+      seekAndHold(index);
+      return;
+    }
+    if (reducedMotion) {
+      seekAndHold(index);
+      return;
+    }
+    var stop = safeTime(index);
+    var now = video.currentTime || 0;
+    needWrap = now >= stop - 0.018;
+    hasWrapped = false;
+    destination = index;
+    userPaused = false;
+    lastTime = now;
+
+    // Play through the real outfit/watch transitions. If target is behind us,
+    // let the source loop naturally instead of reverse-seeking through the footage.
+    var playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(function () { seekAndHold(index); });
+    }
+    startTicker();
+    refresh();
+  }
+
+  function play() {
+    destination = -1;
+    needWrap = false;
+    hasWrapped = false;
+    userPaused = false;
+    if (reducedMotion) return;
+    var playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(function () { refresh(); });
+    }
+    startTicker();
+    refresh();
+  }
+
+  tabs.forEach(function (tab, index) {
+    tab.addEventListener('click', function () { selectDay(index); });
   });
+
   motion.addEventListener('click', function () {
     if (video.paused) {
-      manualPause = false;
-      playIfAllowed();
+      play();
     } else {
-      manualPause = true;
+      destination = -1;
+      userPaused = true;
       video.pause();
+      refresh();
     }
-    refreshControl();
   });
 
-  video.addEventListener('timeupdate', updateProgress);
-  video.addEventListener('seeked', updateProgress);
-  video.addEventListener('play', refreshControl);
-  video.addEventListener('pause', refreshControl);
+  video.addEventListener('play', function () { startTicker(); refresh(); });
+  video.addEventListener('pause', refresh);
+  video.addEventListener('seeked', function () {
+    if (destination === -1) {
+      paint(indexAt(video.currentTime || 0));
+      refresh();
+    }
+  });
   video.addEventListener('loadedmetadata', function () {
-    if (Number.isFinite(video.duration) && video.duration > 0) fullDuration = video.duration;
-    if (reducedMotion) video.pause();
-    updateProgress();
-    refreshControl();
+    if (reducedMotion) seekAndHold(0);
+    else { paint(indexAt(video.currentTime || 0)); refresh(); }
   });
   video.addEventListener('error', function () {
-    video.pause();
-    manualPause = true;
-    refreshControl();
+    destination = -1;
+    userPaused = true;
+    refresh();
   });
+
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) {
-      wasPlaying = !video.paused;
       video.pause();
-    } else if (wasPlaying) {
-      playIfAllowed();
-      wasPlaying = false;
+    } else if (!userPaused && inViewport && !reducedMotion) {
+      // Retain an active navigation destination after the user changes tabs.
+      var promise = video.play();
+      if (promise && promise.catch) promise.catch(function () {});
+      startTicker();
     }
-    refreshControl();
+    refresh();
   });
+
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
       if (!entries.length) return;
       inViewport = entries[0].isIntersecting;
       if (!inViewport) {
-        wasPlaying = !video.paused;
         video.pause();
-      } else if (wasPlaying) {
-        playIfAllowed();
-        wasPlaying = false;
+      } else if (!userPaused && !document.hidden && !reducedMotion) {
+        var promise = video.play();
+        if (promise && promise.catch) promise.catch(function () {});
+        startTicker();
       }
     }, {threshold: 0.1}).observe(hero);
   }
+
+  if (reducedMotionQuery) {
+    var updateMotionPreference = function (event) {
+      reducedMotion = event.matches;
+      if (reducedMotion) seekAndHold(Math.max(0, active));
+    };
+    if (reducedMotionQuery.addEventListener) reducedMotionQuery.addEventListener('change', updateMotionPreference);
+    else if (reducedMotionQuery.addListener) reducedMotionQuery.addListener(updateMotionPreference);
+  }
+
   hero.addEventListener('touchstart', function (event) {
-    if (event.touches && event.touches.length === 1) {
-      touchX = event.touches[0].clientX;
-      touchY = event.touches[0].clientY;
-    }
+    if (!event.touches || event.touches.length !== 1) return;
+    touchX = event.touches[0].clientX;
+    touchY = event.touches[0].clientY;
   }, {passive:true});
   hero.addEventListener('touchend', function (event) {
     if (touchX === null || !event.changedTouches || !event.changedTouches.length) return;
@@ -156,22 +253,19 @@
     touchX = null;
     touchY = null;
     if (Math.abs(dx) > 65 && Math.abs(dx) > Math.abs(dy) * 1.4) {
-      choose((Math.max(active, 0) + (dx < 0 ? 1 : 6)) % 7);
+      selectDay((Math.max(0, active) + (dx < 0 ? 1 : 6)) % 7);
     }
   }, {passive:true});
   hero.addEventListener('keydown', function (event) {
     if (!event.target.closest('[data-hero-tab]')) return;
     if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
     event.preventDefault();
-    var next = (Math.max(active, 0) + (event.key === 'ArrowRight' ? 1 : 6)) % 7;
-    choose(next);
-    tabs[next].focus();
+    var target = (Math.max(0, active) + (event.key === 'ArrowRight' ? 1 : 6)) % 7;
+    selectDay(target);
+    tabs[target].focus();
   });
-  if (reducedMotion) {
-    manualPause = true;
-    video.pause();
-  }
-  paint(0, false);
-  refreshControl();
-  playIfAllowed();
+
+  paint(0);
+  if (reducedMotion) seekAndHold(0);
+  else { startTicker(); refresh(); }
 })();
