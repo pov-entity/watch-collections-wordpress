@@ -190,3 +190,52 @@
   .week-hero__cta,.week-hero__secondary,.week-hero__tab{transition:none!important}
   .week-hero__motion{display:none}
 }
+
+
+/* Weekly video hero: the large watch is already in the source footage.
+   The editorial label stays below it, not over a duplicated watch image. */
+.week-hero--video .week-hero__video {
+  position:absolute;inset:0;width:100%;height:100%;
+  display:block;object-fit:cover;object-position:center center;
+}
+.week-hero--video .week-hero__shade {
+  background:linear-gradient(90deg,rgba(8,19,34,.86) 0%,rgba(8,19,34,.72) 22%,rgba(8,19,34,.28) 40%,rgba(8,19,34,0) 61%),linear-gradient(0deg,rgba(8,19,34,.82) 0%,transparent 26%);
+}
+.week-hero--video .week-hero__day-card {
+  min-width:220px;max-width:310px;
+  margin-bottom:22px;padding:16px 18px 17px;
+  background:linear-gradient(120deg,rgba(9,20,37,.82),rgba(9,20,37,.42));
+  border-left:1px solid rgba(215,188,150,.65);
+  backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
+  text-align:left;text-shadow:0 1px 6px rgba(0,0,0,.2);
+}
+.week-hero--video .week-hero__day-count {color:#E0DDDA;letter-spacing:.18em;margin-bottom:4px;}
+.week-hero--video .week-hero__current {font-size:clamp(1.8rem,2.6vw,2.5rem);margin:0 0 7px;}
+.week-hero--video .week-hero__watch {justify-content:flex-start;margin:0 0 9px;color:#F8E4CC;line-height:1.4;font-size:.66rem;letter-spacing:.09em;}
+.week-hero--video .week-hero__moment {font-size:.78rem;color:#F0F1F2;line-height:1.5;max-width:28ch;}
+.week-hero--video .week-hero__tab-track span {animation:none!important;transform:scaleX(var(--hero-fill,0));transition:none;}
+@media(max-width:850px){
+  .week-hero--video{min-height:850px}
+  .week-hero--video .week-hero__visual{inset:255px 0 180px;}
+  .week-hero--video .week-hero__video{object-fit:contain;object-position:center center;}
+  .week-hero--video .week-hero__shade{background:linear-gradient(180deg,#102238 0%,transparent 12%,transparent 84%,#102238 100%);}
+  .week-hero--video .week-hero__layout{grid-template-rows:auto minmax(280px,1fr) auto auto;padding-top:98px}
+  .week-hero--video .week-hero__copy h1{font-size:clamp(2.75rem,7vw,4rem);margin-bottom:11px}
+  .week-hero--video .week-hero__copy h1 em{display:inline}
+  .week-hero--video .week-hero__statement{margin-bottom:5px}
+  .week-hero--video .week-hero__description{margin-bottom:12px}
+  .week-hero--video .week-hero__day-card{margin:0 0 12px;padding:12px 14px;justify-self:end;max-width:245px;background:rgba(8,19,34,.84);}
+}
+@media(max-width:480px){
+  .week-hero--video{min-height:820px}
+  .week-hero--video .week-hero__visual{inset:325px 0 177px;}
+  .week-hero--video .week-hero__layout{grid-template-rows:auto minmax(270px,1fr) auto auto;padding-top:106px;}
+  .week-hero--video .week-hero__copy h1{font-size:clamp(2.35rem,9vw,3.15rem)}
+  .week-hero--video .week-hero__copy h1 em{display:block}
+  .week-hero--video .week-hero__day-card{max-width:230px;margin-bottom:8px;}
+  .week-hero--video .week-hero__current{font-size:1.5rem;}
+  .week-hero--video .week-hero__moment{font-size:.69rem;}
+}
+@media(prefers-reduced-motion:reduce){
+  .week-hero--video .week-hero__tab-track span{transition:none!important}
+}
