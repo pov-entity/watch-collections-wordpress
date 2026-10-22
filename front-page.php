@@ -29,9 +29,10 @@ foreach ( $week_scenes as &$week_scene ) {
 	}
 }
 unset( $week_scene );
+$hero_video_url = watch_collections_hero_video_url();
 ?>
 <main id="main">
-	<section class="week-hero week-hero--interactive" aria-labelledby="hero-title" data-week-hero>
+	<section class="week-hero week-hero--interactive<?php echo $hero_video_url ? '' : ' has-video-error'; ?>" aria-labelledby="hero-title" data-week-hero>
 		<div class="week-hero__experience">
 			<div class="week-hero__film" aria-hidden="true">
 				<div class="week-hero__fallback-scenes">
@@ -42,6 +43,7 @@ unset( $week_scene );
 				<video
 					class="week-hero__video"
 					data-hero-video
+				data-video-available="<?php echo $hero_video_url ? '1' : '0'; ?>"
 					autoplay
 					muted
 					loop
@@ -51,7 +53,9 @@ unset( $week_scene );
 					width="1280"
 					height="720"
 				>
-					<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/hero-days/week-story.mp4' ); ?>" type="video/mp4">
+					<?php if ( $hero_video_url ) : ?>
+					<source src="<?php echo esc_url( $hero_video_url ); ?>" type="video/mp4">
+				<?php endif; ?>
 				</video>
 				<div class="week-hero__film-shade"></div>
 			</div>
