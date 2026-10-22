@@ -35,7 +35,7 @@
   var reducedMotion = Boolean(reducedMotionQuery && reducedMotionQuery.matches);
   var touchX = null;
   var touchY = null;
-  var videoError = false;
+  var videoError = video.getAttribute('data-video-available') === '0';
   var fallbackImages = Array.prototype.slice.call(hero.querySelectorAll('[data-hero-fallback-image]'));
   var fallbackTimer = 0;
 
@@ -87,14 +87,14 @@
   }
 
   function refresh() {
-    var paused = video.paused;
+    var paused = videoError ? userPaused : video.paused;
     var movingToDay = destination >= 0 && !paused;
     hero.classList.toggle('is-playing', !paused);
     tabs.forEach(function (tab, i) {
       tab.classList.toggle('is-target', movingToDay && i === destination);
     });
     if (status) {
-      status.textContent = movingToDay ? 'Moving to ' + (tabs[destination].getAttribute('data-day') || '') :
+      status.textContent = videoError ? 'Still preview — video file pending' : movingToDay ? 'Moving to ' + (tabs[destination].getAttribute('data-day') || '') :
         paused ? 'Paused on this look' : 'Playing the week';
     }
     motion.setAttribute('aria-pressed', paused ? 'true' : 'false');
@@ -311,6 +311,11 @@
   });
 
   paint(0);
-  if (reducedMotion) seekAndHold(0);
+  if (videoError) {
+    userPaused = reducedMotion;
+    showFallback(0);
+    runFallback();
+    refresh();
+  } else if (reducedMotion) seekAndHold(0);
   else { startTicker(); refresh(); }
 })();
