@@ -1,5 +1,16 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
+## Seven-day interactive video hero — October 2026
+
+The homepage now displays a full-width editorial video area with a dark-navy information rail on the right. Seven keyboard-accessible day buttons play **forward through the original footage** to a measured moment when the model has stopped moving, then freeze on the selected look. The manual pause button finishes at the next settled pose. On narrow screens the rail stacks below the video.
+
+**Required to see moving footage:** the video is not stored in GitHub because the GitHub connector cannot ingest this binary upload. In WordPress, go to **Appearance → Customize → Homepage hero video**, choose or upload `gemini_generated_video_9604232b.mp4` via the Media Library, then **Publish**. Alternatively, copy the MP4 to `assets/hero-days/week-story.mp4` in the theme directory before installing or re-importing the theme. Until an MP4 exists, the hero deliberately falls back to the seven existing still images.
+
+**Playground installation:** importing the GitHub repo updates the theme code but does not pull old Playground instances forward. Create a fresh Playground From GitHub import or update the installed theme files manually. WordPress hosting must be configured separately. No live production store or payment functionality is implied by merging theme code.
+
+**Hold frames:** Monday 0.667s, Tuesday 2.250s, Wednesday 3.750s, Thursday 5.208s, Friday 6.625s, Saturday 7.708s, Sunday 9.125s. Exact stillness depends on the approved 10-second, 24fps original file; replacing it with different footage requires recalibrating the timings. AI-generated images feature recognizable luxury-watch brands as editorial concepts and must not be misrepresented as watches offered by this store.
+
+
 **Status:** Prototype v0.8.2. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
 
 ## Dial-picture style selection — v0.8.2

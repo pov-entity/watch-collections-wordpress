@@ -138,3 +138,40 @@ function watch_collections_site_icon_tags( $tags ) {
 	return $tags;
 }
 add_filter( 'site_icon_meta_tags', 'watch_collections_site_icon_tags' );
+
+
+/**
+ * Hero media uses a WordPress Media Library upload if selected. The bundled
+ * theme MP4 is a secondary option; no external CDN or merchant account needed.
+ */
+function watch_collections_hero_video_url() {
+	$media_id = absint( get_theme_mod( 'watch_collections_hero_video_id', 0 ) );
+	if ( $media_id ) {
+		$mime = get_post_mime_type( $media_id );
+		$url  = $mime && 0 === strpos( $mime, 'video/' ) ? wp_get_attachment_url( $media_id ) : false;
+		if ( $url ) {
+			return $url;
+		}
+	}
+	$asset = '/assets/hero-days/week-story.mp4';
+	return file_exists( get_template_directory() . $asset ) ? get_template_directory_uri() . $asset : '';
+}
+
+function watch_collections_register_hero_video_customizer( $customize ) {
+	$customize->add_section( 'watch_collections_hero_media', array(
+		'title'       => __( 'Homepage hero video', 'watch-collections' ),
+		'description' => __( 'Choose the approved seven-day MP4 from your Media Library. When no video is selected, the existing daily photos are shown.', 'watch-collections' ),
+		'priority'    => 32,
+	) );
+	$customize->add_setting( 'watch_collections_hero_video_id', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+		'transport'         => 'refresh',
+	) );
+	$customize->add_control( new WP_Customize_Media_Control( $customize, 'watch_collections_hero_video_id', array(
+		'label'     => __( 'Weekly fashion film (MP4)', 'watch-collections' ),
+		'section'   => 'watch_collections_hero_media',
+		'mime_type' => 'video',
+	) ) );
+}
+add_action( 'customize_register', 'watch_collections_register_hero_video_customizer' );
