@@ -253,7 +253,7 @@
 }
 .week-hero--interactive .week-hero__video{
   position:absolute;inset:0;width:100%;height:100%;display:block;
-  object-fit:cover;object-position:center center;
+  object-fit:contain;object-position:center center;
 }
 .week-hero--interactive .week-hero__film-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(7,17,31,.26),transparent 42%,rgba(7,17,31,.07))}
 .week-hero--interactive .week-hero__rail{
@@ -372,4 +372,17 @@
 }
 @media(prefers-reduced-motion:reduce){
   .week-hero--interactive .week-hero__tab{transition:none!important}
+}
+
+/* At tablet widths the control rail stacks below the film; no crushed watch crop. */
+@media(min-width:751px) and (max-width:950px){
+  .week-hero--interactive .week-hero__experience{
+    grid-template-columns:minmax(0,1fr);min-height:0;
+  }
+  .week-hero--interactive .week-hero__film{aspect-ratio:16/9;min-height:0}
+  .week-hero--interactive .week-hero__rail{padding:32px 5vw}
+  .week-hero--interactive .week-hero__selector{grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+  .week-hero--interactive .week-hero__tab{display:flex;flex-direction:column;min-height:58px;padding:7px 0;border:1px solid rgba(255,255,255,.16);border-radius:3px}
+  .week-hero--interactive .week-hero__tab-indicator{display:none}
+  .week-hero--interactive .week-hero__rail-actions{max-width:500px}
 }
