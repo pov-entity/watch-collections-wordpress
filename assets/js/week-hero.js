@@ -35,6 +35,26 @@
   var reducedMotion = Boolean(reducedMotionQuery && reducedMotionQuery.matches);
   var touchX = null;
   var touchY = null;
+  var videoError = false;
+  var fallbackImages = Array.prototype.slice.call(hero.querySelectorAll('[data-hero-fallback-image]'));
+  var fallbackTimer = 0;
+
+  function showFallback(index) {
+    fallbackImages.forEach(function (img, i) { img.classList.toggle('is-active', i === index); });
+  }
+
+  function stopFallback() {
+    if (fallbackTimer) { window.clearInterval(fallbackTimer); fallbackTimer = 0; }
+  }
+
+  function runFallback() {
+    stopFallback();
+    if (userPaused || !inViewport || document.hidden || reducedMotion || !videoError) return;
+    fallbackTimer = window.setInterval(function () {
+      paint((Math.max(0, active) + 1) % 7);
+      showFallback(active);
+    }, 4100);
+  }
 
   function indexAt(time) {
     for (var i = boundaries.length - 1; i >= 0; i--) {
@@ -55,6 +75,7 @@
   function paint(index) {
     if (index === active) return;
     active = index;
+    if (videoError) showFallback(index);
     count.textContent = String(index + 1).padStart(2, '0');
     day.textContent = tabs[index].getAttribute('data-day') || '';
     style.textContent = tabs[index].getAttribute('data-style') || '';
@@ -133,6 +154,14 @@
   }
 
   function selectDay(index) {
+    if (videoError) {
+      userPaused = true;
+      stopFallback();
+      paint(index);
+      if (status) status.textContent = 'Still preview — video file pending';
+      announceSelection();
+      return;
+    }
     var now = video.currentTime || 0;
     var stop = safeTime(index);
     // If this day's transition is still underway, play to its settled frame
@@ -158,6 +187,7 @@
   }
 
   function play() {
+    if (videoError) { userPaused = false; runFallback(); refresh(); return; }
     destination = -1;
     needWrap = false;
     hasWrapped = false;
@@ -176,6 +206,15 @@
   });
 
   motion.addEventListener('click', function () {
+    if (videoError) {
+      userPaused = !userPaused;
+      if (userPaused) stopFallback(); else runFallback();
+      if (status) status.textContent = userPaused ? 'Still preview paused' : 'Still preview — video pending';
+      if (motionLabel) motionLabel.textContent = userPaused ? 'Play' : 'Pause';
+      motion.setAttribute('aria-label', userPaused ? 'Play the still preview' : 'Pause the still preview');
+      motion.setAttribute('aria-pressed', userPaused ? 'true' : 'false');
+      return;
+    }
     if (video.paused) {
       play();
     } else {
@@ -200,13 +239,19 @@
   });
   video.addEventListener('error', function () {
     destination = -1;
-    userPaused = true;
-    refresh();
+    videoError = true;
+    hero.classList.add('has-video-error');
+    showFallback(Math.max(0, active));
+    if (status) status.textContent = 'Still preview — video file pending';
+    if (motionLabel) motionLabel.textContent = 'Pause';
+    runFallback();
   });
 
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) {
+      if (videoError) stopFallback();
       video.pause();
+    } else if (videoError) { runFallback();
     } else if (!userPaused && inViewport && !reducedMotion) {
       // Retain an active navigation destination after the user changes tabs.
       var promise = video.play();
@@ -221,7 +266,9 @@
       if (!entries.length) return;
       inViewport = entries[0].isIntersecting;
       if (!inViewport) {
+        if (videoError) stopFallback();
         video.pause();
+      } else if (videoError) { runFallback();
       } else if (!userPaused && !document.hidden && !reducedMotion) {
         var promise = video.play();
         if (promise && promise.catch) promise.catch(function () {});
