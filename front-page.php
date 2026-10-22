@@ -31,62 +31,61 @@ foreach ( $week_scenes as &$week_scene ) {
 unset( $week_scene );
 ?>
 <main id="main">
-	<section class="week-hero week-hero--video" aria-labelledby="hero-title" data-week-hero>
-		<div class="week-hero__visual" aria-hidden="true">
-			<video
-				class="week-hero__video"
-				data-hero-video
-				autoplay
-				muted
-				loop
-				playsinline
-				preload="metadata"
-				poster="<?php echo esc_url( $week_scenes[0]['image'] ); ?>"
-				width="1280"
-				height="720"
-			>
-				<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/hero-days/week-story.mp4' ); ?>" type="video/mp4">
-			</video>
-			<div class="week-hero__shade"></div>
-		</div>
+	<section class="week-hero week-hero--interactive" aria-labelledby="hero-title" data-week-hero>
+		<div class="week-hero__experience">
+			<div class="week-hero__film" aria-hidden="true">
+				<video
+					class="week-hero__video"
+					data-hero-video
+					autoplay
+					muted
+					loop
+					playsinline
+					preload="auto"
+					poster="<?php echo esc_url( $week_scenes[0]['image'] ); ?>"
+					width="1280"
+					height="720"
+				>
+					<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/hero-days/week-story.mp4' ); ?>" type="video/mp4">
+				</video>
+				<div class="week-hero__film-shade"></div>
+			</div>
 
-		<div class="container week-hero__layout">
-			<div class="week-hero__copy">
-				<p class="week-hero__eyebrow"><?php esc_html_e( 'A COLLECTION FOR REAL LIFE', 'watch-collections' ); ?></p>
+			<div class="week-hero__rail">
+				<p class="week-hero__eyebrow"><?php esc_html_e( 'THE SEVEN-DAY EDIT', 'watch-collections' ); ?></p>
 				<h1 id="hero-title"><?php esc_html_e( 'Seven days.', 'watch-collections' ); ?> <em><?php esc_html_e( 'Seven sides of you.', 'watch-collections' ); ?></em></h1>
-				<p class="week-hero__statement"><?php esc_html_e( 'A watch for every moment. A collection that’s yours.', 'watch-collections' ); ?></p>
-				<p class="week-hero__description"><?php esc_html_e( 'Choose the styles that suit your days. Bring them together in one collection, built around you.', 'watch-collections' ); ?></p>
-				<div class="week-hero__actions">
-					<a href="<?php echo esc_url( watch_collections_studio_url() ); ?>" class="week-hero__cta"><?php esc_html_e( 'Explore the collections', 'watch-collections' ); ?><span aria-hidden="true">↗</span></a>
-					<a href="#how-it-works" class="week-hero__secondary"><?php esc_html_e( 'How it works', 'watch-collections' ); ?><span aria-hidden="true">↘</span></a>
+				<p class="week-hero__rail-intro"><?php esc_html_e( 'A different look for every day. One collection, entirely your own.', 'watch-collections' ); ?></p>
+
+				<div class="week-hero__day-card" aria-hidden="true">
+					<div class="week-hero__day-count"><span data-hero-count>01</span><span> / 07</span></div>
+					<p class="week-hero__current" data-hero-day><?php echo esc_html( $week_scenes[0]['day'] ); ?></p>
+					<p class="week-hero__watch"><span class="week-hero__watch-line"></span><span data-hero-style><?php echo esc_html( $week_scenes[0]['style'] ); ?></span></p>
+					<p class="week-hero__moment" data-hero-moment><?php echo esc_html( $week_scenes[0]['scene'] ); ?></p>
+					<p class="week-hero__hold-status" data-hero-status><?php esc_html_e( 'Playing the week', 'watch-collections' ); ?></p>
 				</div>
-			</div>
 
-			<div class="week-hero__day-card" aria-hidden="true">
-				<div class="week-hero__day-count"><span data-hero-count>01</span><span> / 07</span></div>
-				<p class="week-hero__current" data-hero-day><?php echo esc_html( $week_scenes[0]['day'] ); ?></p>
-				<p class="week-hero__watch"><span class="week-hero__watch-line"></span><span data-hero-style><?php echo esc_html( $week_scenes[0]['style'] ); ?></span></p>
-				<p class="week-hero__moment" data-hero-moment><?php echo esc_html( $week_scenes[0]['scene'] ); ?></p>
-			</div>
-
-			<div class="week-hero__bottom">
-				<div class="week-hero__selector" role="group" aria-label="<?php esc_attr_e( 'Choose a day of the week', 'watch-collections' ); ?>">
+				<p class="week-hero__select-title"><?php esc_html_e( 'CHOOSE A DAY TO PAUSE', 'watch-collections' ); ?></p>
+				<div class="week-hero__selector" role="group" aria-label="<?php esc_attr_e( 'Choose a day to play to and pause', 'watch-collections' ); ?>">
 					<?php foreach ( $week_scenes as $index => $scene ) : ?>
-						<button type="button" class="week-hero__tab<?php echo 0 === $index ? ' is-current' : ''; ?>" data-hero-tab="<?php echo esc_attr( $index ); ?>" data-day="<?php echo esc_attr( $scene['day'] ); ?>" data-moment="<?php echo esc_attr( $scene['scene'] ); ?>" data-style="<?php echo esc_attr( $scene['style'] ); ?>" aria-pressed="<?php echo 0 === $index ? 'true' : 'false'; ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Show %s outfit and watch', 'watch-collections' ), $scene['day'] ) ); ?>">
-							<span class="week-hero__tab-number">0<?php echo esc_html( $index + 1 ); ?></span>
-							<span class="week-hero__tab-name"><?php echo esc_html( $scene['short'] ); ?></span>
-							<span class="week-hero__tab-track"><span></span></span>
+						<button type="button" class="week-hero__tab<?php echo 0 === $index ? ' is-current' : ''; ?>" data-hero-tab="<?php echo esc_attr( $index ); ?>" data-day="<?php echo esc_attr( $scene['day'] ); ?>" data-moment="<?php echo esc_attr( $scene['scene'] ); ?>" data-style="<?php echo esc_attr( $scene['style'] ); ?>" aria-pressed="<?php echo 0 === $index ? 'true' : 'false'; ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Play to %s and pause on the watch', 'watch-collections' ), $scene['day'] ) ); ?>">
+							<span class="week-hero__tab-number"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></span>
+							<span class="week-hero__tab-name"><?php echo esc_html( $scene['day'] ); ?></span>
+							<span class="week-hero__tab-indicator" aria-hidden="true"></span>
 						</button>
 					<?php endforeach; ?>
 				</div>
-				<button type="button" class="week-hero__motion" data-hero-motion aria-pressed="false" aria-label="<?php esc_attr_e( 'Pause the weekly video', 'watch-collections' ); ?>">
-					<span class="week-hero__pause-icon" aria-hidden="true"></span>
-					<span data-hero-motion-label><?php esc_html_e( 'Pause', 'watch-collections' ); ?></span>
-				</button>
+
+				<div class="week-hero__rail-actions">
+					<a href="<?php echo esc_url( watch_collections_studio_url() ); ?>" class="week-hero__cta"><?php esc_html_e( 'Build your collection', 'watch-collections' ); ?><span aria-hidden="true">↗</span></a>
+					<button type="button" class="week-hero__motion" data-hero-motion aria-pressed="false" aria-label="<?php esc_attr_e( 'Pause the weekly video', 'watch-collections' ); ?>">
+						<span class="week-hero__pause-icon" aria-hidden="true"></span>
+						<span data-hero-motion-label><?php esc_html_e( 'Pause', 'watch-collections' ); ?></span>
+					</button>
+				</div>
+				<p class="week-hero__preview-note"><?php esc_html_e( 'AI styling concepts. The luxury-branded watches in this video are illustrative, not products offered for sale.', 'watch-collections' ); ?></p>
 			</div>
-			<p class="week-hero__preview-note"><?php esc_html_e( 'AI-generated editorial styling concepts. Featured watch brands are illustrative and are not offered for sale; final catalog imagery will show the actual products.', 'watch-collections' ); ?></p>
-			<p class="screen-reader-text" role="status" aria-live="polite" aria-atomic="true" data-hero-announcer></p>
 		</div>
+		<p class="screen-reader-text" role="status" aria-live="polite" aria-atomic="true" data-hero-announcer></p>
 	</section>
 
 
