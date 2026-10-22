@@ -34,6 +34,11 @@ unset( $week_scene );
 	<section class="week-hero week-hero--interactive" aria-labelledby="hero-title" data-week-hero>
 		<div class="week-hero__experience">
 			<div class="week-hero__film" aria-hidden="true">
+				<div class="week-hero__fallback-scenes">
+					<?php foreach ( $week_scenes as $index => $scene ) : ?>
+						<img class="week-hero__fallback-image<?php echo 0 === $index ? ' is-active' : ''; ?>" data-hero-fallback-image="<?php echo esc_attr( $index ); ?>" src="<?php echo esc_url( $scene['image'] ); ?>" alt="" loading="<?php echo 0 === $index ? 'eager' : 'lazy'; ?>" decoding="async" width="1600" height="900">
+					<?php endforeach; ?>
+				</div>
 				<video
 					class="week-hero__video"
 					data-hero-video
