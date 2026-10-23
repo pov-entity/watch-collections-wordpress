@@ -1,5 +1,9 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
+## Centered mobile assembly — v0.8.14
+
+Live mobile review of v0.8.13 revealed the existing full-bleed figure combined grid centering with a second translate, shifting the assembly left. The figure now expands by the actual container gutters and uses matching negative margins, keeping both edges aligned with the viewport at mobile widths, including previews with scrollbars. The v0.8.13 visual refinements remain unchanged. Verify the heading-to-assembly transition and both edges after cache purge.
+
 ## Restrained invitation and closer assembly — v0.8.13
 
 The collection action keeps “Choose your first watch” with a quieter supporting label, a smooth satin navy surface, one champagne edge, and a shorter profile. The visible grain and inset frame have been removed. The existing contact reflection, controlled press, keyboard focus and reduced-motion support remain.
