@@ -43,7 +43,7 @@ $hero_video_url = watch_collections_hero_video_url();
 				<video
 					class="week-hero__video"
 					data-hero-video
-				data-video-available="<?php echo $hero_video_url ? '1' : '0'; ?>"
+					data-video-available="<?php echo $hero_video_url ? '1' : '0'; ?>"
 					autoplay
 					muted
 					loop
@@ -62,23 +62,21 @@ $hero_video_url = watch_collections_hero_video_url();
 
 			<div class="week-hero__rail">
 				<p class="week-hero__eyebrow"><?php esc_html_e( 'THE SEVEN-DAY EDIT', 'watch-collections' ); ?></p>
-				<h1 id="hero-title"><?php esc_html_e( 'Seven days.', 'watch-collections' ); ?> <em><?php esc_html_e( 'Seven sides of you.', 'watch-collections' ); ?></em></h1>
-				<p class="week-hero__rail-intro"><?php esc_html_e( 'A different look for every day. One collection, entirely your own.', 'watch-collections' ); ?></p>
 
-				<div class="week-hero__day-card" aria-hidden="true">
-					<div class="week-hero__day-count"><span data-hero-count>01</span><span> / 07</span></div>
-					<p class="week-hero__current" data-hero-day><?php echo esc_html( $week_scenes[0]['day'] ); ?></p>
+				<div class="week-hero__day-card">
+					<div class="week-hero__day-count" aria-hidden="true"><span data-hero-count>01</span><span> / 07</span></div>
+					<h1 id="hero-title" class="week-hero__current" data-hero-day><?php echo esc_html( $week_scenes[0]['day'] ); ?></h1>
 					<p class="week-hero__watch"><span class="week-hero__watch-line"></span><span data-hero-style><?php echo esc_html( $week_scenes[0]['style'] ); ?></span></p>
 					<p class="week-hero__moment" data-hero-moment><?php echo esc_html( $week_scenes[0]['scene'] ); ?></p>
-					<p class="week-hero__hold-status" data-hero-status><?php esc_html_e( 'Playing the week', 'watch-collections' ); ?></p>
+					<p class="screen-reader-text" aria-hidden="true" data-hero-status><?php esc_html_e( 'Playing the week', 'watch-collections' ); ?></p>
 				</div>
 
-				<p class="week-hero__select-title"><?php esc_html_e( 'CHOOSE A DAY TO PAUSE', 'watch-collections' ); ?></p>
+				<p class="screen-reader-text"><?php esc_html_e( 'Choose a day to pause', 'watch-collections' ); ?></p>
 				<div class="week-hero__selector" role="group" aria-label="<?php esc_attr_e( 'Choose a day to play to and pause', 'watch-collections' ); ?>">
 					<?php foreach ( $week_scenes as $index => $scene ) : ?>
 						<button type="button" class="week-hero__tab<?php echo 0 === $index ? ' is-current' : ''; ?>" data-hero-tab="<?php echo esc_attr( $index ); ?>" data-day="<?php echo esc_attr( $scene['day'] ); ?>" data-moment="<?php echo esc_attr( $scene['scene'] ); ?>" data-style="<?php echo esc_attr( $scene['style'] ); ?>" aria-pressed="<?php echo 0 === $index ? 'true' : 'false'; ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Play to %s and pause on the watch', 'watch-collections' ), $scene['day'] ) ); ?>">
-							<span class="week-hero__tab-number"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></span>
-							<span class="week-hero__tab-name"><?php echo esc_html( $scene['day'] ); ?></span>
+							<span class="week-hero__tab-number" aria-hidden="true"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></span>
+							<span class="week-hero__tab-name"><?php echo esc_html( $scene['short'] ); ?></span>
 							<span class="week-hero__tab-indicator" aria-hidden="true"></span>
 						</button>
 					<?php endforeach; ?>
@@ -91,8 +89,8 @@ $hero_video_url = watch_collections_hero_video_url();
 						<span data-hero-motion-label><?php esc_html_e( 'Pause', 'watch-collections' ); ?></span>
 					</button>
 				</div>
-				<p class="week-hero__preview-note"><?php esc_html_e( 'AI styling concepts. The luxury-branded watches in this video are illustrative, not products offered for sale.', 'watch-collections' ); ?></p>
 			</div>
+			<p class="week-hero__preview-note"><?php esc_html_e( 'AI styling concepts. The luxury-branded watches in this video are illustrative, not products offered for sale.', 'watch-collections' ); ?></p>
 		</div>
 		<p class="screen-reader-text" role="status" aria-live="polite" aria-atomic="true" data-hero-announcer></p>
 	</section>
@@ -267,3 +265,4 @@ $hero_video_url = watch_collections_hero_video_url();
 	</section>
 </main>
 <?php get_footer(); ?>
+

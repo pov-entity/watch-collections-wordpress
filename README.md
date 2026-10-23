@@ -1,8 +1,16 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
+## Transparent left-side hero — v0.8.4
+
+The selected day is now the hero's main heading, with its style and occasion description directly over the film's empty left side. The separate information panel, large introductory headline and card borders have been removed. Seven abbreviated day buttons sit in one row below the description; full day names remain in their accessible labels. The collection link, motion control and illustration disclosure are retained.
+
+On narrow screens, the complete video frame sits above the left-aligned caption and controls, with no separate panel background. Desktop and 375px, 768px and 1024px preview checks found no horizontal overflow. Selecting Wednesday and Sunday paused the original video at 3.750s and 9.125s respectively. The existing transition and pause-point controller is unchanged.
+
+Decision log — 2026-10-23: follow the founder's requested transparent left caption and day selector below it. Preserve the configured media attachment, collection behavior and commerce content. Version 0.8.4 refreshes theme assets and makes the release discoverable through Git Updater. Hosting cron reliability remains a separate task.
+
 ## Seven-day interactive video hero — October 2026
 
-The homepage now displays a full-width editorial video area with a dark-navy information rail on the right. Seven keyboard-accessible day buttons play **forward through the original footage** to a measured moment when the model has stopped moving, then freeze on the selected look. The manual pause button finishes at the next settled pose. On narrow screens the rail stacks below the video.
+The homepage displays a full-width editorial video area with a transparent left-side caption. Seven keyboard-accessible day buttons play **forward through the original footage** to a measured moment when the model has stopped moving, then freeze on the selected look. The manual pause button finishes at the next settled pose. On narrow screens the caption stacks below the video.
 
 **Required to see moving footage:** the video is not stored in GitHub because the GitHub connector cannot ingest this binary upload. In WordPress, go to **Appearance → Customize → Homepage hero video**, choose or upload `gemini_generated_video_9604232b.mp4` via the Media Library, then **Publish**. Alternatively, copy the MP4 to `assets/hero-days/week-story.mp4` in the theme directory before installing or re-importing the theme. Until an MP4 exists, the hero deliberately falls back to the seven existing still images.
 
@@ -11,7 +19,7 @@ The homepage now displays a full-width editorial video area with a dark-navy inf
 **Hold frames:** Monday 0.667s, Tuesday 2.250s, Wednesday 3.750s, Thursday 5.208s, Friday 6.625s, Saturday 7.708s, Sunday 9.125s. Exact stillness depends on the approved 10-second, 24fps original file; replacing it with different footage requires recalibrating the timings. AI-generated images feature recognizable luxury-watch brands as editorial concepts and must not be misrepresented as watches offered by this store.
 
 
-**Status:** Prototype v0.8.2. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
+**Status:** Prototype v0.8.4. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
 
 ## Dial-picture style selection — v0.8.2
 
@@ -244,3 +252,4 @@ Implemented via Google Fonts + `assets/css/typography.css`, queued last after ho
 The logo is not a text font: the header and footer already reference `assets/brand/dialbyday-logo.svg` (the transparent white founder mark), colored white on the homepage hero and navy on light pages. `assets/brand/favicon.svg` also uses the approved navy `#102A4F`. Existing PNG favicon variants may retain a slightly darker background; they should be regenerated from the approved original logo before launch.
 
 **Seeing changes in WordPress Playground:** an existing *saved* Playground instance is not continuously connected to GitHub. Refreshing Safari or clicking Autosaved does not pull the new theme. Open **New → From GitHub**, import `https://github.com/pov-entity/watch-collections-wordpress`, select **Theme** and `/`, and activate it. Under **Appearance → Themes**, confirm Watch Collections **version 0.6.0**. Open the homepage in that *new* Playground. If fonts do not load, temporarily disable blockers and check connection to Google Fonts; fallback typography will still render. Back up any existing content before replacing an old Playground instance.
+
