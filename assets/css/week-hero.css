@@ -250,7 +250,7 @@
 }
 .week-hero--interactive .week-hero__experience{
   position:relative;display:grid;grid-template-columns:minmax(0,1fr);
-  grid-template-rows:minmax(0,1fr) auto;
+  grid-template-rows:minmax(0,1fr);
   min-height:clamp(560px,56.25vw,1080px);width:100%;
 }
 .week-hero--interactive .week-hero__film{
@@ -608,4 +608,43 @@
   .week-hero--interactive .week-hero__day-count {display:none}
   .week-hero--interactive .week-hero__moment {font-size:.56rem;line-height:1.3}
   .week-hero--interactive .week-hero__tab-name {font-size:.54rem}
+}
+
+
+/* A quiet, outlined collection action with a drawn arrow on every device. */
+.week-hero--interactive .week-hero__cta {
+  min-height:52px;
+  padding:8px 10px 8px 20px;
+  gap:14px;
+  border:1px solid rgba(227,196,158,.65);
+  border-radius:999px;
+  background:linear-gradient(120deg,rgba(39,71,105,.55),rgba(11,32,61,.35));
+  color:#f6f2eb;
+  font-size:.76rem;
+  font-weight:600;
+  line-height:1.35;
+  text-decoration:none;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  transition:background .2s,border-color .2s,box-shadow .2s;
+}
+.week-hero--interactive .week-hero__cta>span {
+  display:grid;place-items:center;flex:none;
+  width:30px;height:30px;border-radius:50%;
+  background:#e8d2b7;color:#0b203d;
+}
+.week-hero--interactive .week-hero__cta svg {display:block;width:18px;height:18px}
+.week-hero--interactive .week-hero__cta:hover {
+  background:#1b3c60;color:#fff;border-color:#ecd7bc;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+  transform:none;
+}
+@media(max-width:650px) {
+  .week-hero--interactive .week-hero__rail {padding-bottom:16px}
+  .week-hero--interactive .week-hero__cta {
+    padding-left:18px;font-size:clamp(.69rem,2.8vw,.8rem);gap:10px;
+  }
+  .week-hero--interactive .week-hero__motion {
+    width:52px;height:52px;min-width:52px;min-height:52px;
+    border-color:rgba(227,196,158,.4);
+  }
 }

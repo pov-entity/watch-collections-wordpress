@@ -83,14 +83,13 @@ $hero_video_url = watch_collections_hero_video_url();
 				</div>
 
 				<div class="week-hero__rail-actions">
-					<a href="<?php echo esc_url( watch_collections_studio_url() ); ?>" class="week-hero__cta"><?php esc_html_e( 'Build your collection', 'watch-collections' ); ?><span aria-hidden="true">↗</span></a>
+					<a href="<?php echo esc_url( watch_collections_studio_url() ); ?>" class="week-hero__cta"><?php esc_html_e( 'Build your collection', 'watch-collections' ); ?><span aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a>
 					<button type="button" class="week-hero__motion" data-hero-motion aria-pressed="false" aria-label="<?php esc_attr_e( 'Pause the weekly video', 'watch-collections' ); ?>">
 						<span class="week-hero__pause-icon" aria-hidden="true"></span>
 						<span data-hero-motion-label><?php esc_html_e( 'Pause', 'watch-collections' ); ?></span>
 					</button>
 				</div>
 			</div>
-			<p class="week-hero__preview-note"><?php esc_html_e( 'AI styling concepts. The luxury-branded watches in this video are illustrative, not products offered for sale.', 'watch-collections' ); ?></p>
 		</div>
 		<p class="screen-reader-text" role="status" aria-live="polite" aria-atomic="true" data-hero-announcer></p>
 	</section>
@@ -98,6 +97,7 @@ $hero_video_url = watch_collections_hero_video_url();
 
 	<section class="editorial-quality" id="quality" aria-labelledby="quality-title">
 		<div class="container editorial-quality__layout">
+			<div class="editorial-quality__story">
 			<div class="editorial-quality__intro">
 				<p class="editorial-tag"><span></span><?php esc_html_e( '01 / THE DETAILS', 'watch-collections' ); ?></p>
 				<h2 id="quality-title"><?php esc_html_e( 'A beautiful dial catches your eye.', 'watch-collections' ); ?> <em><?php esc_html_e( 'The details deserve a closer look.', 'watch-collections' ); ?></em></h2>
@@ -112,6 +112,7 @@ $hero_video_url = watch_collections_hero_video_url();
 				<img src="<?php echo esc_url( get_template_directory_uri() . $exploded_asset ); ?>" alt="<?php esc_attr_e( 'Illustrative exploded view of watch components including crystal, bezel, dial, movement, case and bracelet', 'watch-collections' ); ?>" loading="lazy" decoding="async" width="1024" height="1536">
 				<figcaption><?php esc_html_e( 'Illustrative component diagram — specifications vary by model.', 'watch-collections' ); ?></figcaption>
 			</figure>
+			</div>
 			<div class="editorial-quality__details">
 				<article><span>01</span><div><h3><?php esc_html_e( 'Movement', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Quartz, automatic or hand-wound. You should know what powers each model and what care it requires.', 'watch-collections' ); ?></p></div></article>
 				<article><span>02</span><div><h3><?php esc_html_e( 'Materials & finishing', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Understand the case, strap and clasp materials, plus the details that affect feel and appearance.', 'watch-collections' ); ?></p></div></article>
@@ -265,4 +266,5 @@ $hero_video_url = watch_collections_hero_video_url();
 	</section>
 </main>
 <?php get_footer(); ?>
+
 

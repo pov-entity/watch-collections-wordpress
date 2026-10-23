@@ -1,5 +1,13 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
+## Navy mobile introduction — v0.8.8
+
+The mobile hero controls flow into the details introduction on the same navy background. The background fades behind the exploded-watch image into the pale specification area. White body copy and a warm ivory heading accent retain contrast. The day caption remains transparent over the left third of the film.
+
+The founder-requested hero illustration notice has been removed. The collection action is now a restrained outlined pill with an original inline SVG arrow; the pause control remains separate. Product eligibility, pricing, media selection and pause-point behavior are unchanged. The desktop details grid is preserved through a display-contents story wrapper.
+
+Decision log — 2026-10-23: implement the founder’s navy-to-watch transition, remove the specified hero notice, and refine the CTA. Version 0.8.8 refreshes theme assets. Verify the installed release, purge site caches, and check mobile layout and interactions after installation. Hosting cron reliability remains a separate backlog item; real SKU imagery and commerce launch validation remain outstanding.
+
 ## Focused Collection Studio — v0.8.5
 
 The Studio opens with a compact “Build your collection” title, box choices and watch filters. Repeated slogans, step descriptions and preview notices have been removed. The featured watch shows its style, name and a Details action; full descriptions and specifications remain in the existing dialog. One expandable “About this preview” note explains the concept visuals and launch status, with a small “Preview · No checkout” badge visible at the top.
@@ -260,4 +268,5 @@ Implemented via Google Fonts + `assets/css/typography.css`, queued last after ho
 The logo is not a text font: the header and footer already reference `assets/brand/dialbyday-logo.svg` (the transparent white founder mark), colored white on the homepage hero and navy on light pages. `assets/brand/favicon.svg` also uses the approved navy `#102A4F`. Existing PNG favicon variants may retain a slightly darker background; they should be regenerated from the approved original logo before launch.
 
 **Seeing changes in WordPress Playground:** an existing *saved* Playground instance is not continuously connected to GitHub. Refreshing Safari or clicking Autosaved does not pull the new theme. Open **New → From GitHub**, import `https://github.com/pov-entity/watch-collections-wordpress`, select **Theme** and `/`, and activate it. Under **Appearance → Themes**, confirm Watch Collections **version 0.6.0**. Open the homepage in that *new* Playground. If fonts do not load, temporarily disable blockers and check connection to Google Fonts; fallback typography will still render. Back up any existing content before replacing an old Playground instance.
+
 
