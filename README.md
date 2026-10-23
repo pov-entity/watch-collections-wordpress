@@ -1,5 +1,12 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
+## Desktop Details column alignment — v0.8.19
+
+Fixed the wide-screen Details misalignment documented in the founder's 23 October screenshot. The underlying three-column layout was vertically centering the shorter introductory headline against the taller five-row specifications list, leaving a conspicuous empty area above the headline. From 1101px up, headline and specifications now share a top baseline (matching their 18px content inset), while the assembly film remains vertically balanced inside the middle column. Tablet and mobile layout rules remain unchanged; original film/copy/controls untouched.
+
+Decision log — 2026-10-23: founder requested more precise alignment of headline, assembly video and list. Acceptance: on desktop, “01 / THE DETAILS” begins beside the first details row rather than halfway down it; film stays centered horizontally and vertically; no change to the mobile stack. Source verified, live WordPress update/device QA still pending. Version bumped to 0.8.19 to bust asset caches.
+
+
 ## Left-aligned week invitation — v0.8.18
 
 Moved “Find your day.” from above to immediately below the seven-day selector in the homepage hero rail, and aligned it left on mobile and desktop. The day navigation and Collection Studio CTA stay in place with their event listeners and accessibility labels unchanged. Hero film and watch visuals are untouched.
