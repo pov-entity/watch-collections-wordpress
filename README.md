@@ -1,5 +1,9 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
+## Beauty and durability heading — v0.8.15
+
+The founder requested the details headline retain a beautiful, durable watch catching the eye. It now reads “A beautiful, durable watch catches your eye.” The compact serif treatment, direct transition into the assembly and existing per-model specification qualifications are retained. No product specifications or performance ratings have been added.
+
 ## Centered mobile assembly — v0.8.14
 
 Live mobile review of v0.8.13 revealed the existing full-bleed figure combined grid centering with a second translate, shifting the assembly left. The figure now expands by the actual container gutters and uses matching negative margins, keeping both edges aligned with the viewport at mobile widths, including previews with scrollbars. The v0.8.13 visual refinements remain unchanged. Verify the heading-to-assembly transition and both edges after cache purge.

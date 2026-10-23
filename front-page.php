@@ -106,7 +106,7 @@ $hero_video_url = watch_collections_hero_video_url();
 			<div class="editorial-quality__story">
 			<div class="editorial-quality__intro">
 				<p class="editorial-tag"><span></span><?php esc_html_e( '01 / THE DETAILS', 'watch-collections' ); ?></p>
-				<h2 id="quality-title"><?php esc_html_e( 'Every detail deserves', 'watch-collections' ); ?> <em><?php esc_html_e( 'a closer look.', 'watch-collections' ); ?></em></h2>
+				<h2 id="quality-title"><?php esc_html_e( 'A beautiful, durable watch', 'watch-collections' ); ?> <em><?php esc_html_e( 'catches your eye.', 'watch-collections' ); ?></em></h2>
 			</div>
 			<figure class="editorial-quality__visual">
 				<video class="editorial-quality__assembly" data-assembly-video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="<?php echo esc_url( get_template_directory_uri() . '/assets/assembly/poster.jpg' ); ?>" width="1920" height="1080" aria-label="<?php esc_attr_e( 'Animated exploded watch assembly', 'watch-collections' ); ?>">
