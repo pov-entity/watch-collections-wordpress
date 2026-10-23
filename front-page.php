@@ -10,13 +10,13 @@ get_header();
 $collection_options = watch_collections_packages();
 
 $week_scenes = array(
-	array( 'slug' => 'monday', 'day' => __( 'Monday', 'watch-collections' ), 'short' => __( 'MON', 'watch-collections' ), 'scene' => __( 'Composed. Polished. Ready for the week.', 'watch-collections' ), 'style' => __( 'Business / Classic', 'watch-collections' ) ),
-	array( 'slug' => 'tuesday', 'day' => __( 'Tuesday', 'watch-collections' ), 'short' => __( 'TUE', 'watch-collections' ), 'scene' => __( 'Everyday essentials, with a warm metallic edge.', 'watch-collections' ), 'style' => __( 'Everyday / Casual', 'watch-collections' ) ),
-	array( 'slug' => 'wednesday', 'day' => __( 'Wednesday', 'watch-collections' ), 'short' => __( 'WED', 'watch-collections' ), 'scene' => __( 'Made for the days that move differently.', 'watch-collections' ), 'style' => __( 'Active / Sport', 'watch-collections' ) ),
-	array( 'slug' => 'thursday', 'day' => __( 'Thursday', 'watch-collections' ), 'short' => __( 'THU', 'watch-collections' ), 'scene' => __( 'Dark tones. A confident gold accent.', 'watch-collections' ), 'style' => __( 'Smart / Refined', 'watch-collections' ) ),
-	array( 'slug' => 'friday', 'day' => __( 'Friday', 'watch-collections' ), 'short' => __( 'FRI', 'watch-collections' ), 'scene' => __( 'A little sharper when the evening begins.', 'watch-collections' ), 'style' => __( 'Evening / Classy', 'watch-collections' ) ),
-	array( 'slug' => 'saturday', 'day' => __( 'Saturday', 'watch-collections' ), 'short' => __( 'SAT', 'watch-collections' ), 'scene' => __( 'Relaxed layers. An expressive blue dial.', 'watch-collections' ), 'style' => __( 'Weekend / Social', 'watch-collections' ) ),
-	array( 'slug' => 'sunday', 'day' => __( 'Sunday', 'watch-collections' ), 'short' => __( 'SUN', 'watch-collections' ), 'scene' => __( 'A quieter look for a slower kind of day.', 'watch-collections' ), 'style' => __( 'Relaxed / Minimal', 'watch-collections' ) ),
+	array( 'slug' => 'monday', 'day' => __( 'Monday', 'watch-collections' ), 'short' => __( 'Mon', 'watch-collections' ), 'scene' => __( 'Composed. Polished. Ready for the week.', 'watch-collections' ), 'style' => __( 'Business / Classic', 'watch-collections' ) ),
+	array( 'slug' => 'tuesday', 'day' => __( 'Tuesday', 'watch-collections' ), 'short' => __( 'Tue', 'watch-collections' ), 'scene' => __( 'Everyday essentials, with a warm metallic edge.', 'watch-collections' ), 'style' => __( 'Everyday / Casual', 'watch-collections' ) ),
+	array( 'slug' => 'wednesday', 'day' => __( 'Wednesday', 'watch-collections' ), 'short' => __( 'Wed', 'watch-collections' ), 'scene' => __( 'Made for the days that move differently.', 'watch-collections' ), 'style' => __( 'Active / Sport', 'watch-collections' ) ),
+	array( 'slug' => 'thursday', 'day' => __( 'Thursday', 'watch-collections' ), 'short' => __( 'Thu', 'watch-collections' ), 'scene' => __( 'Dark tones. A confident gold accent.', 'watch-collections' ), 'style' => __( 'Smart / Refined', 'watch-collections' ) ),
+	array( 'slug' => 'friday', 'day' => __( 'Friday', 'watch-collections' ), 'short' => __( 'Fri', 'watch-collections' ), 'scene' => __( 'A little sharper when the evening begins.', 'watch-collections' ), 'style' => __( 'Evening / Classy', 'watch-collections' ) ),
+	array( 'slug' => 'saturday', 'day' => __( 'Saturday', 'watch-collections' ), 'short' => __( 'Sat', 'watch-collections' ), 'scene' => __( 'Relaxed layers. An expressive blue dial.', 'watch-collections' ), 'style' => __( 'Weekend / Social', 'watch-collections' ) ),
+	array( 'slug' => 'sunday', 'day' => __( 'Sunday', 'watch-collections' ), 'short' => __( 'Sun', 'watch-collections' ), 'scene' => __( 'A quieter look for a slower kind of day.', 'watch-collections' ), 'style' => __( 'Relaxed / Minimal', 'watch-collections' ) ),
 );
 $week_images_are_previews = false;
 foreach ( $week_scenes as &$week_scene ) {
@@ -68,6 +68,13 @@ $hero_video_url = watch_collections_hero_video_url();
 					<p class="screen-reader-text" aria-hidden="true" data-hero-status><?php esc_html_e( 'Playing the week', 'watch-collections' ); ?></p>
 				</div>
 
+				<div class="week-hero__discover">
+					<p><?php esc_html_e( 'Find your day.', 'watch-collections' ); ?></p>
+					<button type="button" class="week-hero__motion" data-hero-motion aria-pressed="false" aria-label="<?php esc_attr_e( 'Pause the weekly video', 'watch-collections' ); ?>">
+						<span class="week-hero__pause-icon" aria-hidden="true"></span>
+						<span data-hero-motion-label><?php esc_html_e( 'Pause', 'watch-collections' ); ?></span>
+					</button>
+				</div>
 				<p class="screen-reader-text"><?php esc_html_e( 'Choose a day to pause', 'watch-collections' ); ?></p>
 				<div class="week-hero__selector" role="group" aria-label="<?php esc_attr_e( 'Choose a day to play to and pause', 'watch-collections' ); ?>">
 					<?php foreach ( $week_scenes as $index => $scene ) : ?>
@@ -80,11 +87,11 @@ $hero_video_url = watch_collections_hero_video_url();
 				</div>
 
 				<div class="week-hero__rail-actions">
-					<a href="<?php echo esc_url( watch_collections_studio_url() ); ?>" class="week-hero__cta"><?php esc_html_e( 'Build your collection', 'watch-collections' ); ?><span aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a>
-					<button type="button" class="week-hero__motion" data-hero-motion aria-pressed="false" aria-label="<?php esc_attr_e( 'Pause the weekly video', 'watch-collections' ); ?>">
-						<span class="week-hero__pause-icon" aria-hidden="true"></span>
-						<span data-hero-motion-label><?php esc_html_e( 'Pause', 'watch-collections' ); ?></span>
-					</button>
+					<a href="<?php echo esc_url( watch_collections_studio_url() ); ?>" class="week-hero__cta" aria-label="<?php esc_attr_e( 'Build your collection in the Collection Studio', 'watch-collections' ); ?>">
+						<span class="week-hero__cta-copy"><span class="week-hero__cta-kicker"><?php esc_html_e( 'BUILD YOUR COLLECTION', 'watch-collections' ); ?></span><strong><?php esc_html_e( 'Make the week yours.', 'watch-collections' ); ?></strong></span>
+						<svg aria-hidden="true" viewBox="0 0 32 32" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M6 26 26 6M6 6h20v20"/></svg>
+					</a>
+
 				</div>
 			</div>
 		</div>
@@ -261,6 +268,7 @@ $hero_video_url = watch_collections_hero_video_url();
 	</section>
 </main>
 <?php get_footer(); ?>
+
 
 
 
