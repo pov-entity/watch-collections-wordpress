@@ -117,12 +117,11 @@ $hero_video_url = watch_collections_hero_video_url();
 			</figure>
 			</div>
 			<div class="editorial-quality__details">
-				<article><span>01</span><div><h3><?php esc_html_e( 'Movement', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Quartz, automatic or hand-wound. You should know what powers each model and what care it requires.', 'watch-collections' ); ?></p></div></article>
-				<article><span>02</span><div><h3><?php esc_html_e( 'Materials & finishing', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Understand the case, strap and clasp materials, plus the details that affect feel and appearance.', 'watch-collections' ); ?></p></div></article>
-				<article><span>03</span><div><h3><?php esc_html_e( 'Crystal & durability', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Crystal type, water-resistance rating and practical wearing limits matter more than broad durability claims.', 'watch-collections' ); ?></p></div></article>
-				<article><span>04</span><div><h3><?php esc_html_e( 'Fit & comfort', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Case diameter, thickness, weight and strap details help you choose a watch for your wrist.', 'watch-collections' ); ?></p></div></article>
-				<article><span>05</span><div><h3><?php esc_html_e( 'Real functions', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Functional chronographs and moonphases should be distinguished from decorative subdials and day-night designs.', 'watch-collections' ); ?></p></div></article>
-				<p class="editorial-quality__note"><?php esc_html_e( 'Exact specifications will be published per verified model. We do not claim identical materials or performance across every watch.', 'watch-collections' ); ?></p>
+				<article><span>01</span><div><h3><?php esc_html_e( 'Mechanical, by nature', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'An automatic movement winds with the motion of your wrist. Inside, a miniature world of gears and springs brings each passing second to life — watchmaking you can feel.', 'watch-collections' ); ?></p></div></article>
+				<article><span>02</span><div><h3><?php esc_html_e( 'Quartz, by precision', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'A quartz movement keeps time with a remarkably steady rhythm. Accurate, dependable and low-maintenance — made for days when you want to put on your watch and simply go.', 'watch-collections' ); ?></p></div></article>
+				<article><span>03</span><div><h3><?php esc_html_e( 'Steel with presence', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Stainless steel lends the case its clean lines and satisfying feel. Brushed surfaces soften the light; polished edges catch it. Small finishing choices make a lasting impression.', 'watch-collections' ); ?></p></div></article>
+				<article><span>04</span><div><h3><?php esc_html_e( 'The clarity of sapphire', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Sapphire crystal offers exceptional resistance to everyday scratches while keeping the dial beautifully clear. Every marker, hand and texture stays where your attention belongs.', 'watch-collections' ); ?></p></div></article>
+				<article><span>05</span><div><h3><?php esc_html_e( 'Complications with purpose', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'A working chronograph measures elapsed time. A true moonphase follows the lunar cycle. Our standard is real function rather than decorative imitation — because the engineering should match the beauty.', 'watch-collections' ); ?></p></div></article>
 			</div>
 		</div>
 	</section>
