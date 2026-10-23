@@ -405,3 +405,175 @@
   .week-hero--interactive .week-hero__fallback-image{object-fit:contain}
 }
 
+
+
+/*
+ * Mobile hero refinement — 2026-10-23.
+ * The video is the hero; concise day information and tappable tabs follow it.
+ * Desktop and tablet layouts intentionally remain unchanged.
+ */
+@media (max-width:650px) {
+  /* Clear the oversized logo/menu away from the model and watch. */
+  body.home .site-header {top:6px}
+  body.home .site-header .header-inner {
+    min-height:56px;
+    padding-inline:18px;
+    gap:12px;
+  }
+  body.home .site-header .brand .brand-logo {
+    width:clamp(144px,41vw,168px);
+    max-width:100%;
+    height:auto;
+  }
+  body.home .site-header .menu-toggle {
+    width:40px;
+    height:40px;
+    min-width:40px;
+    border:1px solid rgba(255,255,255,.64);
+    background:rgba(8,19,34,.16);
+    backdrop-filter:blur(4px);
+    -webkit-backdrop-filter:blur(4px);
+  }
+  body.home .site-header .menu-toggle span {width:19px}
+
+  /* Keep original 16:9 framing: cropping would cut off the featured watch. */
+  .week-hero--interactive .week-hero__experience {
+    display:flex;
+    flex-direction:column;
+    padding-top:0;
+    min-height:0;
+  }
+  .week-hero--interactive .week-hero__film {
+    position:relative;
+    inset:auto;
+    width:100%;
+    aspect-ratio:16/9;
+    flex:none;
+    background:#091c32;
+  }
+  .week-hero--interactive .week-hero__video,
+  .week-hero--interactive .week-hero__fallback-image {
+    object-fit:cover;
+    object-position:center;
+  }
+  .week-hero--interactive .week-hero__film-shade {
+    display:block;
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:linear-gradient(180deg,rgba(5,17,31,.45),rgba(5,17,31,0) 41%);
+  }
+
+  /* A compact editorial strip replaces the tall stacked mobile caption. */
+  .week-hero--interactive .week-hero__rail {
+    width:100%;
+    max-width:none;
+    margin:0;
+    padding:18px 18px 14px;
+    background:#0b203d;
+  }
+  .week-hero--interactive .week-hero__eyebrow {display:none}
+  .week-hero--interactive .week-hero__day-count {
+    margin:0 0 3px;
+    font-size:.58rem;
+    letter-spacing:.09em;
+    color:#bacbdc;
+  }
+  .week-hero--interactive .week-hero__rail h1.week-hero__current {
+    font-size:clamp(2.05rem,8vw,2.55rem);
+    line-height:1.08;
+    letter-spacing:-.045em;
+    margin:0 0 5px;
+    white-space:normal;
+  }
+  .week-hero--interactive .week-hero__watch {
+    margin:0 0 6px;
+    gap:9px;
+    font-size:.61rem;
+    line-height:1.35;
+    letter-spacing:.055em;
+  }
+  .week-hero--interactive .week-hero__watch-line {width:16px}
+  .week-hero--interactive .week-hero__moment {
+    min-height:0;
+    max-width:none;
+    margin:0;
+    font-size:.77rem;
+    line-height:1.45;
+    color:#d7e1e8;
+  }
+
+  /* All seven days remain visible as simple 44px-minimum touch targets. */
+  .week-hero--interactive .week-hero__selector {
+    display:grid;
+    grid-template-columns:repeat(7,minmax(0,1fr));
+    max-width:none;
+    margin:15px 0 0;
+    gap:3px;
+    border-top:1px solid rgba(255,255,255,.16);
+  }
+  .week-hero--interactive .week-hero__tab {
+    min-width:0;
+    min-height:44px;
+    padding:9px 0 7px;
+    border-bottom:2px solid transparent;
+  }
+  .week-hero--interactive .week-hero__tab-name {
+    font-size:.59rem;
+    font-weight:500;
+    letter-spacing:0;
+  }
+  .week-hero--interactive .week-hero__tab.is-current {
+    border-bottom:2px solid #d4b18b;
+  }
+  .week-hero--interactive .week-hero__rail-actions {
+    width:100%;
+    max-width:none;
+    margin:12px 0 0;
+    gap:10px;
+  }
+  .week-hero--interactive .week-hero__cta {
+    flex:1 1 auto;
+    min-width:0;
+    min-height:45px;
+    justify-content:space-between;
+    padding:11px 15px;
+    border:1px solid #f2eee6;
+    border-radius:3px;
+    background:#f2eee6;
+    color:#102a4f;
+    font-size:.7rem;
+    font-weight:650;
+    text-decoration:none;
+  }
+  .week-hero--interactive .week-hero__cta:hover {
+    background:#fff;
+    color:#102a4f;
+    border-color:#fff;
+  }
+  .week-hero--interactive .week-hero__motion {
+    flex:none;
+    width:44px;
+    height:44px;
+    min-height:44px;
+    min-width:44px;
+    margin:0;
+    padding:0;
+  }
+  .week-hero--interactive .week-hero__motion [data-hero-motion-label] {display:none}
+  .week-hero--interactive .week-hero__preview-note {
+    width:auto;
+    max-width:none;
+    margin:0;
+    padding:0 18px 14px;
+    background:#0b203d;
+    font-size:.63rem;
+    line-height:1.45;
+    color:#c4d0dc;
+  }
+}
+@media (max-width:355px) {
+  .week-hero--interactive .week-hero__rail {padding-inline:14px}
+  .week-hero--interactive .week-hero__tab-name {font-size:.54rem}
+  .week-hero--interactive .week-hero__preview-note {padding-inline:14px}
+}
