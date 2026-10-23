@@ -1,9 +1,62 @@
-/**
- * Seven-day fashion hero with frame-specific clickable pause destinations.
- * Actual settled-pose timings determined from the 10s / 24fps source footage.
- */
+/** Video-derived day previews, immediate muted autoplay, and matched day reveals. */
 (function () {
   'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function prepare(video) {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+    video.controls = false;
+  }
+
+  // The assembly loop has its own pause control and only runs while visible.
+  var assembly = document.querySelector('[data-assembly-video]');
+  var assemblyButton = document.querySelector('[data-assembly-motion]');
+  if (assembly && assemblyButton) {
+    var assemblyPausedByUser = false;
+    var assemblyVisible = false;
+    prepare(assembly);
+    function assemblyState() {
+      assemblyButton.setAttribute('aria-pressed', assembly.paused ? 'true' : 'false');
+      assemblyButton.setAttribute('aria-label', assembly.paused ? 'Play watch assembly animation' : 'Pause watch assembly animation');
+      assemblyButton.textContent = assembly.paused ? 'Play animation' : 'Pause animation';
+    }
+    function playAssembly() {
+      if (document.hidden || !assemblyVisible || assemblyPausedByUser || reduce.matches) return;
+      var p = assembly.play();
+      if (p && p.catch) p.catch(assemblyState);
+    }
+    assemblyButton.addEventListener('click', function () {
+      assemblyPausedByUser = !assembly.paused;
+      if (assembly.paused) {
+        var p = assembly.play();
+        if (p && p.catch) p.catch(assemblyState);
+      } else assembly.pause();
+      assemblyState();
+    });
+    assembly.addEventListener('play', assemblyState);
+    assembly.addEventListener('pause', assemblyState);
+    assembly.addEventListener('canplay', playAssembly);
+    assembly.addEventListener('error', function () { assemblyState(); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        assemblyVisible = entries[0].isIntersecting;
+        if (assemblyVisible) playAssembly(); else assembly.pause();
+      }, {threshold: 0.12}).observe(assembly);
+    } else { assemblyVisible = true; playAssembly(); }
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) assembly.pause(); else playAssembly();
+    });
+    reduce.addEventListener('change', function () {
+      if (reduce.matches) assembly.pause(); else playAssembly();
+    });
+    assemblyState();
+  }
+
   var hero = document.querySelector('[data-week-hero]');
   if (!hero) return;
   var video = hero.querySelector('[data-hero-video]');
@@ -16,306 +69,244 @@
   var style = hero.querySelector('[data-hero-style]');
   var status = hero.querySelector('[data-hero-status]');
   var announcer = hero.querySelector('[data-hero-announcer]');
+  var images = Array.prototype.slice.call(hero.querySelectorAll('[data-hero-fallback-image]'));
   if (!video || tabs.length !== 7 || !motion || !day || !count || !moment || !style) return;
+  prepare(video);
 
-  // Low-motion moments in the supplied Gemini video, in seconds:
-  // Mon 0.67, Tue 2.25, Wed 3.75, Thu 5.21, Fri 6.63, Sat 7.71, Sun 9.13.
-  var stopFrames = [0.667, 2.25, 3.75, 5.208, 6.625, 7.708, 9.125];
-  // Scene boundaries are independent of the destination freeze frames.
+  var stops = [0.667, 2.25, 3.75, 5.208, 6.625, 7.708, 9.125];
   var boundaries = [0, 1.78, 3.08, 4.46, 5.88, 7.20, 8.65];
   var active = -1;
   var destination = -1;
-  var needWrap = false;
-  var hasWrapped = false;
-  var lastTime = 0;
+  var switching = false;
+  var switchSerial = 0;
   var userPaused = false;
   var inViewport = true;
+  var blocked = false;
+  var hasPlayed = false;
+  var pendingDay = -1;
   var animationId = 0;
-  var reducedMotionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-  var reducedMotion = Boolean(reducedMotionQuery && reducedMotionQuery.matches);
   var touchX = null;
   var touchY = null;
   var videoError = video.getAttribute('data-video-available') === '0';
-  var fallbackImages = Array.prototype.slice.call(hero.querySelectorAll('[data-hero-fallback-image]'));
-  var fallbackTimer = 0;
-
-  function showFallback(index) {
-    fallbackImages.forEach(function (img, i) { img.classList.toggle('is-active', i === index); });
-  }
-
-  function stopFallback() {
-    if (fallbackTimer) { window.clearInterval(fallbackTimer); fallbackTimer = 0; }
-  }
-
-  function runFallback() {
-    stopFallback();
-    if (userPaused || !inViewport || document.hidden || reducedMotion || !videoError) return;
-    fallbackTimer = window.setInterval(function () {
-      paint((Math.max(0, active) + 1) % 7);
-      showFallback(active);
-    }, 4100);
-  }
 
   function indexAt(time) {
-    for (var i = boundaries.length - 1; i >= 0; i--) {
-      if (time >= boundaries[i]) return i;
-    }
+    for (var i = boundaries.length - 1; i >= 0; i--) if (time >= boundaries[i]) return i;
     return 0;
   }
-
   function safeTime(index) {
-    var limit = Number.isFinite(video.duration) && video.duration > 0 ? video.duration : 10;
-    return Math.min(stopFrames[index], Math.max(0, limit - (1 / 24)));
+    var duration = Number.isFinite(video.duration) && video.duration > 0 ? video.duration : 10;
+    return Math.min(stops[index], Math.max(0, duration - 1 / 24));
   }
-
-  function announceSelection() {
+  function announce() {
     if (announcer) announcer.textContent = day.textContent + ', ' + style.textContent + '. ' + moment.textContent;
   }
-
   function paint(index) {
     if (index === active) return;
     active = index;
-    if (videoError) showFallback(index);
+    // Every fallback is extracted from this exact video's settled frame.
+    images.forEach(function (image, i) { image.classList.toggle('is-active', i === index); });
     count.textContent = String(index + 1).padStart(2, '0');
     day.textContent = tabs[index].getAttribute('data-day') || '';
     style.textContent = tabs[index].getAttribute('data-style') || '';
     moment.textContent = tabs[index].getAttribute('data-moment') || '';
     tabs.forEach(function (tab, i) {
-      tab.classList.toggle('is-current', index === i);
-      tab.setAttribute('aria-pressed', index === i ? 'true' : 'false');
+      tab.classList.toggle('is-current', i === index);
+      tab.setAttribute('aria-pressed', i === index ? 'true' : 'false');
     });
   }
-
   function refresh() {
-    var paused = videoError ? userPaused : video.paused;
-    var movingToDay = destination >= 0 && !paused;
+    var paused = videoError || video.paused;
     hero.classList.toggle('is-playing', !paused);
-    tabs.forEach(function (tab, i) {
-      tab.classList.toggle('is-target', movingToDay && i === destination);
-    });
-    if (status) {
-      status.textContent = videoError ? 'Still preview — video file pending' : movingToDay ? 'Moving to ' + (tabs[destination].getAttribute('data-day') || '') :
-        paused ? 'Paused on this look' : 'Playing the week';
-    }
+    hero.classList.toggle('is-autoplay-blocked', blocked);
+    tabs.forEach(function (tab, i) { tab.classList.toggle('is-target', destination === i); });
     motion.setAttribute('aria-pressed', paused ? 'true' : 'false');
     motion.setAttribute('aria-label', paused ? 'Play the weekly video' : 'Pause at the next still pose');
     if (motionLabel) motionLabel.textContent = paused ? 'Play' : 'Pause';
+    if (status) status.textContent = videoError ? 'Video unavailable — showing the matching watch frame' :
+      blocked ? 'Tap Play to start the muted video' : switching ? 'Loading the selected look' :
+      destination >= 0 ? 'Moving to ' + tabs[destination].getAttribute('data-day') :
+      paused ? 'Paused on this look' : 'Playing the week';
   }
-
-  function stopAtDestination() {
-    if (destination < 0) return;
-    var i = destination;
-    destination = -1;
-    video.pause();
-    video.currentTime = safeTime(i); // Exact settled frame, not a moving dissolve.
-    lastTime = safeTime(i);
-    paint(i);
-    userPaused = true;
-    refresh();
-    announceSelection();
-  }
-
-  function tick() {
+  function ticker() {
     animationId = 0;
-    var time = video.currentTime || 0;
-    if (time + 0.25 < lastTime) hasWrapped = true;
-    lastTime = time;
-
-    if (destination >= 0) {
-      var stop = safeTime(destination);
-      // Never pause on a dissolve or a moving pose: stop only at the recorded freeze frame.
-      if ((!needWrap || hasWrapped) && time >= stop - 0.018) {
-        stopAtDestination();
-      } else {
-        paint(indexAt(time));
-      }
-    } else if (!video.paused) {
-      paint(indexAt(time));
+    if (!switching && !video.seeking) {
+      var time = video.currentTime || 0;
+      if (destination >= 0 && time >= safeTime(destination) - 0.018) {
+        var index = destination;
+        destination = -1;
+        userPaused = true;
+        video.pause();
+        video.currentTime = safeTime(index);
+        paint(index);
+        refresh();
+        announce();
+      } else if (destination < 0 && !video.paused) paint(indexAt(time));
     }
-    if (!video.paused && animationId === 0) {
-      animationId = window.requestAnimationFrame(tick);
-    }
+    if (!video.paused) startTicker();
   }
-
   function startTicker() {
-    if (!animationId) animationId = window.requestAnimationFrame(tick);
+    if (!animationId) animationId = window.requestAnimationFrame(ticker);
   }
-
-  function seekAndHold(index) {
-    // A reduced-motion preference skips the intervening video animation.
+  function hold(index) {
+    switchSerial++;
     destination = -1;
-    video.pause();
-    video.currentTime = safeTime(index);
-    lastTime = safeTime(index);
-    paint(index);
+    switching = false;
     userPaused = true;
+    video.pause();
+    paint(index);
+    // Keep the matching extracted frame visible until seeking has completed.
+    hero.classList.add('is-switching');
+    if (video.readyState >= 1) video.currentTime = safeTime(index);
+    else pendingDay = index;
     refresh();
-    announceSelection();
+    announce();
   }
-
   function selectDay(index) {
-    if (videoError) {
-      userPaused = true;
-      stopFallback();
-      paint(index);
-      if (status) status.textContent = 'Still preview — video file pending';
-      announceSelection();
-      return;
-    }
-    var now = video.currentTime || 0;
-    var stop = safeTime(index);
-    // If this day's transition is still underway, play to its settled frame
-    // rather than jumping straight to a still pose.
-    if (reducedMotion || (index === active && destination === -1 && (video.paused || now >= stop - 0.018))) {
-      seekAndHold(index);
-      return;
-    }
-    needWrap = now >= stop - 0.018;
-    hasWrapped = false;
+    if (videoError) { userPaused = true; paint(index); refresh(); announce(); return; }
+    if (video.readyState < 1) { pendingDay = index; paint(index); refresh(); return; }
+    if (reduce.matches || (index === active && video.paused && !blocked)) { hold(index); return; }
+    var serial = ++switchSerial;
+    // Jump directly to the final clean movement of the requested scene. The
+    // matching extracted watch frame masks the seek, so no other day flashes.
     destination = index;
+    switching = true;
+    blocked = false;
     userPaused = false;
-    lastTime = now;
-
-    // Play through the real outfit/watch transitions. If target is behind us,
-    // let the source loop naturally instead of reverse-seeking through the footage.
-    var playPromise = video.play();
-    if (playPromise && typeof playPromise.catch === 'function') {
-      playPromise.catch(function () { seekAndHold(index); });
-    }
+    hero.classList.add('is-switching');
+    paint(index);
+    video.pause();
+    video.currentTime = Math.max(boundaries[index], safeTime(index) - 0.20);
+    var p = video.play();
+    if (p && p.catch) p.catch(function () {
+      if (serial !== switchSerial) return;
+      blocked = true;
+      hold(index);
+    });
     startTicker();
     refresh();
   }
-
-  function play() {
-    if (videoError) { userPaused = false; runFallback(); refresh(); return; }
+  function attemptAutoplay() {
+    if (videoError || userPaused || document.hidden || !inViewport || reduce.matches) return;
+    prepare(video);
+    var serial = switchSerial;
+    var p = video.play();
+    if (p && p.catch) p.catch(function () {
+      if (serial !== switchSerial || userPaused) return;
+      blocked = true;
+      refresh();
+    });
+    startTicker();
+  }
+  function resume() {
+    switchSerial++;
     destination = -1;
-    needWrap = false;
-    hasWrapped = false;
+    switching = false;
     userPaused = false;
-    if (reducedMotion) return;
-    var playPromise = video.play();
-    if (playPromise && typeof playPromise.catch === 'function') {
-      playPromise.catch(function () { refresh(); });
-    }
+    blocked = false;
+    hero.classList.remove('is-switching');
+    // An explicit gesture can start playback even with a motion preference.
+    var serial = switchSerial;
+    var p = video.play();
+    if (p && p.catch) p.catch(function () {
+      if (serial !== switchSerial) return;
+      blocked = true;
+      refresh();
+    });
     startTicker();
     refresh();
   }
-
-  tabs.forEach(function (tab, index) {
-    tab.addEventListener('click', function () { selectDay(index); });
-  });
-
+  tabs.forEach(function (tab, index) { tab.addEventListener('click', function () { selectDay(index); }); });
   motion.addEventListener('click', function () {
-    if (videoError) {
-      userPaused = !userPaused;
-      if (userPaused) stopFallback(); else runFallback();
-      if (status) status.textContent = userPaused ? 'Still preview paused' : 'Still preview — video pending';
-      if (motionLabel) motionLabel.textContent = userPaused ? 'Play' : 'Pause';
-      motion.setAttribute('aria-label', userPaused ? 'Play the still preview' : 'Pause the still preview');
-      motion.setAttribute('aria-pressed', userPaused ? 'true' : 'false');
-      return;
-    }
-    if (video.paused) {
-      play();
-    } else {
-      // Even manual pause respects the model's settled positions.
-      var now = video.currentTime || 0;
-      var next = stopFrames.findIndex(function (stop) { return stop > now + 0.12; });
-      selectDay(next >= 0 ? next : 0);
+    if (videoError) { refresh(); return; }
+    if (video.paused) resume();
+    else {
+      var next = stops.findIndex(function (time) { return time > video.currentTime + 0.05; });
+      if (next < 0) hold(6);
+      else { destination = next; switching = false; startTicker(); refresh(); }
     }
   });
-
+  video.addEventListener('playing', function () {
+    hasPlayed = true;
+    blocked = false;
+    hero.classList.add('has-started');
+    startTicker();
+    refresh();
+  });
   video.addEventListener('play', function () { startTicker(); refresh(); });
   video.addEventListener('pause', refresh);
   video.addEventListener('seeked', function () {
-    if (destination === -1) {
-      paint(indexAt(video.currentTime || 0));
+    var serial = switchSerial;
+    var reveal = function () {
+      if (serial !== switchSerial || video.seeking) return;
+      switching = false;
+      if (hasPlayed && !blocked) hero.classList.remove('is-switching');
+      if (destination < 0) paint(indexAt(video.currentTime || 0));
+      startTicker();
       refresh();
-    }
+    };
+    // rAF lets the newly decoded frame replace the previous texture first.
+    window.requestAnimationFrame(reveal);
   });
   video.addEventListener('loadedmetadata', function () {
-    if (reducedMotion) seekAndHold(0);
-    else { paint(indexAt(video.currentTime || 0)); refresh(); }
+    if (pendingDay >= 0) {
+      var index = pendingDay;
+      pendingDay = -1;
+      if (reduce.matches || userPaused) hold(index); else selectDay(index);
+    } else if (reduce.matches) hold(0);
+    else attemptAutoplay();
   });
+  video.addEventListener('loadeddata', attemptAutoplay);
+  video.addEventListener('canplay', attemptAutoplay);
   video.addEventListener('error', function () {
-    destination = -1;
     videoError = true;
+    destination = -1;
+    switching = false;
     hero.classList.add('has-video-error');
-    showFallback(Math.max(0, active));
-    if (status) status.textContent = 'Still preview — video file pending';
-    if (motionLabel) motionLabel.textContent = 'Pause';
-    runFallback();
-  });
-
-  document.addEventListener('visibilitychange', function () {
-    if (document.hidden) {
-      if (videoError) stopFallback();
-      video.pause();
-    } else if (videoError) { runFallback();
-    } else if (!userPaused && inViewport && !reducedMotion) {
-      // Retain an active navigation destination after the user changes tabs.
-      var promise = video.play();
-      if (promise && promise.catch) promise.catch(function () {});
-      startTicker();
-    }
     refresh();
   });
-
+  // Safari may refuse autoplay in Low Power Mode. Retry on a real interaction;
+  // never replace it with a misleading unrelated photograph or native overlay.
+  function gestureRetry(event) {
+    if (!blocked || userPaused || reduce.matches || event.target.closest('[data-hero-tab],[data-hero-motion]')) return;
+    attemptAutoplay();
+  }
+  document.addEventListener('pointerdown', gestureRetry, {passive:true});
+  document.addEventListener('touchend', gestureRetry, {passive:true});
+  document.addEventListener('keydown', gestureRetry);
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) video.pause(); else attemptAutoplay();
+    refresh();
+  });
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
-      if (!entries.length) return;
       inViewport = entries[0].isIntersecting;
-      if (!inViewport) {
-        if (videoError) stopFallback();
-        video.pause();
-      } else if (videoError) { runFallback();
-      } else if (!userPaused && !document.hidden && !reducedMotion) {
-        var promise = video.play();
-        if (promise && promise.catch) promise.catch(function () {});
-        startTicker();
-      }
+      if (!inViewport) video.pause(); else attemptAutoplay();
     }, {threshold: 0.1}).observe(hero);
   }
-
-  if (reducedMotionQuery) {
-    var updateMotionPreference = function (event) {
-      reducedMotion = event.matches;
-      if (reducedMotion) seekAndHold(Math.max(0, active));
-    };
-    if (reducedMotionQuery.addEventListener) reducedMotionQuery.addEventListener('change', updateMotionPreference);
-    else if (reducedMotionQuery.addListener) reducedMotionQuery.addListener(updateMotionPreference);
-  }
-
+  reduce.addEventListener('change', function () {
+    if (reduce.matches) hold(Math.max(0, active)); else { userPaused = false; attemptAutoplay(); }
+  });
   hero.addEventListener('touchstart', function (event) {
-    if (!event.touches || event.touches.length !== 1) return;
+    if (event.touches.length !== 1) return;
     touchX = event.touches[0].clientX;
     touchY = event.touches[0].clientY;
   }, {passive:true});
   hero.addEventListener('touchend', function (event) {
-    if (touchX === null || !event.changedTouches || !event.changedTouches.length) return;
+    if (touchX === null || !event.changedTouches.length) return;
     var dx = event.changedTouches[0].clientX - touchX;
     var dy = event.changedTouches[0].clientY - touchY;
     touchX = null;
     touchY = null;
-    if (Math.abs(dx) > 65 && Math.abs(dx) > Math.abs(dy) * 1.4) {
-      selectDay((Math.max(0, active) + (dx < 0 ? 1 : 6)) % 7);
-    }
+    if (Math.abs(dx) > 65 && Math.abs(dx) > Math.abs(dy) * 1.4) selectDay((Math.max(0, active) + (dx < 0 ? 1 : 6)) % 7);
   }, {passive:true});
   hero.addEventListener('keydown', function (event) {
-    if (!event.target.closest('[data-hero-tab]')) return;
-    if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+    if (!event.target.closest('[data-hero-tab]') || ['ArrowLeft', 'ArrowRight'].indexOf(event.key) < 0) return;
     event.preventDefault();
     var target = (Math.max(0, active) + (event.key === 'ArrowRight' ? 1 : 6)) % 7;
     selectDay(target);
     tabs[target].focus();
   });
-
   paint(0);
-  if (videoError) {
-    userPaused = reducedMotion;
-    showFallback(0);
-    runFallback();
-    refresh();
-  } else if (reducedMotion) seekAndHold(0);
-  else { startTicker(); refresh(); }
+  refresh();
+  if (reduce.matches) hold(0); else attemptAutoplay();
 })();

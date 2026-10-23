@@ -648,3 +648,18 @@
     border-color:rgba(227,196,158,.4);
   }
 }
+
+
+/* Only actual video frames appear before playback. Safari's native central
+   play overlay remains hidden; the accessible bottom control starts playback. */
+.week-hero--interactive .week-hero__fallback-scenes {display:block}
+.week-hero--interactive .week-hero__fallback-image {transition:opacity 220ms ease}
+.week-hero--interactive .week-hero__video {opacity:0;transition:opacity 160ms ease}
+.week-hero--interactive.has-started:not(.is-switching) .week-hero__video {opacity:1}
+.week-hero--interactive .week-hero__video::-webkit-media-controls {display:none!important}
+.week-hero--interactive .week-hero__video::-webkit-media-controls-start-playback-button {display:none!important}
+@media(prefers-reduced-motion:reduce) {
+  .week-hero--interactive .week-hero__fallback-image,
+  .week-hero--interactive .week-hero__video {transition:none!important}
+  .week-hero--interactive .week-hero__motion {display:flex}
+}

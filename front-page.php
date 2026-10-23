@@ -20,13 +20,8 @@ $week_scenes = array(
 );
 $week_images_are_previews = false;
 foreach ( $week_scenes as &$week_scene ) {
-	$webp_path = '/assets/hero-days/' . $week_scene['slug'] . '.webp';
-	if ( file_exists( get_template_directory() . $webp_path ) ) {
-		$week_scene['image'] = add_query_arg( 'ver', (string) filemtime( get_template_directory() . $webp_path ), get_template_directory_uri() . $webp_path );
-	} else {
-		$week_scene['image'] = get_template_directory_uri() . '/assets/hero-days/' . $week_scene['slug'] . '.svg';
-		$week_images_are_previews = true;
-	}
+	$frame_path = '/assets/hero-days/' . $week_scene['slug'] . '-hold.jpg';
+	$week_scene['image'] = add_query_arg( 'ver', wp_get_theme()->get( 'Version' ), get_template_directory_uri() . $frame_path );
 }
 unset( $week_scene );
 $hero_video_url = watch_collections_hero_video_url();
@@ -37,7 +32,7 @@ $hero_video_url = watch_collections_hero_video_url();
 			<div class="week-hero__film" aria-hidden="true">
 				<div class="week-hero__fallback-scenes">
 					<?php foreach ( $week_scenes as $index => $scene ) : ?>
-						<img class="week-hero__fallback-image<?php echo 0 === $index ? ' is-active' : ''; ?>" data-hero-fallback-image="<?php echo esc_attr( $index ); ?>" src="<?php echo esc_url( $scene['image'] ); ?>" alt="" loading="<?php echo 0 === $index ? 'eager' : 'lazy'; ?>" decoding="async" width="1600" height="900">
+						<img class="week-hero__fallback-image<?php echo 0 === $index ? ' is-active' : ''; ?>" data-hero-fallback-image="<?php echo esc_attr( $index ); ?>" src="<?php echo esc_url( $scene['image'] ); ?>" alt="" loading="eager" decoding="async" width="1600" height="900">
 					<?php endforeach; ?>
 				</div>
 				<video
@@ -48,6 +43,8 @@ $hero_video_url = watch_collections_hero_video_url();
 					muted
 					loop
 					playsinline
+					webkit-playsinline
+					disablepictureinpicture
 					preload="auto"
 					poster="<?php echo esc_url( $week_scenes[0]['image'] ); ?>"
 					width="1280"
@@ -104,13 +101,11 @@ $hero_video_url = watch_collections_hero_video_url();
 				<p><?php esc_html_e( 'There is more to a watch than the way it photographs. We are building product listings around the details that matter for real ownership.', 'watch-collections' ); ?></p>
 			</div>
 			<figure class="editorial-quality__visual">
-				<?php
-				$exploded_png = '/assets/watch-exploded-transparent.png';
-				$exploded_fallback = '/assets/watch-exploded.webp';
-				$exploded_asset = file_exists( get_template_directory() . $exploded_png ) ? $exploded_png : $exploded_fallback;
-				?>
-				<img src="<?php echo esc_url( get_template_directory_uri() . $exploded_asset ); ?>" alt="<?php esc_attr_e( 'Illustrative exploded view of watch components including crystal, bezel, dial, movement, case and bracelet', 'watch-collections' ); ?>" loading="lazy" decoding="async" width="1024" height="1536">
-				<figcaption><?php esc_html_e( 'Illustrative component diagram — specifications vary by model.', 'watch-collections' ); ?></figcaption>
+				<video class="editorial-quality__assembly" data-assembly-video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="<?php echo esc_url( get_template_directory_uri() . '/assets/assembly/poster.jpg' ); ?>" width="1920" height="1080" aria-label="<?php esc_attr_e( 'Animated exploded watch assembly', 'watch-collections' ); ?>">
+					<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/assembly/watch-assembly-loop.mp4' ); ?>" type="video/mp4">
+				</video>
+				<button class="editorial-quality__motion" type="button" data-assembly-motion aria-pressed="false" aria-label="<?php esc_attr_e( 'Pause watch assembly animation', 'watch-collections' ); ?>"><?php esc_html_e( 'Pause animation', 'watch-collections' ); ?></button>
+				<figcaption><?php esc_html_e( 'Illustrative watch assembly', 'watch-collections' ); ?></figcaption>
 			</figure>
 			</div>
 			<div class="editorial-quality__details">
@@ -266,5 +261,6 @@ $hero_video_url = watch_collections_hero_video_url();
 	</section>
 </main>
 <?php get_footer(); ?>
+
 
 

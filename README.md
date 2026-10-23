@@ -1,5 +1,15 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
+## Matched video playback and assembly stage — v0.8.9
+
+The hero explicitly attempts muted inline autoplay at initialization and media readiness. Its seven preview images now come from the exact source-video pause frames; the unrelated campaign photographs no longer appear before playback. If a browser refuses autoplay, the bottom Play button remains available without a native central video overlay. A genuine interaction retries playback, while user pauses and reduced-motion preferences remain respected.
+
+Selecting a day immediately shows that day’s matching watch frame, masks the seek, and plays the final 0.20 seconds of its scene before holding the calibrated pose. Rapid selections retain the newest destination. The former grey background fade has been removed. The founder’s 1080p60 assembly loop replaces the static component diagram, with a navy stage and an independent accessible pause/play control. The assembly pauses offscreen and honors reduced motion. These visuals remain illustrative rather than verified SKU specifications.
+
+Validation: PHP 7.4 parsing and JavaScript syntax passed. Five Node tests cover initial autoplay, playback denial, matching-frame selection, rapid selections and reduced motion. Live responsive QA and installation follow the release. Safari may still refuse autoplay under device restrictions; site code cannot override operating-system or browser policy.
+
+Decision log — 2026-10-23: prioritize immediate matching watch visuals, direct day selection and a continuous navy transition into the existing assembly animation. Backlog: hosting cron reliability, physical-device Safari checks, verified SKU assets and commerce launch validation.
+
 ## Navy mobile introduction — v0.8.8
 
 The mobile hero controls flow into the details introduction on the same navy background. The background fades behind the exploded-watch image into the pale specification area. White body copy and a warm ivory heading accent retain contrast. The day caption remains transparent over the left third of the film.
@@ -268,5 +278,6 @@ Implemented via Google Fonts + `assets/css/typography.css`, queued last after ho
 The logo is not a text font: the header and footer already reference `assets/brand/dialbyday-logo.svg` (the transparent white founder mark), colored white on the homepage hero and navy on light pages. `assets/brand/favicon.svg` also uses the approved navy `#102A4F`. Existing PNG favicon variants may retain a slightly darker background; they should be regenerated from the approved original logo before launch.
 
 **Seeing changes in WordPress Playground:** an existing *saved* Playground instance is not continuously connected to GitHub. Refreshing Safari or clicking Autosaved does not pull the new theme. Open **New → From GitHub**, import `https://github.com/pov-entity/watch-collections-wordpress`, select **Theme** and `/`, and activate it. Under **Appearance → Themes**, confirm Watch Collections **version 0.6.0**. Open the homepage in that *new* Playground. If fonts do not load, temporarily disable blockers and check connection to Google Fonts; fallback typography will still render. Back up any existing content before replacing an old Playground instance.
+
 
 
