@@ -1,5 +1,11 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
+## Left-aligned week invitation — v0.8.18
+
+Moved “Find your day.” from above to immediately below the seven-day selector in the homepage hero rail, and aligned it left on mobile and desktop. The day navigation and Collection Studio CTA stay in place with their event listeners and accessibility labels unchanged. Hero film and watch visuals are untouched.
+
+Decision log — 2026-10-23: founder requests the invitation below the weekday row on the left of the hero. Acceptance check: on iPhone the weekday row appears immediately beneath the film, followed by a left-aligned “Find your day.” and then the collection CTA. Verify installed 0.8.18 and purge caches; no claim of live deployment or device QA yet.
+
 ## Watch details copy — v0.8.17
 
 The five Details rows now use premium, product-focused prose: self-winding automatic mechanisms, quartz timekeeping, stainless-steel finishing, sapphire-crystal scratch resistance and functional chronograph/moonphase distinctions. The founder-requested long specification disclaimer has been removed from the homepage.
