@@ -114,7 +114,7 @@
     const selected = state.slots.includes(watch.id);
     const label = selected ? 'In your box' : (state.target !== null ? 'Replace watch' : (model.count(state) === state.size ? 'Swap into box' : 'Add to my box'));
     $('[data-watch-selection]').innerHTML = `<button type="button" class="studio-primary studio-feature-add${selected ? ' is-in-box' : ''}" data-feature-add data-action="${selected ? 'review' : 'add'}" data-id="${escape(watch.id)}" aria-label="${escape(label + ': ' + watch.name)}">${label}<span aria-hidden="true">${selected ? '✓' : '+'}</span></button>`;
-    $('[data-watch-feature]').innerHTML = `<p class="studio-feature-style">${escape(watch.styleLabel)}<span>Concept ${String(config.watches.indexOf(watch) + 1).padStart(2, '0')}</span></p><h3 id="studio-feature-title">${escape(watch.name)}</h3><p class="studio-feature-description">${escape(watch.description)}</p><dl class="studio-feature-specs"><div><dt>Dial</dt><dd>${escape(watch.dial)}</dd></div><div><dt>Finish</dt><dd>${escape(watch.finish)}</dd></div><div><dt>Strap design</dt><dd>${escape(watch.strapLabel)}</dd></div></dl><button type="button" class="studio-feature-details" data-action="details" data-id="${escape(watch.id)}">View full details <span aria-hidden="true">↗</span></button>`;
+    $('[data-watch-feature]').innerHTML = `<div class="studio-feature-copy"><p class="studio-feature-style">${escape(watch.styleLabel)}</p><h3 id="studio-feature-title">${escape(watch.name)}</h3></div><button type="button" class="studio-feature-details" data-action="details" data-id="${escape(watch.id)}" aria-label="Details for ${escape(watch.name)}">Details <span aria-hidden="true">↗</span></button>`;
   }
   function setActiveWatch(id, refresh, physicalIndex) {
     const index = carouselWatches.findIndex(watch => watch.id === id);
@@ -230,7 +230,7 @@
       setActiveWatch(activeWatchId, true, activeSlideIndex);
       if (changed) centerFrame = requestAnimationFrame(() => centerWatch(activeWatchId, false, activeSlideIndex));
     }
-    $('[data-result-count]').textContent = list.length + ' concept ' + (list.length === 1 ? 'watch' : 'watches') + (filter === 'all' && strap === 'all' && !search ? ' · Find your next favourite.' : ' found');
+    $('[data-result-count]').textContent = list.length + (list.length === 1 ? ' watch' : ' watches');
     $('[data-catalog-empty]').hidden = list.length > 0;
     $('[data-action="reset-filters"]').hidden = filter === 'all' && strap === 'all' && !search;
     root.querySelectorAll('[data-action="filter"]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.style === filter)));
@@ -275,7 +275,7 @@
     $('[data-box-display]').innerHTML = boxMarkup();
     $('[data-mobile-box-display]').innerHTML = boxMarkup();
     $('[data-box-progress]').style.width = (count / state.size * 100) + '%';
-    $('[data-box-hint]').textContent = count === 0 ? 'Your first choice sets the tone. Start with a watch that feels like you.' : count === state.size ? 'All together. Tap any watch to change it, or see your complete collection.' : (state.size - count) + ' more to make it yours. Mix styles, or stay with a look you love.';
+    $('[data-box-hint]').textContent = count === 0 ? 'Choose your first watch.' : count === state.size ? 'Box complete.' : (state.size - count) + (state.size - count === 1 ? ' space left.' : ' spaces left.');
     $('[data-box-price]').textContent = money(price);
     $('[data-box-price]').classList.toggle('is-pending', price === null);
     $('[data-box-inclusions]').textContent = state.size + (state.size === 1 ? ' watch' : ' watches') + ' + presentation box';
@@ -332,14 +332,14 @@
   }
   function reviewRows() {
     return state.slots.map((id, index) => {
-      if (!id) return `<li class="studio-review-row is-empty"><span class="studio-review-number">${String(index + 1).padStart(2, '0')}</span><div><strong>A little room for you.</strong><p>Choose the next watch for your collection.</p></div><button type="button" class="studio-text-button" data-action="replace" data-slot="${index}">Choose ↗</button></li>`;
+      if (!id) return `<li class="studio-review-row is-empty"><span class="studio-review-number">${String(index + 1).padStart(2, '0')}</span><div><strong>Empty slot</strong></div><button type="button" class="studio-text-button" data-action="replace" data-slot="${index}">Choose ↗</button></li>`;
       const watch = watches.get(id);
       return `<li class="studio-review-row"><span class="studio-review-number">${String(index + 1).padStart(2, '0')}</span><div class="studio-review-art">${watchArt(watch)}</div><div class="studio-review-watch"><strong>${escape(watch.name)}</strong><p>${escape(watch.styleLabel)} · ${escape(watch.dial)}</p><div class="studio-review-edit"><button type="button" data-action="replace" data-slot="${index}">Replace</button><button type="button" data-action="remove" data-slot="${index}" aria-label="Remove ${escape(watch.name)}">Remove</button></div></div><div class="studio-reorder"><button type="button" data-action="move" data-slot="${index}" data-to="${index - 1}" aria-label="Move ${escape(watch.name)} earlier" ${index === 0 ? 'disabled' : ''}>↑</button><button type="button" data-action="move" data-slot="${index}" data-to="${index + 1}" aria-label="Move ${escape(watch.name)} later" ${index === state.size - 1 ? 'disabled' : ''}>↓</button></div></li>`;
     }).join('');
   }
   function showReview(opener) {
     const full = model.count(state) === state.size;
-    openDialog(`<div class="studio-review">${title('YOUR COLLECTION / ' + model.count(state) + ' OF ' + state.size + ' CHOSEN', full ? 'That looks like you.' : 'See it coming together.')}<p class="studio-review-intro">Every piece has its place. Replace, remove or rearrange until it feels right.</p><div class="studio-review-overhead">${boxMarkup()}</div><ol class="studio-review-list">${reviewRows()}</ol><div class="studio-review-total"><div><span>Planned collection price</span><strong class="${model.price(state) === null ? 'is-pending' : ''}">${money(model.price(state))}${model.price(state) === null ? '' : ' <small>USD</small>'}</strong></div><p>${state.size} ${state.size === 1 ? 'watch' : 'watches'} of your choice + presentation box.<br>Shipping and taxes to be confirmed before launch.</p></div><p class="studio-review-note">Design preview only. These are concept watches, not confirmed inventory. Orders and checkout are not available.</p><button type="button" class="studio-primary" data-action="${full ? 'keep' : 'continue'}">${full ? 'Keep this selection' : 'Continue choosing'}<span aria-hidden="true">↗</span></button><p class="studio-save-note">${storageAvailable ? 'Your selection is saved on this device. No account needed.' : 'Your selection is kept for this visit. Browser storage is unavailable.'}</p></div>`, 'review', opener);
+    openDialog(`<div class="studio-review">${title('YOUR BOX / ' + model.count(state) + ' OF ' + state.size + ' CHOSEN', 'Review your box')}<div class="studio-review-overhead">${boxMarkup()}</div><ol class="studio-review-list">${reviewRows()}</ol><div class="studio-review-total"><div><span>Planned total</span><strong class="${model.price(state) === null ? 'is-pending' : ''}">${money(model.price(state))}${model.price(state) === null ? '' : ' <small>USD</small>'}</strong></div><p>${state.size} ${state.size === 1 ? 'watch' : 'watches'} of your choice + presentation box.<br>Shipping and taxes to be confirmed before launch.</p></div><p class="studio-review-note">Preview only · No checkout.</p><button type="button" class="studio-primary" data-action="${full ? 'keep' : 'continue'}">${full ? 'Keep this selection' : 'Continue choosing'}<span aria-hidden="true">↗</span></button><p class="studio-save-note">${storageAvailable ? 'Saved on this device.' : 'Kept for this visit.'}</p></div>`, 'review', opener);
     document.body.classList.add('studio-dialog-open');
   }
   function requestSize(size, opener) {

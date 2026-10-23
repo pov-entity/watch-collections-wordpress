@@ -334,3 +334,61 @@
 }
 .studio .studio-box-overhead .studio-box{opacity:0;transition:opacity .15s}
 .studio .studio-box-overhead.is-ready .studio-box{opacity:1}
+
+/* Keep the Studio focused on choosing a box and its watches. */
+.collection-studio-page .announcement-bar,
+.collection-studio-page .header-action{display:none}
+.studio .studio-intro{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  gap:16px;padding:30px 0 26px;
+}
+.studio .studio-intro h1{
+  font-family:var(--font-display);font-size:clamp(1.65rem,2.7vw,2.6rem);
+  font-weight:600;line-height:1.2;letter-spacing:-.05em;margin:0;
+}
+.studio-preview-tag{
+  display:inline-flex;align-items:center;gap:7px;padding:7px 10px;
+  border:1px solid var(--line);border-radius:999px;white-space:nowrap;
+  font:400 .56rem/1.4 var(--font-detail);color:var(--muted);
+}
+.studio .studio-section-label{margin-bottom:12px}
+.studio .studio-section-label h2{font-size:1rem}
+.studio .studio-size{padding-bottom:22px;margin-bottom:22px}
+.studio .studio-filters{margin-top:14px}
+.studio .studio-style-filters{padding-top:16px;padding-bottom:4px}
+.studio .studio-results-bar{min-height:34px}
+.studio .studio-carousel-stage{padding-top:18px}
+.studio .studio-feature{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;padding:20px 26px;text-align:left;
+}
+.studio-feature-copy{min-width:0}
+.studio .studio-feature-style{justify-content:flex-start;margin:0 0 4px}
+.studio .studio-feature h3{font-size:clamp(1.15rem,1.8vw,1.65rem);margin:0}
+.studio .studio-feature-details{flex:none;margin:0}
+.studio .studio-box-heading{margin-bottom:20px}
+.studio .studio-box-hint{min-height:0;line-height:1.6;margin:0 0 14px}
+.studio .studio-box-meta{justify-content:flex-end}
+.studio-preview-details{
+  margin:24px 0 0;padding-top:16px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:.68rem;line-height:1.7;
+}
+.studio-preview-details summary{width:fit-content;cursor:pointer}
+.studio-preview-details summary:focus-visible{outline:3px solid var(--accent-ink);outline-offset:4px}
+.studio-preview-details p{max-width:680px;margin:12px 0 0}
+@media(max-width:700px){
+  .studio .studio-intro{padding:22px 0 20px;gap:12px}
+  .studio .studio-intro h1{font-size:clamp(1.6rem,6.3vw,2rem)}
+  .studio-preview-tag{font-size:.5rem;padding:5px 9px}
+  .studio .studio-size-option{min-height:0;gap:8px;padding:12px 8px;align-items:center}
+  .studio .studio-size-option__photo{height:68px}
+  .studio .studio-size-option__copy{width:100%;text-align:center}
+  .studio .studio-size-option__copy strong{font-size:.71rem}
+  .studio .studio-size-option__price{font-size:1.2rem;text-align:center;align-self:center}
+  .studio .studio-radio{top:10px;right:8px}
+  .studio .studio-filters{margin-top:12px}
+  .studio .studio-feature{gap:14px;padding:18px}
+  .studio .studio-feature-style{font-size:.5rem}
+  .studio .studio-feature-details{font-size:.66rem}
+  .studio-preview-details{font-size:.63rem}
+}

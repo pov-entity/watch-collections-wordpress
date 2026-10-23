@@ -1,5 +1,13 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
+## Focused Collection Studio — v0.8.5
+
+The Studio opens with a compact “Build your collection” title, box choices and watch filters. Repeated slogans, step descriptions and preview notices have been removed. The featured watch shows its style, name and a Details action; full descriptions and specifications remain in the existing dialog. One expandable “About this preview” note explains the concept visuals and launch status, with a small “Preview · No checkout” badge visible at the top.
+
+The box summary and review use shorter labels and status messages. Package prices, selection behavior, overhead trays, five-watch carousel and homepage hero remain unchanged. Desktop and 390px-frame browser checks verified loaded box images, no horizontal overflow, watch details, add/review/remove, search/reset and mobile carousel navigation. JavaScript syntax checks passed.
+
+Decision log — 2026-10-23: reduce distracting text so choosing a box and watches takes priority. Preserve accessible carousel instructions and keep product qualifications available in Details and the preview disclosure. Version 0.8.5 refreshes the assets for Git Updater.
+
 ## Transparent left-side hero — v0.8.4
 
 The selected day is now the hero's main heading, with its style and occasion description directly over the film's empty left side. The separate information panel, large introductory headline and card borders have been removed. Seven abbreviated day buttons sit in one row below the description; full day names remain in their accessible labels. The collection link, motion control and illustration disclosure are retained.
@@ -19,7 +27,7 @@ The homepage displays a full-width editorial video area with a transparent left-
 **Hold frames:** Monday 0.667s, Tuesday 2.250s, Wednesday 3.750s, Thursday 5.208s, Friday 6.625s, Saturday 7.708s, Sunday 9.125s. Exact stillness depends on the approved 10-second, 24fps original file; replacing it with different footage requires recalibrating the timings. AI-generated images feature recognizable luxury-watch brands as editorial concepts and must not be misrepresented as watches offered by this store.
 
 
-**Status:** Prototype v0.8.4. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
+**Status:** Prototype v0.8.5. Not a live store. Uses the founder's DialByDay Collections identity. The Collection Studio supports **1, 3 or 6 watches**.
 
 ## Dial-picture style selection — v0.8.2
 
