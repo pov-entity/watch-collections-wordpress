@@ -196,3 +196,16 @@ body:not(.home) .announcement-bar{background:#0B203D;color:#F5F7F9}
 @media(max-width:650px) {
   .home .editorial-quality__story {--assembly-gutter:18px}
 }
+
+/* Wide-screen Details alignment: share a top baseline across editorial
+   heading and specifications without pulling the watch film out of balance.
+   Preserve the stacked tablet/mobile rules at 1100px and below. */
+@media (min-width:1101px) {
+  .home .editorial-quality__layout {align-items:start}
+  .home .editorial-quality__intro {
+    align-self:start;
+    padding-top:18px;
+  }
+  .home .editorial-quality__visual {align-self:center}
+  .home .editorial-quality__details {align-self:start}
+}
