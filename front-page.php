@@ -29,13 +29,15 @@ $hero_video_url = watch_collections_hero_video_url();
 <main id="main">
 	<section class="week-hero week-hero--interactive<?php echo $hero_video_url ? '' : ' has-video-error'; ?>" aria-labelledby="hero-title" data-week-hero>
 		<div class="week-hero__experience">
-			<div class="week-hero__film" aria-hidden="true">
-				<div class="week-hero__fallback-scenes">
+			<div class="week-hero__film">
+				<div class="week-hero__fallback-scenes" aria-hidden="true">
 					<?php foreach ( $week_scenes as $index => $scene ) : ?>
 						<img class="week-hero__fallback-image<?php echo 0 === $index ? ' is-active' : ''; ?>" data-hero-fallback-image="<?php echo esc_attr( $index ); ?>" src="<?php echo esc_url( $scene['image'] ); ?>" alt="" loading="eager" decoding="async" width="1600" height="900">
 					<?php endforeach; ?>
 				</div>
 				<video
+					id="weekly-fashion-film"
+					aria-hidden="true"
 					class="week-hero__video"
 					data-hero-video
 					data-video-available="<?php echo $hero_video_url ? '1' : '0'; ?>"
@@ -55,6 +57,10 @@ $hero_video_url = watch_collections_hero_video_url();
 				<?php endif; ?>
 				</video>
 				<div class="week-hero__film-shade"></div>
+				<button type="button" class="week-hero__motion" data-hero-motion aria-controls="weekly-fashion-film" aria-pressed="false" aria-label="<?php esc_attr_e( 'Pause the weekly video', 'watch-collections' ); ?>">
+					<span class="week-hero__pause-icon" aria-hidden="true"></span>
+					<span data-hero-motion-label><?php esc_html_e( 'Pause', 'watch-collections' ); ?></span>
+				</button>
 			</div>
 
 			<div class="week-hero__rail">
@@ -70,10 +76,6 @@ $hero_video_url = watch_collections_hero_video_url();
 
 				<div class="week-hero__discover">
 					<p><?php esc_html_e( 'Find your day.', 'watch-collections' ); ?></p>
-					<button type="button" class="week-hero__motion" data-hero-motion aria-pressed="false" aria-label="<?php esc_attr_e( 'Pause the weekly video', 'watch-collections' ); ?>">
-						<span class="week-hero__pause-icon" aria-hidden="true"></span>
-						<span data-hero-motion-label><?php esc_html_e( 'Pause', 'watch-collections' ); ?></span>
-					</button>
 				</div>
 				<p class="screen-reader-text"><?php esc_html_e( 'Choose a day to pause', 'watch-collections' ); ?></p>
 				<div class="week-hero__selector" role="group" aria-label="<?php esc_attr_e( 'Choose a day to play to and pause', 'watch-collections' ); ?>">
@@ -104,8 +106,7 @@ $hero_video_url = watch_collections_hero_video_url();
 			<div class="editorial-quality__story">
 			<div class="editorial-quality__intro">
 				<p class="editorial-tag"><span></span><?php esc_html_e( '01 / THE DETAILS', 'watch-collections' ); ?></p>
-				<h2 id="quality-title"><?php esc_html_e( 'A beautiful dial catches your eye.', 'watch-collections' ); ?> <em><?php esc_html_e( 'The details deserve a closer look.', 'watch-collections' ); ?></em></h2>
-				<p><?php esc_html_e( 'There is more to a watch than the way it photographs. We are building product listings around the details that matter for real ownership.', 'watch-collections' ); ?></p>
+				<h2 id="quality-title"><?php esc_html_e( 'Every detail deserves', 'watch-collections' ); ?> <em><?php esc_html_e( 'a closer look.', 'watch-collections' ); ?></em></h2>
 			</div>
 			<figure class="editorial-quality__visual">
 				<video class="editorial-quality__assembly" data-assembly-video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="<?php echo esc_url( get_template_directory_uri() . '/assets/assembly/poster.jpg' ); ?>" width="1920" height="1080" aria-label="<?php esc_attr_e( 'Animated exploded watch assembly', 'watch-collections' ); ?>">

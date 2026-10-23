@@ -1,5 +1,15 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
+## Restrained invitation and closer assembly — v0.8.13
+
+The collection action keeps “Choose your first watch” with a quieter supporting label, a smooth satin navy surface, one champagne edge, and a shorter profile. The visible grain and inset frame have been removed. The existing contact reflection, controlled press, keyboard focus and reduced-motion support remain.
+
+The hero motion control now sits at the lower-right corner of the film, outside any aria-hidden ancestor and explicitly associated with the video. “Find your day.” is centered above seven equal choices. Playback logic and pause points are unchanged. A shorter serif heading, “Every detail deserves a closer look,” and reduced mobile spacing bring the assembly animation forward; the redundant introductory paragraph is removed.
+
+Asset review: the Studio catalog still contains twelve concept designs; no verified SKU photographs were supplied. Replacing the branded lifestyle film with footage of the products actually offered remains a launch dependency. This release preserves the founder's film and avoids inventing saleable inventory, specifications or product photography. Supplier-confirmed products and images are needed to complete that part of the requested refinement.
+
+Decision log — 2026-10-23: implement the approved visual audit; validate syntax, media behavior, accessible controls, mobile fit and Studio navigation, install the release and clear caches. Conversion impact remains unmeasured.
+
 ## Precious-material collection control — v0.8.12
 
 The homepage action uses “Choose your first watch” on a satin navy surface with fine champagne edging, an inset bevel and warm ivory serif lettering. The cartoon watch stack, add badge, heavy raised edge and playful rotation effects have been removed. A quiet reflection follows pointer or touch contact and a one-pixel press shift gives controlled visual feedback without delaying navigation. Motion preferences and visible keyboard focus remain supported.

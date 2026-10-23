@@ -143,7 +143,10 @@ body:not(.home) .announcement-bar{background:#0B203D;color:#F5F7F9}
 /* A continuous navy stage for the introduction and assembly film. */
 .editorial-quality__story {display:contents}
 .home .editorial-quality {background:#0b203d;overflow:clip}
-.home .editorial-quality__intro h2 {color:#f5f7f9}
+.home .editorial-quality__intro h2 {
+  color:#f5f7f9;font-family:var(--font-editorial);font-weight:400;
+  font-size:clamp(1.85rem,2.6vw,2.65rem);line-height:1.16;letter-spacing:-.035em;
+}
 .home .editorial-quality__intro h2 em {color:#e4c4a3}
 .home .editorial-quality__intro .editorial-tag {color:#b7c9d8}
 .home .editorial-quality__intro>p:not(.editorial-tag),
@@ -176,8 +179,12 @@ body:not(.home) .announcement-bar{background:#0B203D;color:#F5F7F9}
 @media(max-width:700px) {
   .home .editorial-quality {padding-top:0}
   .home .editorial-quality__story {
-    display:grid;grid-template-columns:minmax(0,1fr);gap:20px;
-    padding-top:40px;min-width:0;
+    display:grid;grid-template-columns:minmax(0,1fr);gap:8px;
+    padding-top:28px;min-width:0;
+  }
+  .home .editorial-quality__intro .editorial-tag {margin-bottom:14px}
+  .home .editorial-quality__intro h2 {
+    font-size:clamp(1.65rem,6.4vw,2.2rem);margin-bottom:8px;max-width:22ch;
   }
   .home .editorial-quality__visual {
     max-width:none;width:100vw;left:50%;transform:translateX(-50%);
