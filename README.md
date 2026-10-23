@@ -1,5 +1,14 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
+## Watch details copy — v0.8.17
+
+The five Details rows now use premium, product-focused prose: self-winding automatic mechanisms, quartz timekeeping, stainless-steel finishing, sapphire-crystal scratch resistance and functional chronograph/moonphase distinctions. The founder-requested long specification disclaimer has been removed from the homepage.
+
+Decision log — 2026-10-23: Do not claim an AISI 403 case grade, any specific movement caliber, measured accuracy, or that every sample has sapphire crystal or working complications until supplier SKU sheets and physical samples substantiate those claims. These five rows are intended to express the collection's design/product standard; they do not replace per-SKU confirmed specifications. Confirm materials, functional pushers, moonphase advancement and calibers before opening checkout. No live WordPress installation or purge is implied by a GitHub source change.
+
+Backlog: refresh theme to v0.8.17 in WordPress, purge caches, verify mobile layout/copy, and validate claimed components with supplier sample QC.
+
+
 ## Exact details headline — v0.8.16
 
 The details heading now uses the founder's exact wording: “A beautiful durable dial catches your eye. The details deserve a closer look.” The second sentence retains the warm italic accent. Typography, spacing, assembly and interactions are unchanged.
