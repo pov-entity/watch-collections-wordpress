@@ -1,5 +1,9 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
+## Exact details headline — v0.8.16
+
+The details heading now uses the founder's exact wording: “A beautiful durable dial catches your eye. The details deserve a closer look.” The second sentence retains the warm italic accent. Typography, spacing, assembly and interactions are unchanged.
+
 ## Beauty and durability heading — v0.8.15
 
 The founder requested the details headline retain a beautiful, durable watch catching the eye. It now reads “A beautiful, durable watch catches your eye.” The compact serif treatment, direct transition into the assembly and existing per-model specification qualifications are retained. No product specifications or performance ratings have been added.
