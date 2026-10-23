@@ -310,3 +310,24 @@
   refresh();
   if (reduce.matches) hold(0); else attemptAutoplay();
 })();
+
+
+// A localized material reflection; normal link activation stays immediate.
+(function () {
+  'use strict';
+  var invitation = document.querySelector('[data-precious-cta]');
+  if (!invitation || !('PointerEvent' in window)) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function reflect(event) {
+    var rect = invitation.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    var x = Math.max(0, Math.min(100, (event.clientX - rect.left) / rect.width * 100));
+    var y = Math.max(0, Math.min(100, (event.clientY - rect.top) / rect.height * 100));
+    invitation.style.setProperty('--touch-x', x.toFixed(2) + '%');
+    invitation.style.setProperty('--touch-y', y.toFixed(2) + '%');
+  }
+  invitation.addEventListener('pointerdown', reflect, {passive:true});
+  invitation.addEventListener('pointermove', function (event) {
+    if (!reduced.matches && event.pointerType === 'mouse') reflect(event);
+  }, {passive:true});
+})();

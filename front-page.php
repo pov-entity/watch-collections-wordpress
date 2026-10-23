@@ -87,15 +87,9 @@ $hero_video_url = watch_collections_hero_video_url();
 				</div>
 
 				<div class="week-hero__rail-actions">
-					<a href="<?php echo esc_url( watch_collections_studio_url() ); ?>" class="week-hero__cta week-hero__cta--pick" aria-label="<?php esc_attr_e( 'Pick your first watch in the Collection Studio', 'watch-collections' ); ?>">
-						<span class="week-hero__cta-copy"><strong><?php esc_html_e( 'Pick your first watch', 'watch-collections' ); ?></strong><span class="week-hero__cta-hint"><?php esc_html_e( 'Your collection starts here.', 'watch-collections' ); ?></span></span>
-						<span class="week-hero__cta-visual" aria-hidden="true">
-							<svg viewBox="0 0 100 96" width="88" height="84" fill="none" focusable="false">
-								<g transform="translate(9 14) rotate(-18 22 34)" opacity=".8"><rect x="12" y="-2" width="20" height="74" rx="5" fill="#b59975"/><circle cx="22" cy="34" r="19" fill="#d8d7d0" stroke="#8c9aab"/><circle cx="22" cy="34" r="15.5" fill="#31506d"/><path d="M22 22v3m12 9h-3M22 46v-3m-12-9h3M22 34l-5-5m5 5 6-3" stroke="#f3e6d3" stroke-width="1.5" stroke-linecap="round"/></g>
-								<g transform="translate(48 7) rotate(16 22 34)" opacity=".9"><rect x="12" y="-2" width="20" height="74" rx="5" fill="#b5a18a"/><circle cx="22" cy="34" r="19" fill="#d7b98f" stroke="#a58459"/><circle cx="22" cy="34" r="15.5" fill="#f3eee2"/><path d="M22 22v3m12 9h-3M22 46v-3m-12-9h3M22 34l-5-5m5 5 6-3" stroke="#233b4f" stroke-width="1.5" stroke-linecap="round"/></g>
-								<g transform="translate(28 20)"><rect x="15" y="-5" width="18" height="80" rx="5" fill="#213b53"/><path d="M18 0h12M18 5h12M18 63h12M18 68h12" stroke="#557086"/><rect x="44" y="29" width="5" height="10" rx="2" fill="#8c9aaa"/><circle cx="24" cy="34" r="22" fill="#f3f2ed" stroke="#8090a1" stroke-width="1.3"/><circle cx="24" cy="34" r="18" fill="#0b203d"/><path d="M24 18v3m16 13h-3M24 50v-3M8 34h3" stroke="#f3e6d3" stroke-width="1.6" stroke-linecap="round"/><g class="week-hero__cta-hands"><path d="m24 34-8-8m8 8 10-5" stroke="#e4bd89" stroke-width="2" stroke-linecap="round"/></g><circle cx="24" cy="34" r="2" fill="#f3e6d3"/></g>
-							</svg><span class="week-hero__cta-plus">+</span>
-						</span>
+					<a href="<?php echo esc_url( watch_collections_studio_url() ); ?>" class="week-hero__cta week-hero__cta--precious" data-precious-cta aria-label="<?php esc_attr_e( 'Choose your first watch in the Collection Studio', 'watch-collections' ); ?>">
+						<span class="week-hero__cta-copy"><span class="week-hero__cta-kicker"><?php esc_html_e( 'BUILD YOUR COLLECTION', 'watch-collections' ); ?></span><strong><?php esc_html_e( 'Choose your', 'watch-collections' ); ?><br><?php esc_html_e( 'first watch', 'watch-collections' ); ?></strong></span>
+						<span class="week-hero__cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M3 12h17m-6-6 6 6-6 6"/></svg></span>
 					</a>
 
 				</div>
@@ -274,6 +268,7 @@ $hero_video_url = watch_collections_hero_video_url();
 	</section>
 </main>
 <?php get_footer(); ?>
+
 
 
 

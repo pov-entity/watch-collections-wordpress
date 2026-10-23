@@ -756,64 +756,68 @@
 }
 
 
-/* First-watch entry: tactile feedback and a small original watch collection. */
-.week-hero--interactive .week-hero__cta--pick {
+/* Fine bevels and a quiet reflection suggest a carefully finished object. */
+.week-hero--interactive .week-hero__cta--precious {
+  --touch-x:50%;--touch-y:50%;
   position:relative;isolation:isolate;overflow:hidden;
-  min-height:120px;padding:17px 18px;gap:12px;
-  border:1px solid #e8d8bf;border-bottom:3px solid #d5b58a;border-radius:12px;
-  background:#f3e8d8;color:#0b203d;
-  box-shadow:0 5px 0 #ad875b,0 11px 22px rgba(0,0,0,.14);
-  transform:translateY(0) scale(1);
-  transition:transform 140ms ease,box-shadow 140ms ease,background 180ms ease;
+  width:100%;min-height:108px;padding:19px 22px;gap:18px;
+  border:1px solid #b69a73;border-radius:5px;
+  color:#f5eadb;
+  --precious-surface:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0,rgba(255,255,255,.012) 1px,transparent 1px,transparent 3px),linear-gradient(120deg,#12283d 0%,#1a344b 42%,#10253b 74%,#0d2137 100%);
+  background:var(--precious-surface);
+  box-shadow:inset 0 1px 0 rgba(255,239,211,.12),inset 0 -1px 0 rgba(0,0,0,.25),0 3px 9px rgba(0,0,0,.14);
+  transform:translateY(0);
+  transition:transform 100ms ease,border-color 180ms ease,box-shadow 160ms ease;
   -webkit-tap-highlight-color:transparent;
 }
-.week-hero--interactive .week-hero__cta--pick>.week-hero__cta-copy {
-  gap:8px;color:#0b203d;align-items:flex-start;
+.week-hero--interactive .week-hero__cta--precious::before {
+  content:"";position:absolute;inset:3px;z-index:0;
+  border:1px solid rgba(209,178,133,.12);border-radius:2px;pointer-events:none;
 }
-.week-hero--interactive .week-hero__cta--pick strong {
-  max-width:11ch;color:#0b203d;
-  font:750 clamp(1.16rem,5.5vw,1.4rem)/1.12 var(--font-body,Inter),sans-serif;
-  letter-spacing:-.045em;
+.week-hero--interactive .week-hero__cta--precious::after {
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at var(--touch-x) var(--touch-y),rgba(236,211,171,.24),rgba(236,211,171,.05) 34%,transparent 72%);
+  opacity:0;transition:opacity 220ms ease;
 }
-.week-hero--interactive .week-hero__cta-hint {
-  max-width:21ch;color:#4e6070;
-  font:400 .67rem/1.4 var(--font-body,Inter),sans-serif;letter-spacing:-.01em;
+.week-hero--interactive .week-hero__cta--precious>.week-hero__cta-copy {
+  position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;
+  gap:8px;width:auto;height:auto;min-width:0;flex:1;
+  background:none;color:inherit;border-radius:0;
 }
-.week-hero--interactive .week-hero__cta--pick>.week-hero__cta-visual {
-  position:relative;display:block;flex:none;
-  width:88px;height:84px;border-radius:0;background:none;color:#0b203d;
-  transform:rotate(-5deg);transition:transform 180ms ease;
+.week-hero--interactive .week-hero__cta--precious .week-hero__cta-kicker {
+  color:#c3ae8d;font:500 .52rem/1.4 var(--font-body,Inter),sans-serif;
+  letter-spacing:.16em;
 }
-.week-hero--interactive .week-hero__cta-visual>svg {display:block;width:88px;height:84px}
-.week-hero--interactive .week-hero__cta-hands {
-  transform-origin:24px 34px;transition:transform 220ms ease;
+.week-hero--interactive .week-hero__cta--precious strong {
+  color:#f5eadb;
+  font:500 clamp(1.17rem,5.5vw,1.5rem)/1.12 var(--font-editorial,Lora),serif;
+  letter-spacing:-.025em;
 }
-.week-hero--interactive .week-hero__cta-plus {
-  position:absolute;right:-1px;bottom:0;display:grid;place-items:center;
-  width:25px;height:25px;border:2px solid #f3e8d8;border-radius:9px;
-  background:#0b203d;color:#f8ecda;font:400 22px/1 var(--font-body,Inter),sans-serif;
-  transition:transform 140ms ease,background 140ms ease;
+.week-hero--interactive .week-hero__cta--precious>.week-hero__cta-arrow {
+  position:relative;z-index:1;display:grid;place-items:center;flex:none;
+  width:24px;height:24px;margin-top:11px;
+  background:none;color:#d7ba8f;border-radius:0;
+  transition:transform 180ms ease;
 }
-.week-hero--interactive .week-hero__cta--pick:hover {
-  background:#fff0db;color:#0b203d;border-color:#e8d8bf;border-bottom-color:#d5b58a;
-  transform:translateY(-2px);box-shadow:0 7px 0 #ad875b,0 13px 24px rgba(0,0,0,.16);
+.week-hero--interactive .week-hero__cta-arrow svg {display:block;width:24px;height:24px}
+.week-hero--interactive .week-hero__cta--precious:hover {
+  background:var(--precious-surface);color:#fff3e2;border-color:#e0c69f;
+  box-shadow:inset 0 1px 0 rgba(255,239,211,.18),inset 0 -1px 0 rgba(0,0,0,.25),0 3px 10px rgba(0,0,0,.18);
+  transform:none;
 }
-.week-hero--interactive .week-hero__cta--pick:hover .week-hero__cta-visual,
-.week-hero--interactive .week-hero__cta--pick:focus-visible .week-hero__cta-visual {transform:rotate(1deg) translateY(-2px)}
-.week-hero--interactive .week-hero__cta--pick:hover .week-hero__cta-hands {transform:rotate(40deg)}
-.week-hero--interactive .week-hero__cta--pick:active {
-  transform:translateY(4px) scale(.985);background:#f9e7cd;
-  box-shadow:0 1px 0 #ad875b,0 3px 9px rgba(0,0,0,.12);
+.week-hero--interactive .week-hero__cta--precious:hover::after,
+.week-hero--interactive .week-hero__cta--precious:focus-visible::after {opacity:.65}
+.week-hero--interactive .week-hero__cta--precious:hover>.week-hero__cta-arrow {transform:translateX(3px)}
+.week-hero--interactive .week-hero__cta--precious:active {
+  transform:translateY(1px);border-color:#ecd5b2;
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.22),0 1px 3px rgba(0,0,0,.12);
 }
-.week-hero--interactive .week-hero__cta--pick:active .week-hero__cta-plus {transform:scale(1.12);background:#96683c}
-.week-hero--interactive .week-hero__cta--pick:focus-visible {outline:2px solid #f6d9af;outline-offset:7px}
+.week-hero--interactive .week-hero__cta--precious:active::after {opacity:1}
+.week-hero--interactive .week-hero__cta--precious:focus-visible {outline:2px solid #f5d5aa;outline-offset:5px}
 @media(prefers-reduced-motion:reduce) {
-  .week-hero--interactive .week-hero__cta--pick,
-  .week-hero--interactive .week-hero__cta--pick * {transition:none!important}
-  .week-hero--interactive .week-hero__cta--pick:hover,
-  .week-hero--interactive .week-hero__cta--pick:active,
-  .week-hero--interactive .week-hero__cta--pick:hover .week-hero__cta-visual,
-  .week-hero--interactive .week-hero__cta--pick:focus-visible .week-hero__cta-visual,
-  .week-hero--interactive .week-hero__cta--pick:hover .week-hero__cta-hands,
-  .week-hero--interactive .week-hero__cta--pick:active .week-hero__cta-plus {transform:none}
+  .week-hero--interactive .week-hero__cta--precious,
+  .week-hero--interactive .week-hero__cta--precious::after,
+  .week-hero--interactive .week-hero__cta--precious>.week-hero__cta-arrow {transition:none}
+  .week-hero--interactive .week-hero__cta--precious:active,
+  .week-hero--interactive .week-hero__cta--precious:hover>.week-hero__cta-arrow {transform:none}
 }

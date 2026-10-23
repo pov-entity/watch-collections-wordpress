@@ -1,5 +1,13 @@
 # Watch Collections — WordPress + WooCommerce Theme
 
+## Precious-material collection control — v0.8.12
+
+The homepage action uses “Choose your first watch” on a satin navy surface with fine champagne edging, an inset bevel and warm ivory serif lettering. The cartoon watch stack, add badge, heavy raised edge and playful rotation effects have been removed. A quiet reflection follows pointer or touch contact and a one-pixel press shift gives controlled visual feedback without delaying navigation. Motion preferences and visible keyboard focus remain supported.
+
+The complete control still opens the Collection Studio. The symmetric day selector and all hero and assembly playback behavior are preserved. This is a visual material treatment, not a claim about product materials or measured conversion performance.
+
+Decision log — 2026-10-23: founder requested a sophisticated, precious tactile feel. Validate template/script syntax, responsive fit and the destination; install the release and clear caches. Existing launch and hosting backlog items remain unchanged.
+
 ## First-watch invitation — v0.8.11
 
 The homepage action now says “Pick your first watch,” supported by “Your collection starts here.” It opens the existing Collection Studio. A warm ivory card, original miniature watch illustrations, an add symbol and tactile press feedback make the first selection feel concrete. The illustration lifts and the watch hands turn on hover or press; reduced-motion preferences disable these effects. Keyboard focus remains visible and the entire card is clickable.
@@ -294,6 +302,7 @@ Implemented via Google Fonts + `assets/css/typography.css`, queued last after ho
 The logo is not a text font: the header and footer already reference `assets/brand/dialbyday-logo.svg` (the transparent white founder mark), colored white on the homepage hero and navy on light pages. `assets/brand/favicon.svg` also uses the approved navy `#102A4F`. Existing PNG favicon variants may retain a slightly darker background; they should be regenerated from the approved original logo before launch.
 
 **Seeing changes in WordPress Playground:** an existing *saved* Playground instance is not continuously connected to GitHub. Refreshing Safari or clicking Autosaved does not pull the new theme. Open **New → From GitHub**, import `https://github.com/pov-entity/watch-collections-wordpress`, select **Theme** and `/`, and activate it. Under **Appearance → Themes**, confirm Watch Collections **version 0.6.0**. Open the homepage in that *new* Playground. If fonts do not load, temporarily disable blockers and check connection to Google Fonts; fallback typography will still render. Back up any existing content before replacing an old Playground instance.
+
 
 
 
