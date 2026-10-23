@@ -74,9 +74,6 @@ $hero_video_url = watch_collections_hero_video_url();
 					<p class="screen-reader-text" aria-hidden="true" data-hero-status><?php esc_html_e( 'Playing the week', 'watch-collections' ); ?></p>
 				</div>
 
-				<div class="week-hero__discover">
-					<p><?php esc_html_e( 'Find your day.', 'watch-collections' ); ?></p>
-				</div>
 				<p class="screen-reader-text"><?php esc_html_e( 'Choose a day to pause', 'watch-collections' ); ?></p>
 				<div class="week-hero__selector" role="group" aria-label="<?php esc_attr_e( 'Choose a day to play to and pause', 'watch-collections' ); ?>">
 					<?php foreach ( $week_scenes as $index => $scene ) : ?>
@@ -88,6 +85,9 @@ $hero_video_url = watch_collections_hero_video_url();
 					<?php endforeach; ?>
 				</div>
 
+				<div class="week-hero__discover">
+					<p><?php esc_html_e( 'Find your day.', 'watch-collections' ); ?></p>
+				</div>
 				<div class="week-hero__rail-actions">
 					<a href="<?php echo esc_url( watch_collections_studio_url() ); ?>" class="week-hero__cta week-hero__cta--precious" data-precious-cta aria-label="<?php esc_attr_e( 'Choose your first watch in the Collection Studio', 'watch-collections' ); ?>">
 						<span class="week-hero__cta-copy"><span class="week-hero__cta-kicker"><?php esc_html_e( 'BUILD YOUR COLLECTION', 'watch-collections' ); ?></span><strong><?php esc_html_e( 'Choose your', 'watch-collections' ); ?><br><?php esc_html_e( 'first watch', 'watch-collections' ); ?></strong></span>
