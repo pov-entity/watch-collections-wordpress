@@ -155,26 +155,10 @@ $hero_video_url = watch_collections_hero_video_url();
 		</div>
 	</section>
 
-	<section class="editorial-process" id="how-it-works" aria-labelledby="process-title">
-		<div class="container">
-			<div class="editorial-section-top">
-				<div><p class="editorial-tag"><span></span><?php esc_html_e( '03 / THE EXPERIENCE', 'watch-collections' ); ?></p><h2 id="process-title"><?php esc_html_e( 'Choose the watches.', 'watch-collections' ); ?> <em><?php esc_html_e( 'We bring the box together.', 'watch-collections' ); ?></em></h2></div>
-				<p><?php esc_html_e( 'Choose a box, try different watch styles and see your selection take shape in the Studio preview.', 'watch-collections' ); ?></p>
-			</div>
-			<div class="editorial-process__steps">
-				<div><span>01</span><h3><?php esc_html_e( 'Choose your box', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Pick a 1, 3 or 6-watch box and see what is included.', 'watch-collections' ); ?></p></div>
-				<div><span>02</span><h3><?php esc_html_e( 'Find your watches', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Mix eligible styles, check their details and change your selection before confirming.', 'watch-collections' ); ?></p></div>
-				<div><span>03</span><h3><?php esc_html_e( 'Review every detail', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'See the exact watch models, quantities, box and order total before any payment.', 'watch-collections' ); ?></p></div>
-			</div>
-		</div>
-	</section>
-
-
-
 	<section class="editorial-fulfillment" id="fulfillment" aria-labelledby="fulfillment-title">
 		<div class="container">
 			<div class="editorial-fulfillment__intro">
-				<p class="editorial-tag editorial-tag--light"><?php esc_html_e( '04 / BEYOND CHECKOUT', 'watch-collections' ); ?></p>
+				<p class="editorial-tag editorial-tag--light"><?php esc_html_e( '03 / BEYOND CHECKOUT', 'watch-collections' ); ?></p>
 				<h2 id="fulfillment-title"><?php esc_html_e( 'Your choices deserve', 'watch-collections' ); ?> <em><?php esc_html_e( 'a careful journey.', 'watch-collections' ); ?></em></h2>
 				<p><?php esc_html_e( 'Your collection should arrive with the models you selected, not unexplained substitutions. We are designing our fulfillment around order matching, item checks, protective packing and clear delivery information.', 'watch-collections' ); ?></p>
 			</div>
@@ -190,7 +174,7 @@ $hero_video_url = watch_collections_hero_video_url();
 
 	<section class="editorial-assurance" id="confidence" aria-labelledby="assurance-title">
 		<div class="container editorial-assurance__grid">
-			<div><p class="editorial-tag"><span></span><?php esc_html_e( '05 / NO GUESSWORK', 'watch-collections' ); ?></p><h2 id="assurance-title"><?php esc_html_e( 'A purchase should make sense', 'watch-collections' ); ?> <em><?php esc_html_e( 'before you make it.', 'watch-collections' ); ?></em></h2></div>
+			<div><p class="editorial-tag"><span></span><?php esc_html_e( '04 / NO GUESSWORK', 'watch-collections' ); ?></p><h2 id="assurance-title"><?php esc_html_e( 'A purchase should make sense', 'watch-collections' ); ?> <em><?php esc_html_e( 'before you make it.', 'watch-collections' ); ?></em></h2></div>
 			<div class="editorial-assurance__copy">
 				<p><?php esc_html_e( 'You deserve to know what is inside your box, what each watch is made from, what the full order costs and what happens if something goes wrong.', 'watch-collections' ); ?></p>
 				<ul>
