@@ -487,3 +487,152 @@
  .studio .studio-facet-option{transition:none}
  .studio .studio-facet-option:hover{transform:none}
 }
+
+/* v0.8.25 — A product-led filter gallery, inspired by realistic watch configurators.
+   All images remain original catalog vectors until verified supplier photos are added. */
+.studio .studio-style-heading{
+  margin:16px 0 10px;color:#445d71;font:.59rem/1.45 var(--font-detail);
+  letter-spacing:.13em;font-weight:600;
+}
+.studio .studio-style-filters{
+  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;padding:0 0 5px;
+}
+.studio .studio-style-filters button{
+  min-height:183px;padding:8px 6px 11px;gap:5px;justify-content:flex-start;
+  border:1px solid #D9E0E5;border-radius:10px;background:#fff;
+  box-shadow:0 3px 13px #102A4F0B;
+}
+.studio .studio-style-filters button:hover{
+  border-color:#9CB0C0;background:#F7FAFC;transform:translateY(-2px);
+}
+.studio .studio-style-filters button[aria-pressed=true]{
+  border-color:#1B3754;background:#EFF4F7;box-shadow:0 0 0 1px #1B3754;
+}
+.studio .studio-style-image,
+.studio .studio-style-filters button[aria-pressed=true] .studio-style-image{
+  width:100%;height:126px;min-height:126px;flex:0 0 126px;
+  display:grid;place-items:center;overflow:hidden;border-radius:7px;
+  background:radial-gradient(ellipse at 47% 35%,#F7FAFB 0%,#E4E8EB 45%,#BBC7D0 100%);
+  box-shadow:inset 0 0 0 1px #A9B8C440,0 2px 5px #102A4F0E;
+}
+.studio .studio-style-image .studio-watch-art{
+  display:block;width:auto;height:125px;max-width:100%;max-height:125px;border-radius:0;
+  filter:drop-shadow(2px 4px 3px #0D243C50);transform:none;
+}
+.studio .studio-style-image--all .studio-watch-trio{height:117px;width:115px}
+.studio .studio-style-image--all .studio-watch-trio>span{height:110px;width:51px}
+.studio .studio-style-image--all .studio-watch-trio>span:nth-child(1){left:0;top:10px}
+.studio .studio-style-image--all .studio-watch-trio>span:nth-child(2){left:32px;top:0;z-index:3}
+.studio .studio-style-image--all .studio-watch-trio>span:nth-child(3){left:65px;top:10px}
+.studio .studio-style-image--all .studio-watch-trio .studio-watch-art{height:108px;max-height:108px}
+.studio .studio-style-name{font-size:.69rem;font-weight:600;line-height:1.3;margin-top:3px}
+.studio .studio-style-count{font-size:.54rem;color:#647A8A;line-height:1.3}
+.studio .studio-detail-filters{margin-top:18px;padding:17px 16px 16px;border-color:#D1DBE2;background:#F8FAFB}
+.studio .studio-detail-filters__upper{grid-template-columns:minmax(0,1fr) minmax(0,1.8fr)}
+.studio .studio-facet--strap{margin-top:15px;padding-top:15px;border-top:1px solid #DCE5EB}
+.studio .studio-facet--dial{margin-top:15px;padding-top:15px}
+.studio .studio-facet__heading h3{font-size:.85rem}
+.studio .studio-facet-option{
+  min-height:146px;flex:1 0 122px;gap:4px;padding:7px 6px 11px;
+  border-color:#D4DDE3;border-radius:10px;
+  background:linear-gradient(180deg,#FAFBFC 0%,#FFFFFF 100%);
+}
+.studio .studio-facet-option__art{
+  position:relative;height:96px;min-height:96px;width:100%;
+  display:grid;place-items:center;overflow:hidden;border-radius:7px;
+  background:radial-gradient(ellipse at 51% 33%,#FFFFFF 0%,#E6EAED 52%,#C9D2D9 100%);
+}
+.studio .studio-facet-option--finish .studio-facet-option__art{
+  background:radial-gradient(ellipse at 45% 35%,#F8F2E9 0%,#E6DED6 65%,#D2C0B1 100%);
+}
+.studio .studio-facet-option--strap .studio-facet-option__art{
+  background:radial-gradient(ellipse at 50% 35%,#F7F8FA 0%,#DCE3E7 60%,#C4CDD4 100%);
+}
+.studio .studio-facet-option--brand{min-height:142px;flex:1 0 126px}
+.studio .studio-facet-option--brand .studio-facet-option__art{background:#F1F4F6}
+.studio .studio-facet-option--brand .studio-brand-emblem{
+  width:63px;height:63px;background:linear-gradient(130deg,#FFFFFF,#DCE5EB);
+  border:1px solid #B0C2CE;box-shadow:0 5px 12px #102A4F19;
+}
+.studio .studio-facet-option--dial{
+  min-height:134px;flex:0 0 103px;
+}
+.studio .studio-facet-option--dial .studio-facet-option__art{
+  height:81px;min-height:81px;background:radial-gradient(circle,#FFFFFF,#E4EAEE);
+}
+.studio .studio-facet-option__name{font-size:.69rem}
+.studio .studio-facet-option__count{font-size:.53rem}
+.studio .studio-facet__choices--finish .studio-facet-option,
+.studio .studio-facet__choices--strap .studio-facet-option{flex:1 0 120px}
+.studio .studio-facet__choices--dial .studio-facet-option{flex:0 0 103px}
+.studio-finish-watch,.studio-strap-watch{display:grid;place-items:center;width:100%;height:94px}
+.studio-finish-watch .studio-watch-art,.studio-strap-watch .studio-watch-art,
+.studio-finish-watch .studio-watch-photo,.studio-strap-watch .studio-watch-photo{
+  width:auto;max-width:100%;height:91px;object-fit:contain;
+  filter:drop-shadow(2px 4px 3px #0B1D2B55);
+}
+.studio-watch-trio{position:relative;display:block;width:118px;height:92px;max-width:100%}
+.studio-watch-trio>span{position:absolute;display:grid;place-items:center;top:0;width:55px;height:92px}
+.studio-watch-trio>span:nth-child(1){left:0;top:7px}
+.studio-watch-trio>span:nth-child(2){left:31px;top:-2px;z-index:3}
+.studio-watch-trio>span:nth-child(3){left:62px;top:7px;z-index:2}
+.studio-watch-trio .studio-watch-art,.studio-watch-trio .studio-watch-photo{
+  width:auto;max-width:100%;height:88px;object-fit:contain;
+  filter:drop-shadow(1px 2px 2px #162B3A55);
+}
+.studio-dial-portrait{width:70px;height:70px;box-shadow:0 3px 8px #102A4F2B}
+.studio-dial-portrait .studio-watch-art,.studio-dial-portrait .studio-watch-photo{
+  width:70px;height:70px;object-fit:cover;
+}
+.studio-dial-trio{width:84px;height:67px}
+.studio-dial-trio>span{width:45px;height:45px}
+.studio-dial-trio>span:nth-child(1){left:0;top:19px}
+.studio-dial-trio>span:nth-child(2){left:20px;top:0}
+.studio-dial-trio>span:nth-child(3){left:40px;top:18px}
+.studio-dial-trio .studio-watch-photo{width:100%;height:100%;object-fit:cover}
+.studio .studio-facet-option[aria-pressed=true] .studio-facet-option__art{
+  box-shadow:inset 0 0 0 1px #8EA9BA;
+}
+.studio .studio-facet-option.is-unavailable:not([aria-pressed=true]){
+  opacity:.62;background:#F6F8F9;
+}
+.studio .studio-facet-option.is-unavailable:hover{opacity:1}
+.studio .studio-watch-photo{
+  display:block;object-fit:contain;max-width:100%;
+}
+@media(max-width:1200px){
+ .studio .studio-detail-filters__upper{grid-template-columns:1fr;gap:13px}
+ .studio .studio-facet__choices--brand .studio-facet-option{flex:0 0 136px}
+ .studio .studio-facet__choices--finish .studio-facet-option{flex:0 0 131px}
+ .studio .studio-style-filters button{min-height:175px}
+}
+@media(max-width:700px){
+ .studio .studio-style-heading{margin-top:14px;margin-bottom:8px;font-size:.53rem}
+ .studio .studio-style-filters{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ .studio .studio-style-filters button{min-height:153px;gap:4px;padding:6px 5px 9px;transform:none}
+ .studio .studio-style-image,.studio .studio-style-filters button[aria-pressed=true] .studio-style-image{
+   height:98px;min-height:98px;flex-basis:98px;border-radius:6px;
+ }
+ .studio .studio-style-image .studio-watch-art{height:98px;max-height:98px}
+ .studio .studio-style-image--all .studio-watch-trio{width:90px;height:96px}
+ .studio .studio-style-image--all .studio-watch-trio>span{width:42px;height:91px}
+ .studio .studio-style-image--all .studio-watch-trio>span:nth-child(1){left:0;top:6px}
+ .studio .studio-style-image--all .studio-watch-trio>span:nth-child(2){left:24px;top:0}
+ .studio .studio-style-image--all .studio-watch-trio>span:nth-child(3){left:47px;top:6px}
+ .studio .studio-style-image--all .studio-watch-trio .studio-watch-art{height:88px;max-height:88px}
+ .studio .studio-style-name{font-size:.65rem}
+ .studio .studio-style-count{font-size:.51rem}
+ .studio .studio-detail-filters{margin-top:12px;padding:13px 10px}
+ .studio .studio-facet--strap,.studio .studio-facet--dial{margin-top:12px;padding-top:12px}
+ .studio .studio-facet__choices--strap .studio-facet-option,
+ .studio .studio-facet__choices--finish .studio-facet-option{flex:0 0 124px}
+ .studio .studio-facet__choices--dial .studio-facet-option{flex:0 0 96px;min-height:132px}
+ .studio .studio-facet-option{min-height:144px;padding:6px 5px 9px}
+ .studio .studio-facet-option__name{font-size:.64rem}
+ .studio .studio-facet-option__art{height:92px;min-height:92px}
+ .studio .studio-facet-option--dial .studio-facet-option__art{height:81px;min-height:81px}
+}
+@media(prefers-reduced-motion:reduce){
+ .studio .studio-style-filters button{transition:none}
+ .studio .studio-style-filters button:hover{transform:none}
+}

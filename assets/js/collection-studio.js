@@ -18,6 +18,7 @@
   let strap = 'all';
   let brand = 'all';
   let dial = 'all';
+  let finish = 'all';
   let motion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let svgId = 0;
   let toastTimer;
@@ -79,17 +80,40 @@
     return `<svg class="studio-watch-art${dialOnly ? ' studio-watch-art--dial' : overhead ? ' studio-watch-art--overhead' : ''}" viewBox="${dialOnly ? '55 90 130 130' : overhead ? '45 26 150 258' : '0 0 240 320'}" fill="none" aria-hidden="true" focusable="false"><defs><linearGradient id="${id}-band" x1="80" y1="0" x2="159" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="${band}"/><stop offset=".3" stop-color="${band}"/><stop offset=".5" stop-color="${metalBand ? metal : band}"/><stop offset="1" stop-color="${band}"/></linearGradient><linearGradient id="${id}-metal" x1="64" y1="100" x2="180" y2="216" gradientUnits="userSpaceOnUse"><stop stop-color="#F8FAFB"/><stop offset=".18" stop-color="${metal}"/><stop offset=".4" stop-color="#62717A"/><stop offset=".53" stop-color="${metal}"/><stop offset=".8" stop-color="#EEF3F5"/><stop offset="1" stop-color="${metal}"/></linearGradient><radialGradient id="${id}-dial"><stop stop-color="${dial}"/><stop offset="1" stop-color="${edge}"/></radialGradient><linearGradient id="${id}-glass" x1="72" y1="97" x2="161" y2="211" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFFFF" stop-opacity=".21"/><stop offset=".5" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".07"/></linearGradient><clipPath id="${id}-clip"><rect x="83" y="9" width="74" height="300" rx="16"/></clipPath></defs><ellipse cx="123" cy="302" rx="57" ry="7" fill="#102A4F" fill-opacity=".12"/><rect x="83" y="9" width="74" height="300" rx="16" fill="url(#${id}-band)" stroke="${edge}" stroke-opacity=".2"/><g clip-path="url(#${id}-clip)">${bandDetails}</g><path d="m78 104 5-25h16v27m42 0V79h16l5 25M78 205l5 25h16v-27m42 0v27h16l5-25" fill="url(#${id}-metal)"/><rect x="179" y="147" width="12" height="17" rx="4" fill="url(#${id}-metal)"/><path d="M183 149v13m3-13v13" stroke="${edge}" stroke-opacity=".4"/>${watch.style === 'chronograph' ? `<rect x="173" y="116" width="11" height="9" rx="3" fill="${metal}"/><rect x="173" y="186" width="11" height="9" rx="3" fill="${metal}"/>` : ''}<circle cx="120" cy="158" r="66" fill="#071724" fill-opacity=".22"/><circle cx="120" cy="155" r="65" fill="url(#${id}-metal)" stroke="${metal}" stroke-width="1.4"/><circle cx="120" cy="155" r="58" fill="url(#${id}-dial)" stroke="${edge}" stroke-width="2"/>${sportBezel}<g${watch.style === 'sport' ? ' transform="translate(120 155) scale(.9) translate(-120 -155)"' : ''}>${marks}${complication}<path d="M120 155 100 128" stroke="#071724" stroke-width="5" stroke-linecap="round"/><path d="M120 155 100 128" stroke="${mark}" stroke-width="3.4" stroke-linecap="round"/><path d="M120 155 153 132" stroke="#071724" stroke-width="4" stroke-linecap="round"/><path d="M120 155 153 132" stroke="${mark}" stroke-width="2.4" stroke-linecap="round"/><path d="m115 176 17-71" stroke="${watch.style === 'sport' ? '#D68C68' : metal}" stroke-width=".9"/><circle cx="120" cy="155" r="3.2" fill="${metal}"/><circle cx="120" cy="155" r="1.1" fill="${edge}"/></g><circle cx="120" cy="155" r="56" fill="url(#${id}-glass)"/><path d="M79 124a49 49 0 0 1 60-15" stroke="#FFFFFF" stroke-opacity=".28" stroke-width="1.1"/></svg>`;
   }
 
+  // Use the same model render as the builder; full watch bodies provide realistic proportions.
+  // Verified product photos can replace concept vectors through catalog.visuals.
+  function watchPreview(watch, kind = 'watch') {
+    if (!watch) return '';
+    const raw = watch.visuals && watch.visuals[kind];
+    const url = typeof raw === 'string' ? raw.trim() : '';
+    if (url && /^(https?:\/\/|\/(?!\/))/i.test(url)) {
+      return `<img class="studio-watch-photo" src="${escape(url)}" alt="" loading="lazy" decoding="async">`;
+    }
+    return watchArt(watch, false, kind === 'dial');
+  }
+  function groupedWatches(key, limit = 3) {
+    return config.watches.filter((watch, i, all) =>
+      all.findIndex(other => catalogFilters.facetValue(other, key) === catalogFilters.facetValue(watch, key)) === i
+    ).slice(0, limit);
+  }
+  function previewTrio(watches, kind = 'watch', className = 'studio-watch-trio') {
+    return `<span class="${className}">${watches.map(watch =>
+      `<span>${watchPreview(watch, kind)}</span>`
+    ).join('')}</span>`;
+  }
   function renderStylePreviews() {
-    const overview = ['classic', 'chronograph', 'sport'].map(style => config.watches.find(watch => watch.style === style)).filter(Boolean);
+    const overview = ['classic', 'chronograph', 'sport']
+      .map(style => config.watches.find(watch => watch.style === style)).filter(Boolean);
     root.querySelectorAll('[data-action="filter"]').forEach(button => {
       const preview = button.querySelector('[data-style-preview]');
       if (!preview) return;
-      if (button.dataset.style === 'all') {
+      const style = button.dataset.style;
+      if (style === 'all') {
         preview.classList.add('studio-style-image--all');
-        preview.innerHTML = overview.map(watch => `<span class="studio-style-mini">${watchArt(watch, false, true)}</span>`).join('');
+        preview.innerHTML = previewTrio(overview);
       } else {
-        const watch = config.watches.find(item => item.style === button.dataset.style);
-        preview.innerHTML = watch ? watchArt(watch, false, true) : '';
+        const watch = config.watches.find(item => item.style === style);
+        preview.innerHTML = watch ? watchPreview(watch) : '';
       }
     });
   }
@@ -204,49 +228,53 @@
     const adjacent = activeSlideIndex + direction;
     centerWatch(next.id, true, track.querySelector(`[data-carousel-slide][data-carousel-index="${adjacent}"]`) ? adjacent : nextIndex);
   }
-  // Illustrations represent design choices, never verified supplier materials or trademarks.
+  // Model-based art previews deliberately avoid unverified real-world brand claims.
   function populateFacetChoices() {
-    const strapNames = {
-      bracelet: 'Bracelet',
-      'leather-look': 'Leather-look',
-      sport: 'Sport'
-    };
-    const strapValues = Array.from(new Set(config.watches.map(watch => catalogFilters.facetValue(watch, 'strap')).filter(Boolean)));
+    const strapNames = { bracelet: 'Metal bracelet', 'leather-look': 'Leather-look', sport: 'Sport strap' };
+    const strapValues = Array.from(new Set(config.watches.map(watch =>
+      catalogFilters.facetValue(watch, 'strap')).filter(Boolean)));
     const brandValues = catalogFilters.facetOptions(config.watches, 'brand');
+    const finishValues = catalogFilters.facetOptions(config.watches, 'finish');
     const dialValues = catalogFilters.facetOptions(config.watches, 'dial');
-    const option = (facet, value, name, illustration, additionalClass = '') =>
-      `<button type="button" class="studio-facet-option ${additionalClass}" data-action="facet" data-facet-option data-facet="${escape(facet)}" data-value="${escape(value)}" aria-pressed="false"><span class="studio-facet-option__art" aria-hidden="true">${illustration}</span><span class="studio-facet-option__name">${escape(name)}</span><span class="studio-facet-option__count" data-facet-count></span></button>`;
+    const option = (facet, value, name, illustration) =>
+      `<button type="button" class="studio-facet-option studio-facet-option--${escape(facet)}" data-action="facet" data-facet-option data-facet="${escape(facet)}" data-value="${escape(value)}" aria-pressed="false"><span class="studio-facet-option__art" aria-hidden="true">${illustration}</span><span class="studio-facet-option__name">${escape(name)}</span><span class="studio-facet-option__count" data-facet-count></span></button>`;
 
     $('[data-studio-brand-choices]').innerHTML = ['all', ...brandValues].map(value => {
       const name = value === 'all' ? 'All brands' : value === 'Unbranded concepts' ? 'Concept designs' : value;
       const initials = value === 'all' ? '✧' : value === 'Unbranded concepts' ? '◇' :
         value.trim().split(/\s+/).map(part => part[0] || '').slice(0, 2).join('').toUpperCase();
-      const art = `<span class="studio-brand-emblem${value === 'all' ? ' studio-brand-emblem--all' : ''}">${escape(initials)}</span>`;
-      return option('brand', value, name, art, 'studio-facet-option--brand');
+      return option('brand', value, name,
+        `<span class="studio-brand-emblem${value === 'all' ? ' studio-brand-emblem--all' : ''}">${escape(initials)}</span>`);
+    }).join('');
+
+    $('[data-studio-finish-choices]').innerHTML = ['all', ...finishValues].map(value => {
+      const sample = config.watches.find(watch => watch.finish === value);
+      const stage = value === 'all'
+        ? previewTrio(groupedWatches('finish'), 'watch', 'studio-watch-trio')
+        : `<span class="studio-finish-watch">${watchPreview(sample)}</span>`;
+      return option('finish', value, value === 'all' ? 'All finishes' : value, stage);
     }).join('');
 
     $('[data-studio-strap-choices]').innerHTML = ['all', ...strapValues].map(value => {
-      const name = value === 'all' ? 'Any strap' : strapNames[value] || config.watches.find(watch => watch.strap === value).strapLabel || value;
-      const kind = ['bracelet', 'leather-look', 'sport'].includes(value) ? value : 'other';
-      const art = value === 'all'
-        ? '<span class="studio-strap-all"><i></i><i></i><i></i></span>'
-        : `<span class="studio-strap-sample studio-strap-sample--${kind}"><i></i></span>`;
-      return option('strap', value, name, art, 'studio-facet-option--strap');
+      const sample = config.watches.find(watch => watch.strap === value);
+      const name = value === 'all' ? 'All straps' : strapNames[value] || (sample && sample.strapLabel) || value;
+      const stage = value === 'all'
+        ? previewTrio(groupedWatches('strap'), 'watch', 'studio-watch-trio')
+        : `<span class="studio-strap-watch">${watchPreview(sample)}</span>`;
+      return option('strap', value, name, stage);
     }).join('');
 
-    const dialExamples = config.watches.filter((watch, i, all) => all.findIndex(other => other.dial === watch.dial) === i).slice(0, 3);
     $('[data-studio-dial-choices]').innerHTML = ['all', ...dialValues].map(value => {
-      const name = value === 'all' ? 'All colors' : value;
       const sample = config.watches.find(watch => watch.dial === value);
-      const art = value === 'all'
-        ? `<span class="studio-dial-trio">${dialExamples.map(watch => `<span>${watchArt(watch, false, true)}</span>`).join('')}</span>`
-        : `<span class="studio-dial-portrait">${watchArt(sample, false, true)}</span>`;
-      return option('dial', value, name, art, 'studio-facet-option--dial');
+      const stage = value === 'all'
+        ? previewTrio(groupedWatches('dial'), 'dial', 'studio-dial-trio')
+        : `<span class="studio-dial-portrait">${watchPreview(sample, 'dial')}</span>`;
+      return option('dial', value, value === 'all' ? 'All dials' : value, stage);
     }).join('');
   }
   // Keep choice nodes stable during filtering so keyboard focus never disappears.
   function updateFacetChoices() {
-    const selected = { style: filter, brand, strap, dial, search };
+    const selected = { style: filter, brand, strap, dial, finish, search };
     root.querySelectorAll('[data-facet-option]').forEach(button => {
       const facet = button.dataset.facet;
       const value = button.dataset.value;
@@ -256,10 +284,16 @@
       button.classList.toggle('is-unavailable', count === 0 && !isActive);
       button.querySelector('[data-facet-count]').textContent = count + (count === 1 ? ' watch' : ' watches');
     });
+    root.querySelectorAll('[data-action="filter"]').forEach(button => {
+      const value = button.dataset.style;
+      const count = catalogFilters.filterWatches(config.watches, { ...selected, style: value }).length;
+      const label = button.querySelector('[data-style-count]');
+      if (label) label.textContent = count + (count === 1 ? ' model' : ' models');
+    });
   }
   function renderCatalog() {
     const list = catalogFilters.filterWatches(config.watches, {
-      style: filter, brand, strap, dial, search
+      style: filter, brand, strap, dial, finish, search
     });
     const changed = list.map(watch => watch.id).join() !== carouselWatches.map(watch => watch.id).join();
     carouselWatches = list;
@@ -287,7 +321,7 @@
     }
     $('[data-result-count]').textContent = list.length + (list.length === 1 ? ' watch' : ' watches');
     $('[data-catalog-empty]').hidden = list.length > 0;
-    $('[data-action="reset-filters"]').hidden = filter === 'all' && brand === 'all' && strap === 'all' && dial === 'all' && !search;
+    $('[data-action="reset-filters"]').hidden = filter === 'all' && brand === 'all' && strap === 'all' && dial === 'all' && finish === 'all' && !search;
     updateFacetChoices();
     root.querySelectorAll('[data-action="filter"]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.style === filter)));
     const notice = $('[data-replace-notice]');
@@ -461,12 +495,13 @@
         if (facet === 'brand') brand = brand === value ? 'all' : value;
         else if (facet === 'strap') strap = strap === value ? 'all' : value;
         else if (facet === 'dial') dial = dial === value ? 'all' : value;
+        else if (facet === 'finish') finish = finish === value ? 'all' : value;
         else break;
         renderCatalog();
         break;
       }
       case 'reset-filters':
-        filter = 'all'; search = ''; brand = 'all'; strap = 'all'; dial = 'all';
+        filter = 'all'; search = ''; brand = 'all'; strap = 'all'; dial = 'all'; finish = 'all';
         $('[data-studio-search]').value = '';
         renderCatalog(); $('[data-studio-search]').focus(); break;
       case 'size': requestSize(Number(button.dataset.size), button); break;
