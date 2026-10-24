@@ -3,7 +3,8 @@
   const root = document.querySelector('[data-collection-studio]');
   if (!root || !window.DialByDayCollection) return;
   const config = JSON.parse(root.querySelector('[data-studio-config]').textContent);
-  const model = window.DialByDayCollection.createModel(config.watches, config.packages);
+  const catalogFilters = window.DialByDayCollection;
+  const model = catalogFilters.createModel(config.watches, config.packages);
   const watches = new Map(config.watches.map(watch => [watch.id, watch]));
   const storageKey = 'dialbyday.collection.v1';
   const query = new URLSearchParams(window.location.search);
@@ -15,6 +16,8 @@
   let filter = 'all';
   let search = '';
   let strap = 'all';
+  let brand = 'all';
+  let dial = 'all';
   let motion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let svgId = 0;
   let toastTimer;
@@ -201,10 +204,20 @@
     const adjacent = activeSlideIndex + direction;
     centerWatch(next.id, true, track.querySelector(`[data-carousel-slide][data-carousel-index="${adjacent}"]`) ? adjacent : nextIndex);
   }
+  function populateFacetSelects() {
+    [['brand', '[data-studio-brand]'], ['dial', '[data-studio-dial]']].forEach(([facet, selector]) => {
+      const select = $(selector);
+      catalogFilters.facetOptions(config.watches, facet).forEach(value => {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+      });
+    });
+  }
   function renderCatalog() {
-    const list = config.watches.filter(watch => {
-      const text = [watch.name, watch.styleLabel, watch.dial, watch.strapLabel, watch.finish].join(' ').toLowerCase();
-      return (filter === 'all' || watch.style === filter) && (strap === 'all' || watch.strap === strap) && (!search || text.includes(search));
+    const list = catalogFilters.filterWatches(config.watches, {
+      style: filter, brand, strap, dial, search
     });
     const changed = list.map(watch => watch.id).join() !== carouselWatches.map(watch => watch.id).join();
     carouselWatches = list;
@@ -232,7 +245,10 @@
     }
     $('[data-result-count]').textContent = list.length + (list.length === 1 ? ' watch' : ' watches');
     $('[data-catalog-empty]').hidden = list.length > 0;
-    $('[data-action="reset-filters"]').hidden = filter === 'all' && strap === 'all' && !search;
+    $('[data-action="reset-filters"]').hidden = filter === 'all' && brand === 'all' && strap === 'all' && dial === 'all' && !search;
+    root.querySelectorAll('.studio-filter-select').forEach(label => {
+      label.classList.toggle('is-active', label.querySelector('select').value !== 'all');
+    });
     root.querySelectorAll('[data-action="filter"]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.style === filter)));
     const notice = $('[data-replace-notice]');
     notice.hidden = state.target === null;
@@ -327,7 +343,7 @@
     if (!watch) return;
     const selected = state.slots.includes(id);
     const functionality = watch.style === 'chronograph' ? 'Chronograph operation is not verified.' : watch.style === 'moonphase' ? 'A working moonphase is not verified.' : watch.style === 'skeleton' ? 'The movement and open-work construction are not verified.' : 'Movement and functions are not verified.';
-    openDialog(`<div class="studio-detail-layout"><div class="studio-detail-art">${watchArt(watch)}<span>ORIGINAL CONCEPT ILLUSTRATION</span></div><div class="studio-detail-copy">${title(escape(watch.styleLabel) + ' / DESIGN PREVIEW', escape(watch.name))}<p class="studio-detail-intro">${escape(watch.description)}</p><dl class="studio-specs"><div><dt>Dial / finish</dt><dd>${escape(watch.dial)} / ${escape(watch.finish)}</dd></div><div><dt>Strap design</dt><dd>${escape(watch.strapLabel)}</dd></div><div><dt>Movement / functions</dt><dd>To be verified</dd></div><div><dt>Case / crystal / fit</dt><dd>To be verified</dd></div><div><dt>Water resistance</dt><dd>No rating confirmed</dd></div></dl><p class="studio-detail-note">${functionality} Final photography, materials, dimensions and specifications will replace this concept before launch.</p><button type="button" class="studio-primary" data-action="${selected ? 'review' : 'detail-add'}" data-id="${escape(id)}">${selected ? 'See it in my collection' : state.target !== null ? 'Replace selected watch' : model.count(state) === state.size ? 'Choose a watch to replace' : 'Add to my box'}<span aria-hidden="true">${selected ? '↗' : '+'}</span></button></div></div>`, 'details', opener);
+    openDialog(`<div class="studio-detail-layout"><div class="studio-detail-art">${watchArt(watch)}<span>ORIGINAL CONCEPT ILLUSTRATION</span></div><div class="studio-detail-copy">${title(escape(watch.styleLabel) + ' / DESIGN PREVIEW', escape(watch.name))}<p class="studio-detail-intro">${escape(watch.description)}</p><dl class="studio-specs"><div><dt>Brand</dt><dd>${escape(catalogFilters.facetValue(watch, 'brand'))}</dd></div><div><dt>Dial / finish</dt><dd>${escape(watch.dial)} / ${escape(watch.finish)}</dd></div><div><dt>Strap design</dt><dd>${escape(watch.strapLabel)}</dd></div><div><dt>Movement / functions</dt><dd>To be verified</dd></div><div><dt>Case / crystal / fit</dt><dd>To be verified</dd></div><div><dt>Water resistance</dt><dd>No rating confirmed</dd></div></dl><p class="studio-detail-note">${functionality} Final photography, materials, dimensions and specifications will replace this concept before launch.</p><button type="button" class="studio-primary" data-action="${selected ? 'review' : 'detail-add'}" data-id="${escape(id)}">${selected ? 'See it in my collection' : state.target !== null ? 'Replace selected watch' : model.count(state) === state.size ? 'Choose a watch to replace' : 'Add to my box'}<span aria-hidden="true">${selected ? '↗' : '+'}</span></button></div></div>`, 'details', opener);
     document.body.classList.add('studio-dialog-open');
   }
   function reviewRows() {
@@ -400,8 +416,9 @@
     switch (button.dataset.action) {
       case 'filter': filter = button.dataset.style; renderCatalog(); break;
       case 'reset-filters':
-        filter = 'all'; search = ''; strap = 'all';
-        $('[data-studio-search]').value = ''; $('[data-studio-strap]').value = 'all';
+        filter = 'all'; search = ''; brand = 'all'; strap = 'all'; dial = 'all';
+        $('[data-studio-search]').value = '';
+        ['brand', 'strap', 'dial'].forEach(facet => { $('[data-studio-' + facet + ']').value = 'all'; });
         renderCatalog(); $('[data-studio-search]').focus(); break;
       case 'size': requestSize(Number(button.dataset.size), button); break;
       case 'confirm-size': closeDialog(); commit(model.resize(state, Number(button.dataset.size), true), 'Your box size has been updated.'); break;
@@ -461,10 +478,13 @@
   if (window.ResizeObserver) new ResizeObserver(resizeCarousel).observe(track);
   else window.addEventListener('resize', resizeCarousel);
   $('[data-studio-search]').addEventListener('input', event => { search = event.target.value.trim().toLowerCase(); renderCatalog(); });
+  $('[data-studio-brand]').addEventListener('change', event => { brand = event.target.value; renderCatalog(); });
   $('[data-studio-strap]').addEventListener('change', event => { strap = event.target.value; renderCatalog(); });
+  $('[data-studio-dial]').addEventListener('change', event => { dial = event.target.value; renderCatalog(); });
   window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', event => {
     if (event.matches) { motion = false; root.dataset.motion = 'off'; $('[data-action="motion"]').textContent = 'Motion off'; $('[data-action="motion"]').setAttribute('aria-pressed', 'false'); }
   });
+  populateFacetSelects();
   renderStylePreviews();
   save();
   render();
