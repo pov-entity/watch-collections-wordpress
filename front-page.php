@@ -147,7 +147,7 @@ $hero_video_url = watch_collections_hero_video_url();
 					<?php else : ?>
 					<p class="editorial-package__price editorial-package__price--pending"><?php esc_html_e( 'Price to be confirmed', 'watch-collections' ); ?></p>
 					<?php endif; ?>
-					<a class="editorial-package__choose" href="<?php echo esc_url( watch_collections_studio_url( $option['count'] ) ); ?>"><?php echo esc_html( sprintf( _n( 'Choose my %d watch', 'Choose my %d watches', $option['count'], 'watch-collections' ), $option['count'] ) ); ?><span aria-hidden="true">↗</span></a>
+					<a class="editorial-package__choose" href="<?php echo esc_url( watch_collections_studio_url( $option['count'] ) ); ?>"><?php echo null === $option['price'] ? esc_html__( 'Preview this collection', 'watch-collections' ) : esc_html( sprintf( _n( 'Choose my %d watch', 'Choose my %d watches', $option['count'], 'watch-collections' ), $option['count'] ) ); ?><span aria-hidden="true">↗</span></a>
 				</article>
 				<?php endforeach; ?>
 			</div>
