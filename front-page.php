@@ -32,7 +32,7 @@ $hero_video_url = watch_collections_hero_video_url();
 			<div class="week-hero__film">
 				<div class="week-hero__fallback-scenes" aria-hidden="true">
 					<?php foreach ( $week_scenes as $index => $scene ) : ?>
-						<img class="week-hero__fallback-image<?php echo 0 === $index ? ' is-active' : ''; ?>" data-hero-fallback-image="<?php echo esc_attr( $index ); ?>" src="<?php echo esc_url( $scene['image'] ); ?>" alt="" loading="eager" decoding="async" width="1600" height="900">
+						<img class="week-hero__fallback-image<?php echo 0 === $index ? ' is-active' : ''; ?>" data-hero-fallback-image="<?php echo esc_attr( $index ); ?>" <?php echo 0 === $index ? 'src' : 'data-src'; ?>="<?php echo esc_url( $scene['image'] ); ?>" alt="" loading="<?php echo 0 === $index ? 'eager' : 'lazy'; ?>" <?php echo 0 === $index ? 'fetchpriority="high"' : ''; ?> decoding="async" width="1600" height="900">
 					<?php endforeach; ?>
 				</div>
 				<video
@@ -89,11 +89,11 @@ $hero_video_url = watch_collections_hero_video_url();
 					<p><?php esc_html_e( 'Find your day.', 'watch-collections' ); ?></p>
 				</div>
 				<div class="week-hero__rail-actions">
-					<a href="<?php echo esc_url( watch_collections_studio_url() ); ?>" class="week-hero__cta week-hero__cta--precious" data-precious-cta aria-label="<?php esc_attr_e( 'Choose your first watch in the Collection Studio', 'watch-collections' ); ?>">
-						<span class="week-hero__cta-copy"><span class="week-hero__cta-kicker"><?php esc_html_e( 'BUILD YOUR COLLECTION', 'watch-collections' ); ?></span><strong><?php esc_html_e( 'Choose your', 'watch-collections' ); ?><br><?php esc_html_e( 'first watch', 'watch-collections' ); ?></strong></span>
+					<a href="<?php echo esc_url( watch_collections_studio_url() ); ?>" class="week-hero__cta week-hero__cta--precious" data-precious-cta aria-label="<?php esc_attr_e( 'Enter the Collection Studio to choose a box and your watches', 'watch-collections' ); ?>">
+						<span class="week-hero__cta-copy"><span class="week-hero__cta-kicker"><?php esc_html_e( 'THE COLLECTION STUDIO', 'watch-collections' ); ?></span><strong><?php esc_html_e( 'Build your', 'watch-collections' ); ?><br><?php esc_html_e( 'collection', 'watch-collections' ); ?></strong></span>
 						<span class="week-hero__cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M3 12h17m-6-6 6 6-6 6"/></svg></span>
 					</a>
-
+					<p class="week-hero__offer"><?php esc_html_e( 'Choose 1, 3 or 6 watches. Your selection, together in one presentation box.', 'watch-collections' ); ?></p>
 				</div>
 			</div>
 		</div>
@@ -109,7 +109,7 @@ $hero_video_url = watch_collections_hero_video_url();
 				<h2 id="quality-title"><?php esc_html_e( 'A beautiful durable dial catches your eye.', 'watch-collections' ); ?> <em><?php esc_html_e( 'The details deserve a closer look.', 'watch-collections' ); ?></em></h2>
 			</div>
 			<figure class="editorial-quality__visual">
-				<video class="editorial-quality__assembly" data-assembly-video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="<?php echo esc_url( get_template_directory_uri() . '/assets/assembly/poster.jpg' ); ?>" width="1920" height="1080" aria-label="<?php esc_attr_e( 'Animated exploded watch assembly', 'watch-collections' ); ?>">
+				<video class="editorial-quality__assembly" data-assembly-video autoplay muted loop playsinline webkit-playsinline preload="none" poster="<?php echo esc_url( get_template_directory_uri() . '/assets/assembly/poster.jpg' ); ?>" width="1920" height="1080" aria-label="<?php esc_attr_e( 'Animated exploded watch assembly', 'watch-collections' ); ?>">
 					<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/assembly/watch-assembly-loop.mp4' ); ?>" type="video/mp4">
 				</video>
 				<button class="editorial-quality__motion" type="button" data-assembly-motion aria-pressed="false" aria-label="<?php esc_attr_e( 'Pause watch assembly animation', 'watch-collections' ); ?>"><?php esc_html_e( 'Pause animation', 'watch-collections' ); ?></button>
@@ -117,92 +117,22 @@ $hero_video_url = watch_collections_hero_video_url();
 			</figure>
 			</div>
 			<div class="editorial-quality__details">
-				<article><span>01</span><div><h3><?php esc_html_e( 'Mechanical, by nature', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'An automatic movement winds with the motion of your wrist. Inside, a miniature world of gears and springs brings each passing second to life — watchmaking you can feel.', 'watch-collections' ); ?></p></div></article>
-				<article><span>02</span><div><h3><?php esc_html_e( 'Quartz, by precision', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'A quartz movement keeps time with a remarkably steady rhythm. Accurate, dependable and low-maintenance — made for days when you want to put on your watch and simply go.', 'watch-collections' ); ?></p></div></article>
-				<article><span>03</span><div><h3><?php esc_html_e( 'Steel with presence', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Stainless steel lends the case its clean lines and satisfying feel. Brushed surfaces soften the light; polished edges catch it. Small finishing choices make a lasting impression.', 'watch-collections' ); ?></p></div></article>
-				<article><span>04</span><div><h3><?php esc_html_e( 'The clarity of sapphire', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Sapphire crystal offers exceptional resistance to everyday scratches while keeping the dial beautifully clear. Every marker, hand and texture stays where your attention belongs.', 'watch-collections' ); ?></p></div></article>
-				<article><span>05</span><div><h3><?php esc_html_e( 'Complications with purpose', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'A working chronograph measures elapsed time. A true moonphase follows the lunar cycle. Our standard is real function rather than decorative imitation — because the engineering should match the beauty.', 'watch-collections' ); ?></p></div></article>
+				<article><span>01</span><div><h3><?php esc_html_e( 'Movements — automatic & quartz', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Automatic movements wind through the motion of your wrist. Quartz movements use a battery and electronic timekeeping for dependable precision. Two approaches to the same everyday ritual.', 'watch-collections' ); ?></p></div></article>
+				<article><span>02</span><div><h3><?php esc_html_e( 'Sapphire & steel', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Sapphire crystal is valued for its resistance to everyday scratches. Stainless steel adds structure, weight and a considered finish. Look closely at the materials specified for each watch.', 'watch-collections' ); ?></p></div></article>
+				<article><span>03</span><div><h3><?php esc_html_e( 'Complexity with purpose', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'A functional chronograph measures elapsed time; a true moonphase follows the lunar cycle. Real complications deserve to be distinguished from decorative subdials.', 'watch-collections' ); ?></p></div></article>
 			</div>
 		</div>
 	</section>
 
 
-	<section class="editorial-intro" id="the-idea" aria-labelledby="intro-title">
-		<div class="container editorial-intro__grid">
-			<div class="editorial-montage">
-				<div class="editorial-montage__tile editorial-montage__tile--main">
-					<img src="<?php echo esc_url( $week_scenes[0]['image'] ); ?>" alt="<?php esc_attr_e( 'Illustrated weekday outfit with a classic wristwatch', 'watch-collections' ); ?>" loading="lazy" width="1600" height="900" decoding="async">
-				</div>
-				<div class="editorial-montage__tile editorial-montage__tile--top">
-					<img src="<?php echo esc_url( $week_scenes[4]['image'] ); ?>" alt="<?php esc_attr_e( 'Illustrated evening look paired with a dress watch', 'watch-collections' ); ?>" loading="lazy" width="1600" height="900" decoding="async">
-				</div>
-				<div class="editorial-montage__tile editorial-montage__tile--bottom">
-					<img src="<?php echo esc_url( $week_scenes[5]['image'] ); ?>" alt="<?php esc_attr_e( 'Illustrated weekend outfit with a sporty watch', 'watch-collections' ); ?>" loading="lazy" width="1600" height="900" decoding="async">
-				</div>
-				<div class="editorial-montage__label" aria-hidden="true"><strong>7</strong><span><?php esc_html_e( 'days to dress for', 'watch-collections' ); ?></span></div>
-				<span class="editorial-montage__caption"><?php esc_html_e( 'Concept visuals • final watch photography to follow', 'watch-collections' ); ?></span>
-			</div>
-			<div class="editorial-intro__content">
-				<p class="editorial-tag"><span></span><?php esc_html_e( '02 / THE IDEA', 'watch-collections' ); ?></p>
-				<h2 id="intro-title"><?php esc_html_e( 'Not one watch for everything.', 'watch-collections' ); ?> <em><?php esc_html_e( 'A choice for every moment.', 'watch-collections' ); ?></em></h2>
-				<p class="editorial-lede"><?php esc_html_e( 'What feels right for Monday morning might not be what you want on Saturday night. A collection gives you the freedom to choose.', 'watch-collections' ); ?></p>
-				<p><?php esc_html_e( 'We bring different watch styles together through one simple idea: you choose the watches you want, we present them as a collection in a dedicated box. No mystery assortment. No pressure to dress the same way every day.', 'watch-collections' ); ?></p>
-				<div class="editorial-intro__facts">
-					<div><span aria-hidden="true">✓</span><?php esc_html_e( 'Choose every eligible watch', 'watch-collections' ); ?></div>
-					<div><span aria-hidden="true">✓</span><?php esc_html_e( 'One box for the collection', 'watch-collections' ); ?></div>
-					<div><span aria-hidden="true">✓</span><?php esc_html_e( 'Review the price and contents before buying', 'watch-collections' ); ?></div>
-				</div>
-				<a class="editorial-button" href="#collection-options"><?php esc_html_e( 'See collection options', 'watch-collections' ); ?><span aria-hidden="true">↗</span></a>
-			</div>
-		</div>
-	</section>
 
-	<section class="editorial-feature-band" aria-labelledby="features-title">
-		<div class="container">
-			<div class="editorial-feature-band__heading"><p class="editorial-tag editorial-tag--light"><?php esc_html_e( 'WHY A COLLECTION', 'watch-collections' ); ?></p><h2 id="features-title" class="screen-reader-text"><?php esc_html_e( 'The collection advantages', 'watch-collections' ); ?></h2></div>
-			<div class="editorial-features">
-				<article class="editorial-feature">
-					<svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="17"/><circle cx="24" cy="24" r="12"/><path d="M24 16v9l7 4M24 2v5M24 41v5"/></svg>
-					<h3><?php esc_html_e( 'Understand the watch', 'watch-collections' ); ?></h3>
-					<p><?php esc_html_e( 'Movement, materials and real functions should be clearly explained—not hidden behind attractive images.', 'watch-collections' ); ?></p>
-				</article>
-				<article class="editorial-feature">
-					<svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M7 10h34M7 24h34M7 38h34"/><circle cx="18" cy="10" r="5"/><circle cx="31" cy="24" r="5"/><circle cx="15" cy="38" r="5"/></svg>
-					<h3><?php esc_html_e( 'Your own selection', 'watch-collections' ); ?></h3>
-					<p><?php esc_html_e( 'A curated choice of styles. You decide what belongs in your box, subject to the available collection.', 'watch-collections' ); ?></p>
-				</article>
-				<article class="editorial-feature">
-					<svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="6" y="13" width="36" height="27" rx="2"/><path d="M6 21h36M12 13V8h24v5M12 29l7 6 16-17"/></svg>
-					<h3><?php esc_html_e( 'An order you can check', 'watch-collections' ); ?></h3>
-					<p><?php esc_html_e( 'Your chosen models, quantities and box will be summarized before checkout; packing checks are part of our launch plan.', 'watch-collections' ); ?></p>
-				</article>
-				<article class="editorial-feature">
-					<svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M5 14h25v22H5zM30 21h7l7 9v6H30z"/><circle cx="14" cy="37" r="4"/><circle cx="36" cy="37" r="4"/><path d="M9 8h18"/></svg>
-					<h3><?php esc_html_e( 'Clarity through delivery', 'watch-collections' ); ?></h3>
-					<p><?php esc_html_e( 'See available shipping terms before payment, including estimated timing and applicable delivery charges.', 'watch-collections' ); ?></p>
-				</article>
-			</div>
-		</div>
-	</section>
 
-	<section class="editorial-process" id="how-it-works" aria-labelledby="process-title">
-		<div class="container">
-			<div class="editorial-section-top">
-				<div><p class="editorial-tag"><span></span><?php esc_html_e( '03 / THE EXPERIENCE', 'watch-collections' ); ?></p><h2 id="process-title"><?php esc_html_e( 'Choose the watches.', 'watch-collections' ); ?> <em><?php esc_html_e( 'We bring the box together.', 'watch-collections' ); ?></em></h2></div>
-				<p><?php esc_html_e( 'Try the Collection Studio with concept watches. Choose a box, explore styles and see your selection together.', 'watch-collections' ); ?></p>
-			</div>
-			<div class="editorial-process__steps">
-				<div><span>01</span><h3><?php esc_html_e( 'Choose your box', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Pick space for 1, 3 or 6 watches and see the planned pricing status upfront.', 'watch-collections' ); ?></p></div>
-				<div><span>02</span><h3><?php esc_html_e( 'Find your watches', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Mix eligible styles, check their details and change your selection before confirming.', 'watch-collections' ); ?></p></div>
-				<div><span>03</span><h3><?php esc_html_e( 'Review every detail', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'See the exact watch models, quantities, box and order total before any payment.', 'watch-collections' ); ?></p></div>
-			</div>
-		</div>
-	</section>
+
 
 	<section class="editorial-packages" id="collection-options" aria-labelledby="collection-options-title">
 		<div class="container">
 			<div class="editorial-section-top">
-				<div><p class="editorial-tag"><span></span><?php esc_html_e( '04 / YOUR COLLECTION', 'watch-collections' ); ?></p><h2 id="collection-options-title"><?php esc_html_e( 'A place for every piece.', 'watch-collections' ); ?> <em><?php esc_html_e( 'Start with your number.', 'watch-collections' ); ?></em></h2></div>
+				<div><p class="editorial-tag"><span></span><?php esc_html_e( '02 / YOUR COLLECTION', 'watch-collections' ); ?></p><h2 id="collection-options-title"><?php esc_html_e( 'A place for every piece.', 'watch-collections' ); ?> <em><?php esc_html_e( 'Start with your number.', 'watch-collections' ); ?></em></h2></div>
 				<p><?php esc_html_e( 'Choose the size of your collection. Each package pairs the specified number of eligible watches with a presentation box.', 'watch-collections' ); ?></p>
 			</div>
 			<div class="editorial-packages__grid editorial-packages__grid--three">
@@ -217,7 +147,7 @@ $hero_video_url = watch_collections_hero_video_url();
 					<?php else : ?>
 					<p class="editorial-package__price editorial-package__price--pending"><?php esc_html_e( 'Price to be confirmed', 'watch-collections' ); ?></p>
 					<?php endif; ?>
-					<a class="editorial-package__choose" href="<?php echo esc_url( watch_collections_studio_url( $option['count'] ) ); ?>"><?php echo esc_html( sprintf( _n( 'Choose my %d watch', 'Choose my %d watches', $option['count'], 'watch-collections' ), $option['count'] ) ); ?><span aria-hidden="true">↗</span></a>
+					<a class="editorial-package__choose" href="<?php echo esc_url( watch_collections_studio_url( $option['count'] ) ); ?>"><?php echo null === $option['price'] ? esc_html__( 'Preview this collection', 'watch-collections' ) : esc_html( sprintf( _n( 'Choose my %d watch', 'Choose my %d watches', $option['count'], 'watch-collections' ), $option['count'] ) ); ?><span aria-hidden="true">↗</span></a>
 				</article>
 				<?php endforeach; ?>
 			</div>
@@ -225,10 +155,26 @@ $hero_video_url = watch_collections_hero_video_url();
 		</div>
 	</section>
 
+	<section class="editorial-process" id="how-it-works" aria-labelledby="process-title">
+		<div class="container">
+			<div class="editorial-section-top">
+				<div><p class="editorial-tag"><span></span><?php esc_html_e( '03 / THE EXPERIENCE', 'watch-collections' ); ?></p><h2 id="process-title"><?php esc_html_e( 'Choose the watches.', 'watch-collections' ); ?> <em><?php esc_html_e( 'We bring the box together.', 'watch-collections' ); ?></em></h2></div>
+				<p><?php esc_html_e( 'Choose a box, try different watch styles and see your selection take shape in the Studio preview.', 'watch-collections' ); ?></p>
+			</div>
+			<div class="editorial-process__steps">
+				<div><span>01</span><h3><?php esc_html_e( 'Choose your box', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Pick a 1, 3 or 6-watch box and see what is included.', 'watch-collections' ); ?></p></div>
+				<div><span>02</span><h3><?php esc_html_e( 'Find your watches', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'Mix eligible styles, check their details and change your selection before confirming.', 'watch-collections' ); ?></p></div>
+				<div><span>03</span><h3><?php esc_html_e( 'Review every detail', 'watch-collections' ); ?></h3><p><?php esc_html_e( 'See the exact watch models, quantities, box and order total before any payment.', 'watch-collections' ); ?></p></div>
+			</div>
+		</div>
+	</section>
+
+
+
 	<section class="editorial-fulfillment" id="fulfillment" aria-labelledby="fulfillment-title">
 		<div class="container">
 			<div class="editorial-fulfillment__intro">
-				<p class="editorial-tag editorial-tag--light"><?php esc_html_e( '05 / BEYOND CHECKOUT', 'watch-collections' ); ?></p>
+				<p class="editorial-tag editorial-tag--light"><?php esc_html_e( '04 / BEYOND CHECKOUT', 'watch-collections' ); ?></p>
 				<h2 id="fulfillment-title"><?php esc_html_e( 'Your choices deserve', 'watch-collections' ); ?> <em><?php esc_html_e( 'a careful journey.', 'watch-collections' ); ?></em></h2>
 				<p><?php esc_html_e( 'Your collection should arrive with the models you selected, not unexplained substitutions. We are designing our fulfillment around order matching, item checks, protective packing and clear delivery information.', 'watch-collections' ); ?></p>
 			</div>
@@ -244,7 +190,7 @@ $hero_video_url = watch_collections_hero_video_url();
 
 	<section class="editorial-assurance" id="confidence" aria-labelledby="assurance-title">
 		<div class="container editorial-assurance__grid">
-			<div><p class="editorial-tag"><span></span><?php esc_html_e( '06 / NO GUESSWORK', 'watch-collections' ); ?></p><h2 id="assurance-title"><?php esc_html_e( 'A purchase should make sense', 'watch-collections' ); ?> <em><?php esc_html_e( 'before you make it.', 'watch-collections' ); ?></em></h2></div>
+			<div><p class="editorial-tag"><span></span><?php esc_html_e( '05 / NO GUESSWORK', 'watch-collections' ); ?></p><h2 id="assurance-title"><?php esc_html_e( 'A purchase should make sense', 'watch-collections' ); ?> <em><?php esc_html_e( 'before you make it.', 'watch-collections' ); ?></em></h2></div>
 			<div class="editorial-assurance__copy">
 				<p><?php esc_html_e( 'You deserve to know what is inside your box, what each watch is made from, what the full order costs and what happens if something goes wrong.', 'watch-collections' ); ?></p>
 				<ul>

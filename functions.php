@@ -70,6 +70,15 @@ function watch_collections_assets() {
 		is_front_page() && ! watch_collections_is_studio() ? array( 'watch-collections-editorial-home', 'watch-collections-font-families' ) : array( 'watch-collections-site', 'watch-collections-font-families' ),
 		$version
 	);
+	// Final front-page refinements: specifically override earlier responsive rules.
+	if ( is_front_page() && ! watch_collections_is_studio() ) {
+		wp_enqueue_style(
+			'watch-collections-home-refinement',
+			get_template_directory_uri() . '/assets/css/home-refinement.css',
+			array( 'watch-collections-typography' ),
+			$version
+		);
+	}
 	if ( watch_collections_is_studio() ) {
 		wp_enqueue_style( 'watch-collections-studio', get_template_directory_uri() . '/assets/css/collection-studio.css', array( 'watch-collections-typography' ), $version );
 		wp_enqueue_script( 'watch-collections-state', get_template_directory_uri() . '/assets/js/collection-state.js', array(), $version, true );

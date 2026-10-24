@@ -21,6 +21,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<a href="<?php echo esc_url( home_url( '/#collection-options' ) ); ?>"><?php esc_html_e( 'Collections', 'watch-collections' ); ?></a>
 				<a href="<?php echo esc_url( home_url( '/#quality' ) ); ?>"><?php esc_html_e( 'The details', 'watch-collections' ); ?></a>
 				<a href="<?php echo esc_url( home_url( '/#fulfillment' ) ); ?>"><?php esc_html_e( 'Delivery journey', 'watch-collections' ); ?></a>
+				<a href="<?php echo esc_url( home_url( '/#confidence' ) ); ?>"><?php esc_html_e( 'Before you buy', 'watch-collections' ); ?></a>
+				<?php $contact_page = get_page_by_path( 'contact' ); ?>
+				<?php if ( $contact_page ) : ?>
+					<a href="<?php echo esc_url( get_permalink( $contact_page ) ); ?>"><?php esc_html_e( 'Contact', 'watch-collections' ); ?></a>
+				<?php endif; ?>
+				<?php $privacy_url = get_privacy_policy_url(); ?>
+				<?php if ( $privacy_url ) : ?>
+					<a href="<?php echo esc_url( $privacy_url ); ?>"><?php esc_html_e( 'Privacy policy', 'watch-collections' ); ?></a>
+				<?php endif; ?>
 			</div>
 		</div>
 		<div class="container footer-bottom">

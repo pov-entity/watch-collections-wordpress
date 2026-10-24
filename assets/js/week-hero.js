@@ -100,9 +100,21 @@
   function announce() {
     if (announcer) announcer.textContent = day.textContent + ', ' + style.textContent + '. ' + moment.textContent;
   }
+  // Secondary still frames are fetched only when needed for a seek or fallback.
+  // The playing film does not trigger seven competing full-image downloads.
+  function loadFrame(index) {
+    var image = images[index];
+    if (!image) return;
+    var deferred = image.getAttribute('data-src');
+    if (deferred) {
+      image.src = deferred;
+      image.removeAttribute('data-src');
+    }
+  }
   function paint(index) {
     if (index === active) return;
     active = index;
+    if (videoError || switching || !hasPlayed) loadFrame(index);
     // Every fallback is extracted from this exact video's settled frame.
     images.forEach(function (image, i) { image.classList.toggle('is-active', i === index); });
     count.textContent = String(index + 1).padStart(2, '0');
@@ -287,7 +299,7 @@
     if (reduce.matches) hold(Math.max(0, active)); else { userPaused = false; attemptAutoplay(); }
   });
   hero.addEventListener('touchstart', function (event) {
-    if (event.touches.length !== 1) return;
+    if (event.target.closest('button, a') || event.touches.length !== 1) { touchX = null; return; }
     touchX = event.touches[0].clientX;
     touchY = event.touches[0].clientY;
   }, {passive:true});
