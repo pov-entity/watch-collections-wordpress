@@ -69,10 +69,11 @@
     if (facet === 'brand') return String(watch.brand || '').trim() || 'Unbranded concepts';
     if (facet === 'dial') return String(watch.dial || '').trim();
     if (facet === 'strap') return String(watch.strap || '').trim();
+    if (facet === 'finish') return String(watch.finish || '').trim();
     return '';
   }
   function facetOptions(watches, facet) {
-    if (!['brand', 'dial'].includes(facet)) return [];
+    if (!['brand', 'dial', 'finish'].includes(facet)) return [];
     return Array.from(new Set(watches.map(watch => facetValue(watch, facet)).filter(Boolean)))
       .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
   }
@@ -83,9 +84,10 @@
       if (!matches(watch.style, selections.style) ||
           !matches(facetValue(watch, 'brand'), selections.brand) ||
           !matches(facetValue(watch, 'strap'), selections.strap) ||
-          !matches(facetValue(watch, 'dial'), selections.dial)) return false;
+          !matches(facetValue(watch, 'dial'), selections.dial) ||
+          !matches(facetValue(watch, 'finish'), selections.finish)) return false;
       if (!search) return true;
-      return [watch.name, watch.styleLabel, facetValue(watch, 'brand'), watch.dial, watch.strapLabel, watch.finish]
+      return [watch.name, watch.styleLabel, facetValue(watch, 'brand'), watch.dial, watch.strapLabel, facetValue(watch, 'finish')]
         .some(value => String(value || '').toLowerCase().includes(search));
     });
   }
