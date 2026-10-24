@@ -12,7 +12,7 @@ const css = read('assets/css/home-refinement.css');
 const packages = read('inc/collection-studio.php');
 const footer = read('footer.php');
 const section = (name) => {
-  const start = page.indexOf('<section class="' + name + '"');
+  const start = page.indexOf('<section class="' + name);
   assert.ok(start >= 0, 'Missing ' + name);
   const end = page.indexOf('</section>', start);
   assert.ok(end > start);
