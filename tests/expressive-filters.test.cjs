@@ -53,7 +53,7 @@ test('box collection state, pricing and mobile motion accessibility stay intact'
   assert.match(studio, /model\.put\(state, id, index\)/);
   assert.match(studio, /\[data-action="reset-filters"\]/);
   assert.match(css, /prefers-reduced-motion:reduce/);
-  assert.match(studio, /studio-style-count/);
+  assert.match(css, /studio-style-count/);
   assert.match(css, /@media\(max-width:700px\)/);
   assert.deepEqual(watches.map(watch => watch.id).length, 12);
 });
