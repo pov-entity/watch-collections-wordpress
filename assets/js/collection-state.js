@@ -63,5 +63,31 @@
     const serialize = state => JSON.stringify({ version: 1, size: state.size, slots: state.slots });
     return { empty, hydrate, resize, put, remove, move, target, count, price, serialize, validSize };
   }
-  return { createModel };
+  // Filters operate only on the public concept catalog; they never change box contents.
+  // Missing brand is explicitly unbranded rather than inventing a manufacturer.
+  function facetValue(watch, facet) {
+    if (facet === 'brand') return String(watch.brand || '').trim() || 'Unbranded concepts';
+    if (facet === 'dial') return String(watch.dial || '').trim();
+    if (facet === 'strap') return String(watch.strap || '').trim();
+    return '';
+  }
+  function facetOptions(watches, facet) {
+    if (!['brand', 'dial'].includes(facet)) return [];
+    return Array.from(new Set(watches.map(watch => facetValue(watch, facet)).filter(Boolean)))
+      .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+  }
+  function filterWatches(watches, selections = {}) {
+    const search = String(selections.search || '').trim().toLowerCase();
+    const matches = (actual, wanted) => !wanted || wanted === 'all' || String(actual).toLowerCase() === String(wanted).toLowerCase();
+    return watches.filter(watch => {
+      if (!matches(watch.style, selections.style) ||
+          !matches(facetValue(watch, 'brand'), selections.brand) ||
+          !matches(facetValue(watch, 'strap'), selections.strap) ||
+          !matches(facetValue(watch, 'dial'), selections.dial)) return false;
+      if (!search) return true;
+      return [watch.name, watch.styleLabel, facetValue(watch, 'brand'), watch.dial, watch.strapLabel, watch.finish]
+        .some(value => String(value || '').toLowerCase().includes(search));
+    });
+  }
+  return { createModel, facetValue, facetOptions, filterWatches };
 }));
