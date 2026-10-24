@@ -22,8 +22,9 @@ test('visual facets replace the old native dropdowns and remain accessible', () 
 
 test('dial colors are drawn using real prototype watch art, not named swatches only', () => {
   assert.match(studio, /studio-dial-portrait/);
-  assert.match(studio, /watchArt\(sample, false, true\)/);
+  assert.match(studio, /watchPreview\(sample, 'dial'\)/);
   assert.match(studio, /studio-dial-trio/);
+  assert.match(studio, /watchPreview\(watch, kind/);
   assert.equal(facetOptions(watches, 'dial').length, 6);
 });
 
@@ -34,7 +35,8 @@ test('manufacturer choice has no invented brands', () => {
 
 test('strap previews are visually differentiated', () => {
   for (const type of ['bracelet', 'leather-look', 'sport']) {
-    assert.match(css, new RegExp('studio-strap-sample--' + type));
+    assert.match(studio, /studio-strap-watch/);
+    assert.match(studio, /groupedWatches\('strap'\)/);
     assert.ok(watches.some(watch => watch.strap === type));
   }
 });
@@ -51,6 +53,7 @@ test('box collection state, pricing and mobile motion accessibility stay intact'
   assert.match(studio, /model\.put\(state, id, index\)/);
   assert.match(studio, /\[data-action="reset-filters"\]/);
   assert.match(css, /prefers-reduced-motion:reduce/);
+  assert.match(studio, /studio-style-count/);
   assert.match(css, /@media\(max-width:700px\)/);
   assert.deepEqual(watches.map(watch => watch.id).length, 12);
 });
