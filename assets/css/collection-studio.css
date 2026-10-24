@@ -392,3 +392,18 @@
   .studio .studio-feature-details{font-size:.66rem}
   .studio-preview-details{font-size:.63rem}
 }
+
+/* Studio catalog attribute filters: search first, then three compact facets. */
+.studio .studio-search-row .studio-search{width:100%}
+.studio .studio-attribute-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:11px 0 9px}
+.studio .studio-filter-select{display:block;min-width:0}
+.studio .studio-filter-caption{display:block;margin:0 0 6px;color:var(--muted);font-size:.62rem;font-weight:600;line-height:1.4}
+.studio .studio-filter-select select{display:block;width:100%;min-width:0;height:44px;border:1px solid #D4DDE4;border-radius:7px;background:#fff;color:var(--ink);font-family:var(--font-body);font-size:.71rem;padding:0 28px 0 11px}
+.studio .studio-filter-select.is-active .studio-filter-caption{color:var(--ink)}
+.studio .studio-filter-select.is-active select{border-color:#7E9AB0;background:#EBF2F7}
+@media(max-width:700px){
+ .studio .studio-attribute-filters{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:9px}
+ .studio .studio-filter-select:last-child{grid-column:1/-1}
+ .studio .studio-filter-caption{font-size:.62rem;margin-bottom:5px}
+ .studio .studio-filter-select select{height:43px;font-size:.7rem}
+}
