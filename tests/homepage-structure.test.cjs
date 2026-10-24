@@ -20,12 +20,20 @@ const section = (name) => {
 };
 
 test('homepage ordering preserves navy assembly before collection choices', () => {
-  const names = ['week-hero', 'editorial-quality', 'editorial-packages', 'editorial-process', 'editorial-fulfillment', 'editorial-assurance', 'editorial-closing'];
+  const names = ['week-hero', 'editorial-quality', 'editorial-packages', 'editorial-fulfillment', 'editorial-assurance', 'editorial-closing'];
   const positions = names.map(name => page.indexOf('<section class="' + name));
   assert.ok(positions.every(pos => pos >= 0));
   assert.ok(positions.every((pos, i) => !i || pos > positions[i - 1]));
   assert.ok(!page.includes('<section class="editorial-intro"'));
   assert.ok(!page.includes('<section class="editorial-feature-band"'));
+});
+
+test('removed Experience section is absent and downstream numbering is sequential', () => {
+  assert.ok(!page.includes('03 / THE EXPERIENCE'));
+  assert.ok(!page.includes('<section class="editorial-process"'));
+  assert.ok(!page.includes('id="how-it-works"'));
+  assert.ok(page.includes('03 / BEYOND CHECKOUT'));
+  assert.ok(page.includes('04 / NO GUESSWORK'));
 });
 
 test('the Details section contains exactly three distinct themes', () => {
@@ -39,10 +47,10 @@ test('the Details section contains exactly three distinct themes', () => {
   }
 });
 
-test('approved prototype prices are unchanged and six-watch price is pending', () => {
-  assert.match(packages, /'count'\s*=>\s*1,\s*'price'\s*=>\s*160/);
-  assert.match(packages, /'count'\s*=>\s*3,\s*'price'\s*=>\s*299/);
-  assert.match(packages, /'count'\s*=>\s*6,\s*'price'\s*=>\s*null/);
+test('founder-approved 1, 3 and 6-watch preview prices are displayed', () => {
+  assert.match(packages, /'count'\s*=>\s*1,\s*'price'\s*=>\s*179/);
+  assert.match(packages, /'count'\s*=>\s*3,\s*'price'\s*=>\s*333/);
+  assert.match(packages, /'count'\s*=>\s*6,\s*'price'\s*=>\s*579/);
   assert.ok(section('editorial-packages').includes('Preview this collection'));
 });
 
