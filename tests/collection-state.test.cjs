@@ -2,7 +2,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { createModel } = require('../assets/js/collection-state.js');
 const watches = require('../assets/data/studio-catalog.json');
-const model = createModel(watches, [{ count: 1, price: 160 }, { count: 3, price: 299 }, { count: 6, price: null }]);
+const model = createModel(watches, [{ count: 1, price: 179 }, { count: 3, price: 333 }, { count: 6, price: 579 }]);
 const ids = watches.map(watch => watch.id);
 
 test('only 1, 3 and 6-watch boxes are accepted', () => {
@@ -50,11 +50,12 @@ test('restoring storage rejects corrupt, obsolete and duplicate selections', () 
   const restored = model.hydrate({ version: 1, size: 3, slots: [ids[0], ids[0], 'deleted'], target: 2, price: 1 }, 3);
   assert.deepEqual(restored.slots, [ids[0], null, null]);
   assert.equal(restored.target, null);
-  assert.equal(model.price(restored), 299);
+  assert.equal(model.price(restored), 333);
 });
-test('unapproved six-watch price is unknown rather than free', () => {
-  assert.equal(model.price(model.empty(6)), null);
-  assert.equal(model.price(model.empty(1)), 160);
+test('approved collection prices apply to all three box sizes', () => {
+  assert.equal(model.price(model.empty(1)), 179);
+  assert.equal(model.price(model.empty(3)), 333);
+  assert.equal(model.price(model.empty(6)), 579);
 });
 test('saved selections exclude temporary replacement state and prices', () => {
   const saved = JSON.parse(model.serialize(model.target(model.put(model.empty(3), ids[0]), 0)));
