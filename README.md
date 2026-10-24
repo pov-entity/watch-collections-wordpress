@@ -1,3 +1,11 @@
+## Homepage simplification — v0.8.22 (2026-10-24)
+
+Removed the entire `03 / THE EXPERIENCE` homepage section (its introduction and all three process cards) at founder request. The page now moves straight from **Your Collection** to **Beyond Checkout**, then **No Guesswork**, with sequential visible section numbers (`03` and `04`). The Collection Studio and all pricing (1/$179, 3/$333, 6/$579) are preserved. Updated homepage structural tests and theme version for updater/cache detection.
+
+**Source status:** Committed to GitHub `main`. Live WordPress version, cache purge, and mobile Safari appearance have not been verified; installation of v0.8.22 is needed to show these changes.
+
+---
+
 ## Pricing update — v0.8.21 (2026-10-24)
 
 Founder-approved **prototype** collection prices are now **1 watch / $179, 3 watches / $333, 6 watches / $579 USD**, each including the selection of watches and its presentation box. This replaces all earlier proposed/current price figures in the historical notes below. The shared package configuration in `inc/collection-studio.php` drives the homepage package cards, Collection Studio size cards, mobile and desktop box totals, and review modal. Regression tests reflect the new prices. Theme version bumped to 0.8.21 for WordPress updater detection and asset caching.
