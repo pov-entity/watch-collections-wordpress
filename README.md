@@ -1,3 +1,23 @@
+## Homepage refinement — v0.8.20 (review branch)
+
+This iteration implements founder direction for the **DialByDay Collections** homepage without changing prices, ordering, payment, stock, or the live WordPress installation.
+
+- Keep the seven-day cinematic hero, visible day/style selector, premium CTA and a continuous navy transition into the assembly video.
+- Explain the collection format directly below the hero CTA: **1, 3 or 6 watches**, curated by the buyer, presented in one box.
+- Reduce the **The Details** section to **Movements (automatic + quartz)**, **Sapphire & Steel**, and **Complexity (functional chronograph and true moonphase)**. These statements describe mechanisms and materials; no unverified claims about individual inventory have been introduced.
+- Eliminate duplicate lifestyle montage and benefits sections; place the collection-size cards directly after The Details, before the process explanation.
+- Preserve the existing 1/$160, 3/$299 and 6/price-pending prototypes. Label an unpriced option as a **preview** instead of a confirmed offer.
+- Tighten mobile hero day text and hide the long mobile-over-video occasion sentence rather than rendering it at unreadable sizes.
+- Keep the first hero video still frame ready, while deferring other still frames until they are needed; defer assembly-video fetching until the animation is in view.
+- Add a footer path to the existing pre-purchase information. Contact and Privacy links appear only when the corresponding real WordPress pages are configured.
+- Keep video pause/reduce-motion controls and avoid swipe handling on active hero buttons.
+
+**Development checks:** Source-level structural checks, JS parsing and static assertions have been carried out. A repeatable Node regression suite is in `tests/homepage-structure.test.cjs` and can run with `node --test tests/homepage-structure.test.cjs`.
+
+**Unverified / launch gates:** Live WordPress installation, actual visual browser QA (320/375/390/430 px and desktop), video first-frame playback on Safari and Android, network throttling, Core Web Vitals, product sample claims, the six-watch price, real contact/privacy/returns/warranty policies, and checkout are not signed off. Do not merge/deploy this branch automatically to a live store before verifying the site's update behavior and founder approval.
+
+---
+
 # Watch Collections — WordPress + WooCommerce Theme
 
 ## Desktop Details column alignment — v0.8.19
