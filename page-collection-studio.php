@@ -49,12 +49,24 @@ $config = array( 'watches' => watch_collections_studio_catalog(), 'packages' => 
 					<div class="studio-search-row">
 						<label class="studio-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><span class="screen-reader-text"><?php esc_html_e( 'Search concept watches', 'watch-collections' ); ?></span><input type="search" data-studio-search placeholder="<?php esc_attr_e( 'Search watches…', 'watch-collections' ); ?>" maxlength="100" autocomplete="off"></label>
 					</div>
-					<div class="studio-attribute-filters" role="group" aria-label="<?php esc_attr_e( 'Filter watches by brand, strap and dial color', 'watch-collections' ); ?>">
-						<label class="studio-filter-select"><span class="studio-filter-caption"><?php esc_html_e( 'Brand', 'watch-collections' ); ?></span><select data-studio-brand><option value="all"><?php esc_html_e( 'All brands', 'watch-collections' ); ?></option></select></label>
-						<label class="studio-filter-select"><span class="studio-filter-caption"><?php esc_html_e( 'Strap', 'watch-collections' ); ?></span><select data-studio-strap><option value="all"><?php esc_html_e( 'All straps', 'watch-collections' ); ?></option><option value="bracelet"><?php esc_html_e( 'Metal bracelet', 'watch-collections' ); ?></option><option value="leather-look"><?php esc_html_e( 'Leather-look', 'watch-collections' ); ?></option><option value="sport"><?php esc_html_e( 'Sport strap', 'watch-collections' ); ?></option></select></label>
-						<label class="studio-filter-select"><span class="studio-filter-caption"><?php esc_html_e( 'Dial color', 'watch-collections' ); ?></span><select data-studio-dial><option value="all"><?php esc_html_e( 'All dial colors', 'watch-collections' ); ?></option></select></label>
-					</div>
 					<div class="studio-style-filters" role="group" aria-label="<?php esc_attr_e( 'Filter by watch style', 'watch-collections' ); ?>"><?php foreach ( array( 'all' => __( 'All watches', 'watch-collections' ), 'classic' => __( 'Classic', 'watch-collections' ), 'chronograph' => __( 'Chronograph', 'watch-collections' ), 'moonphase' => __( 'Moonphase style', 'watch-collections' ), 'sport' => __( 'Sport', 'watch-collections' ), 'skeleton' => __( 'Skeleton style', 'watch-collections' ) ) as $key => $label ) : ?><button type="button" data-action="filter" data-style="<?php echo esc_attr( $key ); ?>" aria-pressed="<?php echo 'all' === $key ? 'true' : 'false'; ?>"><span class="studio-style-image" data-style-preview aria-hidden="true"></span><span class="studio-style-name"><?php echo esc_html( $label ); ?></span></button><?php endforeach; ?></div>
+					<div class="studio-detail-filters" aria-label="<?php esc_attr_e( 'Make the details your own', 'watch-collections' ); ?>">
+						<div class="studio-detail-filters__intro"><span><?php esc_html_e( 'THE FINISHING TOUCHES', 'watch-collections' ); ?></span><p><?php esc_html_e( 'Explore by brand, strap and dial. Every choice refines the watches below.', 'watch-collections' ); ?></p></div>
+						<div class="studio-detail-filters__upper">
+							<section class="studio-facet studio-facet--brand" aria-labelledby="studio-brand-title">
+								<div class="studio-facet__heading"><h3 id="studio-brand-title"><?php esc_html_e( 'Brand', 'watch-collections' ); ?></h3><span><?php esc_html_e( 'Find your maker', 'watch-collections' ); ?></span></div>
+								<div class="studio-facet__choices studio-facet__choices--brand" data-studio-brand-choices role="group" aria-label="<?php esc_attr_e( 'Choose a watch brand', 'watch-collections' ); ?>"></div>
+							</section>
+							<section class="studio-facet studio-facet--strap" aria-labelledby="studio-strap-title">
+								<div class="studio-facet__heading"><h3 id="studio-strap-title"><?php esc_html_e( 'Strap', 'watch-collections' ); ?></h3><span><?php esc_html_e( 'Choose the feel', 'watch-collections' ); ?></span></div>
+								<div class="studio-facet__choices studio-facet__choices--strap" data-studio-strap-choices role="group" aria-label="<?php esc_attr_e( 'Choose a strap design', 'watch-collections' ); ?>"></div>
+							</section>
+						</div>
+						<section class="studio-facet studio-facet--dial" aria-labelledby="studio-dial-title">
+							<div class="studio-facet__heading"><h3 id="studio-dial-title"><?php esc_html_e( 'Dial color', 'watch-collections' ); ?></h3><span><?php esc_html_e( 'Find the shade that catches your eye', 'watch-collections' ); ?></span></div>
+							<div class="studio-facet__choices studio-facet__choices--dial" data-studio-dial-choices role="group" aria-label="<?php esc_attr_e( 'Choose a dial color', 'watch-collections' ); ?>"></div>
+						</section>
+					</div>
 				</div>
 				<div class="studio-results-bar"><p data-result-count role="status"></p><button type="button" class="studio-quiet-button" data-action="reset-filters" hidden><?php esc_html_e( 'Clear filters', 'watch-collections' ); ?></button></div>
 				<div class="studio-replace-notice" data-replace-notice hidden></div>

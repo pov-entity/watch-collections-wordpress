@@ -204,15 +204,57 @@
     const adjacent = activeSlideIndex + direction;
     centerWatch(next.id, true, track.querySelector(`[data-carousel-slide][data-carousel-index="${adjacent}"]`) ? adjacent : nextIndex);
   }
-  function populateFacetSelects() {
-    [['brand', '[data-studio-brand]'], ['dial', '[data-studio-dial]']].forEach(([facet, selector]) => {
-      const select = $(selector);
-      catalogFilters.facetOptions(config.watches, facet).forEach(value => {
-        const option = document.createElement('option');
-        option.value = value;
-        option.textContent = value;
-        select.appendChild(option);
-      });
+  // Illustrations represent design choices, never verified supplier materials or trademarks.
+  function populateFacetChoices() {
+    const strapNames = {
+      bracelet: 'Bracelet',
+      'leather-look': 'Leather-look',
+      sport: 'Sport'
+    };
+    const strapValues = Array.from(new Set(config.watches.map(watch => catalogFilters.facetValue(watch, 'strap')).filter(Boolean)));
+    const brandValues = catalogFilters.facetOptions(config.watches, 'brand');
+    const dialValues = catalogFilters.facetOptions(config.watches, 'dial');
+    const option = (facet, value, name, illustration, additionalClass = '') =>
+      `<button type="button" class="studio-facet-option ${additionalClass}" data-action="facet" data-facet-option data-facet="${escape(facet)}" data-value="${escape(value)}" aria-pressed="false"><span class="studio-facet-option__art" aria-hidden="true">${illustration}</span><span class="studio-facet-option__name">${escape(name)}</span><span class="studio-facet-option__count" data-facet-count></span></button>`;
+
+    $('[data-studio-brand-choices]').innerHTML = ['all', ...brandValues].map(value => {
+      const name = value === 'all' ? 'All brands' : value === 'Unbranded concepts' ? 'Concept designs' : value;
+      const initials = value === 'all' ? '✧' : value === 'Unbranded concepts' ? '◇' :
+        value.trim().split(/\s+/).map(part => part[0] || '').slice(0, 2).join('').toUpperCase();
+      const art = `<span class="studio-brand-emblem${value === 'all' ? ' studio-brand-emblem--all' : ''}">${escape(initials)}</span>`;
+      return option('brand', value, name, art, 'studio-facet-option--brand');
+    }).join('');
+
+    $('[data-studio-strap-choices]').innerHTML = ['all', ...strapValues].map(value => {
+      const name = value === 'all' ? 'Any strap' : strapNames[value] || config.watches.find(watch => watch.strap === value).strapLabel || value;
+      const kind = ['bracelet', 'leather-look', 'sport'].includes(value) ? value : 'other';
+      const art = value === 'all'
+        ? '<span class="studio-strap-all"><i></i><i></i><i></i></span>'
+        : `<span class="studio-strap-sample studio-strap-sample--${kind}"><i></i></span>`;
+      return option('strap', value, name, art, 'studio-facet-option--strap');
+    }).join('');
+
+    const dialExamples = config.watches.filter((watch, i, all) => all.findIndex(other => other.dial === watch.dial) === i).slice(0, 3);
+    $('[data-studio-dial-choices]').innerHTML = ['all', ...dialValues].map(value => {
+      const name = value === 'all' ? 'All colors' : value;
+      const sample = config.watches.find(watch => watch.dial === value);
+      const art = value === 'all'
+        ? `<span class="studio-dial-trio">${dialExamples.map(watch => `<span>${watchArt(watch, false, true)}</span>`).join('')}</span>`
+        : `<span class="studio-dial-portrait">${watchArt(sample, false, true)}</span>`;
+      return option('dial', value, name, art, 'studio-facet-option--dial');
+    }).join('');
+  }
+  // Keep choice nodes stable during filtering so keyboard focus never disappears.
+  function updateFacetChoices() {
+    const selected = { style: filter, brand, strap, dial, search };
+    root.querySelectorAll('[data-facet-option]').forEach(button => {
+      const facet = button.dataset.facet;
+      const value = button.dataset.value;
+      const isActive = selected[facet] === value;
+      const count = catalogFilters.filterWatches(config.watches, { ...selected, [facet]: value }).length;
+      button.setAttribute('aria-pressed', String(isActive));
+      button.classList.toggle('is-unavailable', count === 0 && !isActive);
+      button.querySelector('[data-facet-count]').textContent = count + (count === 1 ? ' watch' : ' watches');
     });
   }
   function renderCatalog() {
@@ -246,9 +288,7 @@
     $('[data-result-count]').textContent = list.length + (list.length === 1 ? ' watch' : ' watches');
     $('[data-catalog-empty]').hidden = list.length > 0;
     $('[data-action="reset-filters"]').hidden = filter === 'all' && brand === 'all' && strap === 'all' && dial === 'all' && !search;
-    root.querySelectorAll('.studio-filter-select').forEach(label => {
-      label.classList.toggle('is-active', label.querySelector('select').value !== 'all');
-    });
+    updateFacetChoices();
     root.querySelectorAll('[data-action="filter"]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.style === filter)));
     const notice = $('[data-replace-notice]');
     notice.hidden = state.target === null;
@@ -415,10 +455,19 @@
     const index = Number(button.dataset.slot);
     switch (button.dataset.action) {
       case 'filter': filter = button.dataset.style; renderCatalog(); break;
+      case 'facet': {
+        const facet = button.dataset.facet;
+        const value = button.dataset.value;
+        if (facet === 'brand') brand = brand === value ? 'all' : value;
+        else if (facet === 'strap') strap = strap === value ? 'all' : value;
+        else if (facet === 'dial') dial = dial === value ? 'all' : value;
+        else break;
+        renderCatalog();
+        break;
+      }
       case 'reset-filters':
         filter = 'all'; search = ''; brand = 'all'; strap = 'all'; dial = 'all';
         $('[data-studio-search]').value = '';
-        ['brand', 'strap', 'dial'].forEach(facet => { $('[data-studio-' + facet + ']').value = 'all'; });
         renderCatalog(); $('[data-studio-search]').focus(); break;
       case 'size': requestSize(Number(button.dataset.size), button); break;
       case 'confirm-size': closeDialog(); commit(model.resize(state, Number(button.dataset.size), true), 'Your box size has been updated.'); break;
@@ -478,13 +527,10 @@
   if (window.ResizeObserver) new ResizeObserver(resizeCarousel).observe(track);
   else window.addEventListener('resize', resizeCarousel);
   $('[data-studio-search]').addEventListener('input', event => { search = event.target.value.trim().toLowerCase(); renderCatalog(); });
-  $('[data-studio-brand]').addEventListener('change', event => { brand = event.target.value; renderCatalog(); });
-  $('[data-studio-strap]').addEventListener('change', event => { strap = event.target.value; renderCatalog(); });
-  $('[data-studio-dial]').addEventListener('change', event => { dial = event.target.value; renderCatalog(); });
   window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', event => {
     if (event.matches) { motion = false; root.dataset.motion = 'off'; $('[data-action="motion"]').textContent = 'Motion off'; $('[data-action="motion"]').setAttribute('aria-pressed', 'false'); }
   });
-  populateFacetSelects();
+  populateFacetChoices();
   renderStylePreviews();
   save();
   render();

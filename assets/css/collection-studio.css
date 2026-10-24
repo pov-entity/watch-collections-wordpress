@@ -393,17 +393,97 @@
   .studio-preview-details{font-size:.63rem}
 }
 
-/* Studio catalog attribute filters: search first, then three compact facets. */
+/* Editorial detail atelier: physical, tactile selectors instead of menus. */
 .studio .studio-search-row .studio-search{width:100%}
-.studio .studio-attribute-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:11px 0 9px}
-.studio .studio-filter-select{display:block;min-width:0}
-.studio .studio-filter-caption{display:block;margin:0 0 6px;color:var(--muted);font-size:.62rem;font-weight:600;line-height:1.4}
-.studio .studio-filter-select select{display:block;width:100%;min-width:0;height:44px;border:1px solid #D4DDE4;border-radius:7px;background:#fff;color:var(--ink);font-family:var(--font-body);font-size:.71rem;padding:0 28px 0 11px}
-.studio .studio-filter-select.is-active .studio-filter-caption{color:var(--ink)}
-.studio .studio-filter-select.is-active select{border-color:#7E9AB0;background:#EBF2F7}
+.studio .studio-detail-filters{
+  margin:15px 0 5px;padding:18px 18px 16px;
+  background:linear-gradient(145deg,#F8FAFB 0%,#EDF2F5 100%);
+  border:1px solid #D6E0E7;border-radius:13px;
+}
+.studio-detail-filters__intro{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 18px}
+.studio-detail-filters__intro>span{color:#28445C;white-space:nowrap;font:500 .57rem/1.5 var(--font-detail);letter-spacing:.12em}
+.studio-detail-filters__intro>p{max-width:560px;margin:0;color:#637687;font-size:.65rem;line-height:1.55;text-align:right}
+.studio .studio-detail-filters__upper{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:18px;align-items:start}
+.studio .studio-facet{min-width:0}
+.studio .studio-facet--dial{margin-top:18px;padding-top:17px;border-top:1px solid #D6E0E7}
+.studio .studio-facet__heading{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:4px 12px;margin:0 0 10px}
+.studio .studio-facet__heading h3{color:var(--ink);font-weight:600;font-size:.78rem;letter-spacing:-.02em;margin:0;line-height:1.45}
+.studio .studio-facet__heading>span{color:#738696;font-size:.61rem;line-height:1.5}
+.studio .studio-facet__choices{display:flex;align-items:stretch;gap:8px;min-width:0;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x proximity;padding:3px 3px 7px;scrollbar-width:thin;scrollbar-color:#BBCBD6 transparent}
+.studio .studio-facet-option{
+  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  min-width:0;min-height:102px;flex:1 0 100px;padding:8px 7px 9px;
+  border:1px solid #D4DEE6;border-radius:9px;background:#FFFFFF;
+  color:var(--ink);cursor:pointer;scroll-snap-align:start;text-align:center;
+  box-shadow:0 1px 1px #102A4F06;
+  transition:background .2s,border-color .2s,box-shadow .2s,transform .2s;
+}
+.studio .studio-facet-option:hover{background:#FDFEFF;border-color:#8DA8BA;transform:translateY(-2px);box-shadow:0 5px 16px #102A4F13}
+.studio .studio-facet-option[aria-pressed=true]{border-color:#173455;background:#E8F0F5;box-shadow:0 0 0 1px #173455,0 5px 14px #102A4F13}
+.studio .studio-facet-option[aria-pressed=true]::after{
+  content:'✓';position:absolute;right:5px;top:5px;width:17px;height:17px;display:grid;place-items:center;
+  background:#143252;border-radius:50%;font-size:.55rem;color:white;line-height:1;
+}
+.studio .studio-facet-option__art{height:57px;width:100%;display:grid;place-items:center;flex-shrink:0;pointer-events:none}
+.studio .studio-facet-option__name{display:block;max-width:100%;font-size:.65rem;line-height:1.3;font-weight:600;overflow-wrap:anywhere}
+.studio .studio-facet-option__count{display:block;color:#6B8192;font-size:.54rem;line-height:1.4}
+.studio .studio-facet-option.is-unavailable:not([aria-pressed=true]){background:#F8FAFB;border-style:dashed}
+.studio .studio-facet-option.is-unavailable .studio-facet-option__count{color:#8A5960}
+.studio .studio-facet__choices--brand .studio-facet-option{flex:1 0 116px}
+.studio .studio-facet__choices--strap .studio-facet-option{flex:1 0 95px}
+.studio .studio-facet__choices--dial .studio-facet-option{flex:1 0 90px}
+.studio-brand-emblem{display:grid;place-items:center;width:51px;height:51px;border-radius:50%;border:1px solid #ACBCC9;background:radial-gradient(circle at 30% 25%,#F8FAFC,#CBD7E1);color:#193451;font:500 1.15rem/1 var(--font-editorial);box-shadow:0 3px 9px #102A4F12}
+.studio-brand-emblem--all{font-size:1.65rem}
+.studio-strap-sample{display:block;position:relative;width:35px;height:55px;filter:drop-shadow(0 3px 3px #102A4F23)}
+.studio-strap-sample>i{display:block;position:absolute;top:2px;bottom:2px;left:5px;right:5px;border-radius:4px;background:linear-gradient(90deg,#81919E,#DFE5E9 48%,#798995)}
+.studio-strap-sample--bracelet>i{
+ background:repeating-linear-gradient(to bottom,#9AABB9 0px,#E6EEF2 4px,#8898A6 6px,#CBD6DE 9px,#8094A3 11px,#BAC8D2 13px);
+ border:1px solid #889CA9;
+}
+.studio-strap-sample--bracelet>i:after{content:'';position:absolute;inset:0 7px;border-left:1px solid #687E8D;border-right:1px solid #DCE6EC}
+.studio-strap-sample--leather-look>i{background:linear-gradient(90deg,#704B35,#AE7C5D 48%,#755039);border:2px dashed #D7B198;border-radius:6px}
+.studio-strap-sample--sport>i{background:linear-gradient(90deg,#183B3D,#2D5A55,#173638);border:1px solid #193837}
+.studio-strap-sample--sport>i:after{content:'';position:absolute;top:9px;bottom:9px;left:10px;border-left:3px dotted #91AAA3}
+.studio-strap-sample--other>i{background:linear-gradient(100deg,#455A67,#8092A1,#364A59)}
+.studio-strap-all{display:flex;justify-content:center;gap:3px;transform:rotate(-12deg)}
+.studio-strap-all i{width:12px;height:44px;border-radius:4px;border:1px solid #A2ADBA}
+.studio-strap-all i:nth-child(1){background:repeating-linear-gradient(to bottom,#DDE6EB,#889BA9 5px,#DDE6EB 9px)}
+.studio-strap-all i:nth-child(2){background:linear-gradient(90deg,#704C39,#B98966,#795342)}
+.studio-strap-all i:nth-child(3){background:linear-gradient(90deg,#25413F,#557C74,#234642)}
+.studio-dial-portrait{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;overflow:hidden;box-shadow:0 3px 7px #102A4F16}
+.studio-dial-portrait .studio-watch-art{display:block;width:58px;height:58px;max-width:100%;border-radius:50%}
+.studio-dial-trio{position:relative;display:block;width:73px;height:58px}
+.studio-dial-trio>span{position:absolute;display:grid;place-items:center;width:39px;height:39px;border:2px solid #F7F9FA;border-radius:50%;overflow:hidden;box-shadow:0 2px 5px #102A4F27}
+.studio-dial-trio>span:nth-child(1){left:0;top:17px}
+.studio-dial-trio>span:nth-child(2){left:17px;top:2px;z-index:2}
+.studio-dial-trio>span:nth-child(3){left:35px;top:18px;z-index:1}
+.studio-dial-trio .studio-watch-art{width:100%;height:100%}
+@media(max-width:1200px){
+  .studio .studio-detail-filters__upper{grid-template-columns:1fr;gap:14px}
+  .studio .studio-facet__choices--brand .studio-facet-option{flex:0 0 145px}
+  .studio .studio-facet__choices--strap .studio-facet-option{flex:1 0 95px}
+}
 @media(max-width:700px){
- .studio .studio-attribute-filters{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:9px}
- .studio .studio-filter-select:last-child{grid-column:1/-1}
- .studio .studio-filter-caption{font-size:.62rem;margin-bottom:5px}
- .studio .studio-filter-select select{height:43px;font-size:.7rem}
+  .studio .studio-detail-filters{margin-top:12px;padding:14px 11px 11px;border-radius:11px}
+  .studio-detail-filters__intro{display:block;margin-bottom:14px}
+  .studio-detail-filters__intro>span{font-size:.52rem}
+  .studio-detail-filters__intro>p{margin-top:4px;text-align:left;font-size:.61rem}
+  .studio .studio-detail-filters__upper{gap:11px}
+  .studio .studio-facet__heading{margin-bottom:7px}
+  .studio .studio-facet__heading h3{font-size:.72rem}
+  .studio .studio-facet__heading>span{font-size:.57rem}
+  .studio .studio-facet--dial{margin-top:12px;padding-top:13px}
+  .studio .studio-facet-option{min-height:100px;padding:8px 6px;flex:0 0 101px}
+  .studio .studio-facet__choices--brand .studio-facet-option{flex:0 0 131px}
+  .studio .studio-facet__choices--strap .studio-facet-option{flex:0 0 95px}
+  .studio .studio-facet__choices--dial .studio-facet-option{flex:0 0 91px}
+  .studio .studio-facet-option__name{font-size:.62rem}
+  .studio .studio-facet-option__count{font-size:.51rem}
+}
+@media(hover:none){
+ .studio .studio-facet-option:hover{transform:none;box-shadow:0 1px 1px #102A4F06}
+}
+@media(prefers-reduced-motion:reduce){
+ .studio .studio-facet-option{transition:none}
+ .studio .studio-facet-option:hover{transform:none}
 }
