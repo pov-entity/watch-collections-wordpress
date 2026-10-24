@@ -11,9 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /** Founder-approved sizes. A null price must never become a zero-dollar offer. */
 function watch_collections_packages() {
 	return array(
-		array( 'count' => 1, 'price' => 160, 'name' => __( 'Start with one', 'watch-collections' ), 'detail' => __( 'One watch you choose, in its presentation box.', 'watch-collections' ) ),
-		array( 'count' => 3, 'price' => 299, 'name' => __( 'Room for variety', 'watch-collections' ), 'detail' => __( 'Three watches you choose, together in one box.', 'watch-collections' ) ),
-		array( 'count' => 6, 'price' => null, 'name' => __( 'Your full rotation', 'watch-collections' ), 'detail' => __( 'Six watches you choose, together in one box.', 'watch-collections' ) ),
+		array( 'count' => 1, 'price' => 179, 'name' => __( 'Start with one', 'watch-collections' ), 'detail' => __( 'One watch you choose, in its presentation box.', 'watch-collections' ) ),
+		array( 'count' => 3, 'price' => 333, 'name' => __( 'Room for variety', 'watch-collections' ), 'detail' => __( 'Three watches you choose, together in one box.', 'watch-collections' ) ),
+		array( 'count' => 6, 'price' => 579, 'name' => __( 'Your full rotation', 'watch-collections' ), 'detail' => __( 'Six watches you choose, together in one box.', 'watch-collections' ) ),
 	);
 }
 
